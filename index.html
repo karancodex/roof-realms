@@ -1,0 +1,3670 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roof &amp; Realms - Premium Modular Construction</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sora:wght@100..800&display=swap"
+        rel="stylesheet">
+    <script src="/_sdk/element_sdk.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #0a0a14;
+            color: #ffffff;
+            overflow-x: hidden;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+        }
+
+        /* Premium Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 20, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 166, 63, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 0.8rem 5%;
+            background: rgba(10, 10, 20, 0.98);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            border-bottom: 1px solid rgba(212, 166, 63, 0.4);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container:hover {
+            transform: scale(1.02);
+        }
+
+        .logo {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #1F3A93 0%, #2a4fc9 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.6rem;
+            color: #D4A63F;
+            border: 2px solid #D4A63F;
+            box-shadow: 0 5px 20px rgba(31, 58, 147, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: rotate(5deg);
+            box-shadow: 0 8px 30px rgba(212, 166, 63, 0.5);
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #D4A63F 0%, #f4d483 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.5px;
+        }
+
+        nav {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        nav>a,
+        .nav-item {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+            padding: 0.5rem 0;
+        }
+
+        nav>a:hover,
+        .nav-item:hover {
+            color: #D4A63F;
+        }
+
+        nav>a::after,
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #D4A63F, #f4d483);
+            transition: width 0.4s ease;
+        }
+
+        nav>a:hover::after,
+        .nav-item:hover::after {
+            width: 100%;
+        }
+
+        /* Mega Menu Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: calc(100% + 1rem);
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(180deg, rgba(15, 15, 30, 0.98) 0%, rgba(10, 10, 20, 0.98) 100%);
+            backdrop-filter: blur(20px);
+            min-width: 280px;
+            padding: 1rem;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 166, 63, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(31, 58, 147, 0.3);
+            flex-direction: column;
+            gap: 0;
+            opacity: 0;
+            animation: fadeInDown 0.4s ease forwards;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: flex;
+        }
+
+        .dropdown-item {
+            padding: 1rem 1.5rem;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.4s ease;
+            border: 1px solid transparent;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dropdown-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 166, 63, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .dropdown-item:hover::before {
+            left: 100%;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(31, 58, 147, 0.25);
+            border-color: #D4A63F;
+            transform: translateX(8px);
+            box-shadow: 0 5px 20px rgba(212, 166, 63, 0.2);
+        }
+
+        .dropdown-item-title {
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: #D4A63F;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .dropdown-item-desc {
+            font-size: 0.85rem;
+            color: #b0b0b0;
+            line-height: 1.4;
+        }
+
+        .header-cta {
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #D4A63F 0%, #f4d483 100%);
+            color: #0a0a1a;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 5px 20px rgba(212, 166, 63, 0.3);
+            letter-spacing: 0.5px;
+        }
+
+        .header-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 35px rgba(212, 166, 63, 0.5);
+            background: linear-gradient(135deg, #f4d483 0%, #D4A63F 100%);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .mobile-menu-btn span {
+            width: 28px;
+            height: 3px;
+            background: #D4A63F;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Enhanced Hero Section */
+        .hero {
+            height: 100vh;
+            /* Make full-screen */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 0;
+            /* Remove padding so the video fits fully */
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-bg-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+
+        .hero-bg-slide.active {
+            opacity: 1;
+        }
+
+        .hero-bg-slide video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Full screen look */
+        }
+
+
+        .hero-bg-slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* background: linear-gradient(135deg, rgba(10, 10, 20, 0.85) 0%, rgba(31, 58, 147, 0.75) 50%, rgba(10, 10, 20, 0.85) 100%); */
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(31, 58, 147, 0.03) 2px, rgba(31, 58, 147, 0.03) 4px),
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(31, 58, 147, 0.03) 2px, rgba(31, 58, 147, 0.03) 4px);
+            animation: gridMove 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes gridMove {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(40px, 40px);
+            }
+        }
+
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.08;
+            filter: blur(1px);
+        }
+
+        .shape:nth-child(1) {
+            top: 15%;
+            left: 10%;
+            animation: float 25s infinite ease-in-out;
+        }
+
+        .shape:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            animation: float 30s infinite ease-in-out 5s;
+        }
+
+        .shape:nth-child(3) {
+            bottom: 15%;
+            left: 25%;
+            animation: float 28s infinite ease-in-out 10s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            33% {
+                transform: translateY(-40px) rotate(5deg);
+            }
+
+            66% {
+                transform: translateY(20px) rotate(-5deg);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5.5rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #ffffff 0%, #D4A63F 50%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1.2s ease-out;
+            line-height: 1.1;
+            text-shadow: 0 0 60px rgba(212, 166, 63, 0.3);
+            letter-spacing: -1px;
+        }
+
+        .hero-subheadline {
+            font-size: 1.5rem;
+            color: #e8e8e8;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            animation: fadeInUp 1.2s ease-out 0.2s backwards;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+        }
+
+        .hero-supporting {
+            font-size: 1.2rem;
+            color: #c8c8c8;
+            margin-bottom: 3rem;
+            line-height: 1.9;
+            animation: fadeInUp 1.2s ease-out 0.4s backwards;
+            font-weight: 300;
+            letter-spacing: 0.2px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            animation: fadeInUp 1.2s ease-out 0.6s backwards;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            transform: translate(-50%, -50%);
+            transition: width 0.7s, height 0.7s;
+        }
+
+        .btn:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #D4A63F 0%, #f4d483 100%);
+            color: #0a0a1a;
+            box-shadow: 0 8px 30px rgba(212, 166, 63, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(212, 166, 63, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #D4A63F;
+            border: 2px solid #D4A63F;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(212, 166, 63, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(212, 166, 63, 0.3);
+        }
+
+        /* Background Navigation */
+        .hero-bg-nav {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 3;
+        }
+
+        .hero-bg-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            border: 2px solid #D4A63F;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .hero-bg-dot.active {
+            background: #D4A63F;
+            transform: scale(1.3);
+            box-shadow: 0 0 20px rgba(212, 166, 63, 0.8);
+        }
+
+        /* Gold Divider */
+        .gold-divider {
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #D4A63F, transparent);
+            margin: 1.5rem auto 3rem;
+            animation: expandWidth 1.2s ease-out;
+            box-shadow: 0 0 15px rgba(212, 166, 63, 0.5);
+        }
+
+        @keyframes expandWidth {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 120px;
+            }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 7rem 5%;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff 0%, #D4A63F 50%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeIn 1s ease-out;
+            letter-spacing: -0.5px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #b8b8b8;
+            font-size: 1.2rem;
+            margin-bottom: 5rem;
+            animation: fadeIn 1s ease-out 0.3s backwards;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Who We Serve Section */
+        .who-we-serve {
+            background:
+                radial-gradient(circle at 10% 20%, rgba(31, 58, 147, 0.1) 0%, transparent 50%),
+                linear-gradient(180deg, #0a0a14 0%, #12121e 100%);
+            padding: 6rem 0 4rem;
+        }
+
+        .serve-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            max-width: 1200px;
+            margin: 0 auto 1.2rem;
+            min-height: 10vh;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .serve-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .serve-image-container {
+            position: relative;
+            overflow: hidden;
+            background: #0a0a14;
+        }
+
+        .serve-image {
+            width: 100%;
+            height: 50vh;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .serve-row:hover .serve-image {
+            transform: scale(1.15);
+        }
+
+        .serve-image-container::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 3px solid transparent;
+            transition: border-color 0.6s ease;
+            pointer-events: none;
+        }
+
+        /* .serve-row:hover .serve-image-container::after {
+            border-color: #D4A63F;
+            box-shadow: inset 0 0 40px rgba(212, 166, 63, 0.4), 0 0 40px rgba(212, 166, 63, 0.4);
+        } */
+
+        .serve-content {
+            background: linear-gradient(135deg, rgba(31, 58, 147, 0.25) 0%, rgba(10, 10, 20, 0.95) 100%);
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .serve-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 166, 63, 0.08) 0%, transparent 70%);
+            transition: transform 1s ease;
+        }
+
+        .serve-row:hover .serve-content::before {
+            transform: translate(-25%, -25%) scale(1.5);
+        }
+
+        .serve-content>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .serve-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+            filter: drop-shadow(0 0 15px rgba(212, 166, 63, 0.5));
+            transition: transform 0.5s ease;
+        }
+
+        .serve-row:hover .serve-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .serve-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #D4A63F;
+            margin-bottom: 0.45rem;
+            letter-spacing: -0.5px;
+        }
+
+        .serve-subtitle {
+            font-size: 1rem;
+            color: #e8e8e8;
+            line-height: 1.4;
+            margin-bottom: 0.7rem;
+            font-weight: 300;
+        }
+
+        .serve-benefits {
+            list-style: none;
+            margin-bottom: 0.7rem;
+        }
+
+        .serve-benefits li {
+            color: #c8c8c8;
+            font-size: 0.75rem;
+            line-height: 1.3;
+            padding-left: 1.3rem;
+            position: relative;
+            margin-bottom: 0.25rem;
+        }
+
+        .serve-benefits li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #D4A63F;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .serve-link {
+            color: #D4A63F;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .serve-link::after {
+            content: '→';
+            transition: transform 0.3s ease;
+        }
+
+        .serve-link:hover {
+            color: #f4d483;
+            transform: translateX(5px);
+        }
+
+        .serve-link:hover::after {
+            transform: translateX(5px);
+        }
+
+        /* Gallery Section */
+        .gallery {
+            background:
+                radial-gradient(circle at 90% 20%, rgba(212, 166, 63, 0.08) 0%, transparent 50%),
+                #0a0a14;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            height: 280px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            border: 2px solid rgba(212, 166, 63, 0.15);
+            transition: all 0.5s ease;
+            background: rgba(10, 10, 20, 0.8);
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(10, 10, 20, 0.85) 0%, transparent 60%);
+            opacity: 0.7;
+            transition: opacity 0.5s ease;
+            z-index: 1;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 0.5;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            border-color: #D4A63F;
+            box-shadow: 0 20px 60px rgba(212, 166, 63, 0.4), 0 0 30px rgba(31, 58, 147, 0.2);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.15);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            z-index: 2;
+            background: rgba(212, 166, 63, 0.95);
+            color: #0a0a1a;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            background: rgba(244, 212, 131, 1);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(212, 166, 63, 0.5);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background:
+                radial-gradient(circle at 20% 80%, rgba(31, 58, 147, 0.12) 0%, transparent 50%),
+                linear-gradient(180deg, #12121e 0%, #0a0a14 100%);
+            overflow: hidden;
+        }
+
+        .testimonials-carousel-wrapper {
+            position: relative;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 80px;
+        }
+
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #D4A63F 0%, #f4d483 100%);
+            border: none;
+            color: #0a0a1a;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            z-index: 10;
+            box-shadow: 0 8px 25px rgba(212, 166, 63, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .carousel-arrow:hover {
+            transform: translateY(-50%) scale(1.15);
+            box-shadow: 0 12px 40px rgba(212, 166, 63, 0.6);
+            background: linear-gradient(135deg, #f4d483 0%, #D4A63F 100%);
+        }
+
+        .carousel-arrow-left {
+            left: 0;
+        }
+
+        .carousel-arrow-right {
+            right: 0;
+        }
+
+        .testimonials-carousel-container {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .testimonials-carousel {
+            display: flex;
+            gap: 2rem;
+            /* 2rem ≈ 32px → matches JS 'gap' */
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .testimonial-card {
+            width: 30%;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, rgba(31, 58, 147, 0.12) 0%, rgba(10, 10, 20, 0.6) 100%);
+            padding: 1.2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(212, 166, 63, 0.2);
+            transition: all 0.6s ease;
+            position: relative;
+            overflow: hidden;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 12px;
+            font-size: 60px;
+            font-family: 'Playfair Display', serif;
+            color: rgba(212, 166, 63, 0.06);
+            line-height: 1;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            border-color: #D4A63F;
+            box-shadow: 0 20px 50px rgba(212, 166, 63, 0.4), 0 0 30px rgba(31, 58, 147, 0.2);
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            margin-bottom: 0.8rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #D4A63F;
+            background: linear-gradient(135deg, #1F3A93 0%, #2a4fc9 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: transform 0.5s ease;
+            box-shadow: 0 4px 15px rgba(31, 58, 147, 0.4);
+            flex-shrink: 0;
+        }
+
+        .testimonial-card:hover .testimonial-avatar {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .testimonial-info h4 {
+            color: #D4A63F;
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .testimonial-info p {
+            color: #b8b8b8;
+            font-size: 0.8rem;
+            line-height: 1.2;
+        }
+
+        .testimonial-text {
+            color: #e8e8e8;
+            line-height: 1.6;
+            font-size: 0.9rem;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+            font-weight: 300;
+            flex-grow: 1;
+        }
+
+        .testimonial-stars {
+            margin-top: 0.8rem;
+            color: #D4A63F;
+            font-size: 0.95rem;
+            filter: drop-shadow(0 0 8px rgba(212, 166, 63, 0.4));
+        }
+
+        /* Why Roof & Realms - 5 Pillars Section */
+        .why-section {
+            background:
+                radial-gradient(circle at 50% 50%, rgba(212, 166, 63, 0.08) 0%, transparent 60%),
+                radial-gradient(circle at 0% 100%, rgba(31, 58, 147, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 100% 0%, rgba(31, 58, 147, 0.2) 0%, transparent 50%),
+                linear-gradient(135deg, #0a0a14 0%, #12121e 50%, #0a0a14 100%);
+            border-top: 1px solid rgba(212, 166, 63, 0.3);
+            border-bottom: 1px solid rgba(212, 166, 63, 0.3);
+            padding: 6rem 5% 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .why-section::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(212, 166, 63, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulseGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+
+            0%,
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.4;
+            }
+
+            50% {
+                transform: translate(-50%, -50%) scale(1.3);
+                opacity: 0.7;
+            }
+        }
+
+        .pillars-container {
+            max-width: 1400px;
+            margin: 0 auto 4rem;
+            position: relative;
+        }
+
+        .pillars-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        /* Individual Pillar Column */
+        .pillar-column {
+            background: linear-gradient(180deg, rgba(31, 58, 147, 0.3) 0%, rgba(10, 10, 20, 0.95) 100%);
+            border: none;
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
+            position: relative;
+            min-height: 550px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Pillar Capital (Top Decorative Part) */
+        .pillar-column::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: linear-gradient(180deg, #f4d483 0%, #D4A63F 50%, #c49636 100%);
+            box-shadow:
+                0 8px 20px rgba(0, 0, 0, 0.6),
+                inset 0 4px 10px rgba(255, 255, 255, 0.3),
+                inset 0 -4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+            clip-path: polygon(0% 0%, 100% 0%,
+                    95% 25%, 90% 40%, 85% 45%, 80% 47%, 75% 48%, 70% 48.5%, 65% 49%, 60% 49.2%, 55% 49.3%, 50% 49.4%,
+                    45% 49.3%, 40% 49.2%, 35% 49%, 30% 48.5%, 25% 48%, 20% 47%, 15% 45%, 10% 40%, 5% 25%);
+            border-top: 3px solid #f4d483;
+            border-left: 2px solid rgba(212, 166, 63, 0.4);
+            border-right: 2px solid rgba(0, 0, 0, 0.4);
+        }
+
+        /* Pillar Base (Bottom Platform) */
+        .pillar-column::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: linear-gradient(180deg, #c49636 0%, #D4A63F 50%, #f4d483 100%);
+            box-shadow:
+                0 -8px 20px rgba(0, 0, 0, 0.6),
+                inset 0 -4px 10px rgba(255, 255, 255, 0.3),
+                inset 0 4px 10px rgba(0, 0, 0, 0.3),
+                0 10px 40px rgba(212, 166, 63, 0.5);
+            z-index: 1;
+            clip-path: polygon(5% 0%, 10% 15%, 15% 25%, 20% 35%, 25% 42%, 30% 47%, 35% 51%, 40% 54%, 45% 56%, 50% 57%,
+                    55% 56%, 60% 54%, 65% 51%, 70% 47%, 75% 42%, 80% 35%, 85% 25%, 90% 15%, 95% 0%,
+                    100% 100%, 0% 100%);
+            border-bottom: 5px solid #D4A63F;
+            border-left: 2px solid rgba(0, 0, 0, 0.4);
+            border-right: 2px solid rgba(212, 166, 63, 0.4);
+        }
+
+        /* Pillar Shaft Body - Vertical Lines */
+        .pillar-body {
+            background:
+                repeating-linear-gradient(90deg,
+                    transparent,
+                    transparent 8%,
+                    rgba(212, 166, 63, 0.15) 8%,
+                    rgba(212, 166, 63, 0.15) 10%,
+                    transparent 10%,
+                    transparent 18%,
+                    rgba(0, 0, 0, 0.2) 18%,
+                    rgba(0, 0, 0, 0.2) 20%),
+                linear-gradient(180deg, rgba(31, 58, 147, 0.2) 0%, rgba(10, 10, 20, 0.9) 100%);
+            border-left: 3px solid rgba(212, 166, 63, 0.3);
+            border-right: 3px solid rgba(0, 0, 0, 0.3);
+            box-shadow:
+                inset 3px 0 15px rgba(212, 166, 63, 0.2),
+                inset -3px 0 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .pillar-column:hover {
+            transform: translateY(-25px) scale(1.05);
+            background: linear-gradient(180deg, rgba(212, 166, 63, 0.25) 0%, rgba(31, 58, 147, 0.4) 50%, rgba(10, 10, 20, 0.95) 100%);
+            z-index: 20;
+        }
+
+        .pillar-column:hover::before {
+            background: linear-gradient(180deg, #f4d483 0%, #D4A63F 50%, #f4d483 100%);
+            box-shadow:
+                0 8px 30px rgba(212, 166, 63, 0.9),
+                inset 0 4px 15px rgba(255, 255, 255, 0.5),
+                inset 0 -4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .pillar-column:hover::after {
+            background: linear-gradient(180deg, #c49636 0%, #f4d483 50%, #f4d483 100%);
+            box-shadow:
+                0 -8px 30px rgba(212, 166, 63, 0.9),
+                inset 0 -4px 15px rgba(255, 255, 255, 0.5),
+                inset 0 4px 15px rgba(0, 0, 0, 0.4),
+                0 10px 60px rgba(212, 166, 63, 0.8);
+        }
+
+        .pillar-column:hover .pillar-body {
+            background:
+                repeating-linear-gradient(90deg,
+                    transparent,
+                    transparent 8%,
+                    rgba(212, 166, 63, 0.3) 8%,
+                    rgba(212, 166, 63, 0.3) 10%,
+                    transparent 10%,
+                    transparent 18%,
+                    rgba(0, 0, 0, 0.25) 18%,
+                    rgba(0, 0, 0, 0.25) 20%),
+                linear-gradient(180deg, rgba(212, 166, 63, 0.2) 0%, rgba(31, 58, 147, 0.3) 50%, rgba(10, 10, 20, 0.9) 100%);
+            border-left-color: rgba(212, 166, 63, 0.6);
+            box-shadow:
+                inset 5px 0 20px rgba(212, 166, 63, 0.4),
+                inset -5px 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .pillar-top {
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .pillar-icon-wrapper {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #D4A63F 0%, #f4d483 50%, #D4A63F 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow:
+                0 15px 50px rgba(212, 166, 63, 0.6),
+                inset 0 -8px 25px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+
+        .pillar-icon-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg,
+                    #D4A63F 0deg,
+                    #f4d483 60deg,
+                    #D4A63F 120deg,
+                    #f4d483 180deg,
+                    #D4A63F 240deg,
+                    #f4d483 300deg,
+                    #D4A63F 360deg);
+            opacity: 0;
+            animation: rotate 2.5s linear infinite;
+            transition: opacity 0.8s ease;
+        }
+
+        .pillar-column:hover .pillar-icon-wrapper::before {
+            opacity: 1;
+        }
+
+        @keyframes rotate {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .pillar-icon-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #D4A63F 0%, #f4d483 50%, #D4A63F 100%);
+        }
+
+        .pillar-column:hover .pillar-icon-wrapper {
+            transform: scale(1.2) rotate(360deg);
+            box-shadow:
+                0 20px 70px rgba(212, 166, 63, 1),
+                inset 0 -10px 35px rgba(0, 0, 0, 0.5),
+                0 0 60px rgba(212, 166, 63, 0.8);
+        }
+
+        .pillar-icon {
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.4));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pillar-icon svg {
+            width: 45px;
+            height: 45px;
+        }
+
+        .pillar-column h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            background: linear-gradient(135deg, #D4A63F 0%, #f4d483 50%, #ffffff 75%, #f4d483 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.8rem;
+            text-align: center;
+            font-weight: 800;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 0 20px rgba(212, 166, 63, 0.5));
+        }
+
+        .pillar-tagline {
+            color: #f0f0f0;
+            font-size: 0.95rem;
+            margin-bottom: 0;
+            font-weight: 600;
+            text-align: center;
+            line-height: 1.5;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .pillar-body {
+            padding: 0 2rem 3rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .pillar-benefits {
+            list-style: none;
+            text-align: left;
+        }
+
+        .pillar-benefits li {
+            color: #d0d0d0;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            padding-left: 1.8rem;
+            position: relative;
+            margin-bottom: 0.9rem;
+            transition: all 0.4s ease;
+        }
+
+        .pillar-column:hover .pillar-benefits li {
+            color: #ffffff;
+            transform: translateX(8px);
+        }
+
+        .pillar-benefits li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #D4A63F;
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-shadow: 0 0 15px rgba(212, 166, 63, 0.8);
+        }
+
+        /* Metrics Badge Row */
+        .metrics-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 3rem;
+            border-top: 2px solid rgba(212, 166, 63, 0.2);
+        }
+
+        .metric-badge {
+            background: rgba(31, 58, 147, 0.2);
+            padding: 2rem 1.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 166, 63, 0.3);
+            text-align: center;
+            transition: all 0.5s ease;
+        }
+
+        .metric-badge:hover {
+            transform: translateY(-10px);
+            border-color: #D4A63F;
+            box-shadow: 0 15px 40px rgba(212, 166, 63, 0.3);
+            background: rgba(31, 58, 147, 0.3);
+        }
+
+        .metric-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px rgba(212, 166, 63, 0.5));
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #D4A63F;
+            margin-bottom: 0.5rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .metric-label {
+            color: #b8b8b8;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* Journey Section */
+        .journey-section {
+            background:
+                radial-gradient(circle at 80% 20%, rgba(212, 166, 63, 0.1) 0%, transparent 50%),
+                linear-gradient(180deg, #0a0a14 0%, #12121e 100%);
+            padding: 8rem 5% 10rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .journey-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(31, 58, 147, 0.05) 2px, rgba(31, 58, 147, 0.05) 4px),
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(31, 58, 147, 0.05) 2px, rgba(31, 58, 147, 0.05) 4px);
+            pointer-events: none;
+        }
+
+        .journey-timeline-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        /* Vertical Timeline Line */
+        .journey-vertical-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background: linear-gradient(180deg, transparent, #D4A63F 10%, #D4A63F 90%, transparent);
+            transform: translateX(-50%);
+            box-shadow: 0 0 30px rgba(212, 166, 63, 0.6);
+            z-index: 1;
+        }
+
+        .journey-vertical-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: #D4A63F;
+            border-radius: 50%;
+            box-shadow: 0 0 25px rgba(212, 166, 63, 0.8);
+            animation: pulseStart 2s ease-in-out infinite;
+        }
+
+        .journey-vertical-line::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: #D4A63F;
+            border-radius: 50%;
+            box-shadow: 0 0 25px rgba(212, 166, 63, 0.8);
+            animation: pulseEnd 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseStart {
+
+            0%,
+            100% {
+                transform: translateX(-50%) scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateX(-50%) scale(1.3);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes pulseEnd {
+
+            0%,
+            100% {
+                transform: translateX(-50%) scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateX(-50%) scale(1.3);
+                opacity: 0.8;
+            }
+        }
+
+        .journey-steps {
+            position: relative;
+            z-index: 2;
+        }
+
+        .journey-step {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            margin-bottom: 6rem;
+            position: relative;
+        }
+
+        .journey-step:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Left-aligned steps */
+        .journey-step:nth-child(odd) {
+            flex-direction: row;
+            justify-content: flex-end;
+            padding-right: calc(50% + 3rem);
+        }
+
+        /* Right-aligned steps */
+        .journey-step:nth-child(even) {
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+            padding-left: calc(50% + 3rem);
+        }
+
+        .step-circle {
+            width: 80px;
+            height: 80px;
+            min-width: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1F3A93 0%, #2a4fc9 100%);
+            border: 4px solid #D4A63F;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #D4A63F;
+            transition: all 0.5s ease;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            box-shadow: 0 10px 35px rgba(31, 58, 147, 0.6), 0 0 30px rgba(212, 166, 63, 0.4);
+        }
+
+        .journey-step:hover .step-circle {
+            transform: translateX(-50%) scale(1.2) rotate(360deg);
+            box-shadow: 0 15px 50px rgba(212, 166, 63, 0.8), 0 0 40px rgba(31, 58, 147, 0.6);
+        }
+
+        .step-content-box {
+            background: linear-gradient(135deg, rgba(31, 58, 147, 0.2) 0%, rgba(10, 10, 20, 0.9) 100%);
+            padding: 1.5rem;
+            border-radius: 25px;
+            border: 2px solid rgba(212, 166, 63, 0.3);
+            transition: all 0.6s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-content-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(212, 166, 63, 0.1) 0%, transparent 70%);
+            transition: transform 1s ease;
+        }
+
+        .journey-step:hover .step-content-box::before {
+            transform: translate(-25%, -25%) scale(1.5);
+        }
+
+        .step-content-box>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .journey-step:hover .step-content-box {
+            background: linear-gradient(135deg, rgba(31, 58, 147, 0.35) 0%, rgba(212, 166, 63, 0.15) 100%);
+            border-color: #D4A63F;
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(212, 166, 63, 0.4);
+        }
+
+        /* Connector lines from circle to content */
+        .step-content-box::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 3rem;
+            height: 2px;
+            background: linear-gradient(90deg, #D4A63F, transparent);
+            transform: translateY(-50%);
+            z-index: 0;
+        }
+
+        .journey-step:nth-child(odd) .step-content-box::after {
+            right: -3rem;
+            background: linear-gradient(90deg, transparent, #D4A63F);
+        }
+
+        .journey-step:nth-child(even) .step-content-box::after {
+            left: -3rem;
+            background: linear-gradient(90deg, #D4A63F, transparent);
+        }
+
+        .step-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            filter: drop-shadow(0 0 15px rgba(212, 166, 63, 0.5));
+            transition: transform 0.5s ease;
+        }
+
+        .journey-step:hover .step-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .step-content-box h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #D4A63F;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        .step-content-box p {
+            font-size: 1rem;
+            color: #c8c8c8;
+            line-height: 1.8;
+        }
+
+        /* Process Benefits Box */
+        .journey-benefits {
+            max-width: 1000px;
+            margin: 6rem auto 0;
+            padding: 3.5rem;
+            background: linear-gradient(135deg, rgba(31, 58, 147, 0.25) 0%, rgba(10, 10, 20, 0.95) 100%);
+            border-radius: 30px;
+            border: 2px solid rgba(212, 166, 63, 0.4);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .journey-benefits::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg,
+                    transparent 0deg,
+                    rgba(212, 166, 63, 0.15) 90deg,
+                    transparent 180deg);
+            animation: rotate 8s linear infinite;
+        }
+
+        .journey-benefits>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .journey-benefits h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            background: linear-gradient(135deg, #D4A63F 0%, #f4d483 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .benefit-item {
+            text-align: center;
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            filter: drop-shadow(0 0 15px rgba(212, 166, 63, 0.5));
+        }
+
+        .benefit-item h4 {
+            color: #D4A63F;
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .benefit-item p {
+            color: #b8b8b8;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+
+
+        /* Footer */
+        footer {
+            background: linear-gradient(180deg, #0a0a14 0%, #050508 100%);
+            padding: 5rem 5% 3rem;
+            border-top: 1px solid rgba(212, 166, 63, 0.3);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-section h4.footer-heading {
+            color: #D4A63F;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-list {
+            list-style: none;
+        }
+
+        .footer-list li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-list a {
+            color: #b8b8b8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .footer-list a:hover {
+            color: #D4A63F;
+            padding-left: 5px;
+        }
+
+        .footer-contact {
+            list-style: none;
+        }
+
+        .footer-contact li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            color: #b8b8b8;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .footer-contact svg {
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+            color: #D4A63F;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(31, 58, 147, 0.3);
+            border: 1px solid rgba(212, 166, 63, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #D4A63F;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: #D4A63F;
+            color: #0a0a1a;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(212, 166, 63, 0.4);
+        }
+
+        .footer-cta {
+            margin-top: 1.5rem;
+            padding: 0.9rem 1.8rem;
+            background: linear-gradient(135deg, #D4A63F 0%, #f4d483 100%);
+            color: #0a0a1a;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 20px rgba(212, 166, 63, 0.3);
+            letter-spacing: 0.5px;
+            width: 100%;
+        }
+
+        .footer-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 35px rgba(212, 166, 63, 0.5);
+            background: linear-gradient(135deg, #f4d483 0%, #D4A63F 100%);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(212, 166, 63, 0.2);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom p {
+            color: #888;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-bottom-links a {
+            color: #b8b8b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom-links a:hover {
+            color: #D4A63F;
+        }
+
+        .footer-bottom-links span {
+            color: #555;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            animation: fadeIn 0.3s ease;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-container {
+            background: linear-gradient(135deg, rgba(31, 58, 147, 0.95) 0%, rgba(10, 10, 20, 0.98) 100%);
+            border-radius: 30px;
+            border: 2px solid rgba(212, 166, 63, 0.4);
+            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.9), 0 0 60px rgba(212, 166, 63, 0.3);
+            max-width: 600px;
+            width: 90%;
+            max-height: 90%;
+            overflow-y: auto;
+            animation: slideUp 0.4s ease;
+            position: relative;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(100px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            padding: 2.5rem 3rem 1.5rem;
+            border-bottom: 1px solid rgba(212, 166, 63, 0.2);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 2rem;
+            right: 2.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(212, 166, 63, 0.2);
+            border: 2px solid #D4A63F;
+            color: #D4A63F;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            background: #D4A63F;
+            color: #0a0a1a;
+            transform: rotate(90deg);
+        }
+
+        .modal-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #D4A63F 0%, #f4d483 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-header p {
+            color: #c0c0c0;
+            font-size: 1.05rem;
+        }
+
+        .modal-body {
+            padding: 2.5rem 3rem 3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: #D4A63F;
+            font-weight: 600;
+            margin-bottom: 0.7rem;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: rgba(31, 58, 147, 0.2);
+            border: 2px solid rgba(212, 166, 63, 0.3);
+            border-radius: 15px;
+            color: #ffffff;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #D4A63F;
+            background: rgba(31, 58, 147, 0.3);
+            box-shadow: 0 0 20px rgba(212, 166, 63, 0.2);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #888;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 1.3rem;
+            background: linear-gradient(135deg, #D4A63F 0%, #f4d483 100%);
+            color: #0a0a1a;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            margin-top: 1rem;
+            box-shadow: 0 10px 30px rgba(212, 166, 63, 0.4);
+            letter-spacing: 1px;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 45px rgba(212, 166, 63, 0.6);
+            background: linear-gradient(135deg, #f4d483 0%, #D4A63F 100%);
+        }
+
+        .form-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .success-message.active {
+            display: block;
+        }
+
+        .success-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            animation: bounceIn 0.6s ease;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .success-message h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #D4A63F;
+            margin-bottom: 1rem;
+        }
+
+        .success-message p {
+            color: #c0c0c0;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .testimonial-card {
+                min-width: calc(50% - 1.25rem);
+            }
+
+            .hero {
+                padding: 7rem 5% 4rem;
+            }
+
+            .hero-content {
+                max-width: 100%;
+            }
+
+            .hero h1 {
+                font-size: 4rem;
+            }
+        }
+
+        @media (max-width: 968px) {
+            .serve-row {
+                grid-template-columns: 1fr;
+                margin-bottom: 3rem;
+            }
+
+            .serve-content {
+                padding: 3rem 2rem;
+            }
+
+            .serve-content h3 {
+                font-size: 2.2rem;
+            }
+
+            .serve-subtitle {
+                font-size: 1.05rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .gallery-item {
+                height: 240px;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100%;
+                width: 320px;
+                background: rgba(10, 10, 20, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 7rem 2.5rem 2.5rem;
+                gap: 2rem;
+                transition: right 0.5s ease;
+                border-left: 1px solid rgba(212, 166, 63, 0.3);
+                box-shadow: -10px 0 50px rgba(0, 0, 0, 0.7);
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .dropdown-content {
+                position: static;
+                transform: none;
+                margin-top: 0.8rem;
+                display: none;
+                box-shadow: none;
+            }
+
+            .dropdown.active .dropdown-content {
+                display: flex;
+            }
+
+            .header-cta {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .hero-subheadline {
+                font-size: 1.25rem;
+            }
+
+            .hero-supporting {
+                font-size: 1.05rem;
+            }
+
+            .cta-buttons {
+                gap: 1rem;
+            }
+
+            .hero-bg-nav {
+                bottom: 2rem;
+            }
+
+            .testimonial-card {
+                min-width: calc(50% - 1rem);
+            }
+
+            .testimonials-carousel-wrapper {
+                padding: 0 60px;
+            }
+
+            .carousel-arrow {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .journey-road,
+            .journey-steps {
+                min-width: 800px;
+            }
+
+            .journey-vertical-line {
+                left: 2rem;
+            }
+
+            .journey-step {
+                padding-right: 0 !important;
+                padding-left: 4.5rem !important;
+                flex-direction: row !important;
+                justify-content: flex-start !important;
+            }
+
+            .step-circle {
+                left: 2rem;
+            }
+
+            .step-content-box::after {
+                left: -3rem !important;
+                background: linear-gradient(90deg, #D4A63F, transparent) !important;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .pillars-row {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .pillar-column {
+                min-height: 450px;
+            }
+
+            .metrics-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 1rem 4%;
+            }
+
+            section {
+                padding: 5rem 4%;
+            }
+
+            .hero {
+                padding: 6rem 4% 3rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subheadline {
+                font-size: 1.1rem;
+            }
+
+            .hero-supporting {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 1rem 2rem;
+                font-size: 0.95rem;
+            }
+
+            .esg-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .esg-image-container {
+                height: 200px;
+            }
+
+            .esg-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+
+            .gallery-item {
+                height: 220px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .logo {
+                width: 50px;
+                height: 50px;
+                font-size: 1.4rem;
+            }
+
+            .logo-text {
+                font-size: 1.4rem;
+            }
+
+            .hero-bg-nav {
+                bottom: 1.5rem;
+                gap: 0.7rem;
+            }
+
+            .hero-bg-dot {
+                width: 12px;
+                height: 12px;
+            }
+
+            .modal-container {
+                max-width: 95%;
+            }
+
+            .modal-header,
+            .modal-body {
+                padding: 2rem 1.5rem;
+            }
+
+            .modal-close {
+                top: 1.5rem;
+                right: 1.5rem;
+                width: 35px;
+                height: 35px;
+                font-size: 1.3rem;
+            }
+
+            .modal-header h2 {
+                font-size: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .pillars-row {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .pillar-column {
+                min-height: auto;
+            }
+
+            .pillar-icon-wrapper {
+                width: 80px;
+                height: 80px;
+            }
+
+            .pillar-icon svg {
+                width: 40px;
+                height: 40px;
+            }
+
+            .pillar-column h3 {
+                font-size: 1.4rem;
+            }
+
+            .pillar-tagline {
+                font-size: 0.9rem;
+            }
+
+            .metrics-row {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .testimonials-carousel-container {
+                overflow: hidden;
+                /* Hide extra cards */
+                width: 100%;
+            }
+
+            .testimonials-carousel {
+                display: flex;
+                transition: transform 0.5s ease-in-out;
+            }
+
+            .testimonial-card {
+                flex: 0 0 calc(100% / 3);
+                /* 3 cards in one row */
+                padding: 1.2rem;
+                box-sizing: border-box;
+            }
+
+            .testimonial-card::before {
+                font-size: 60px;
+                top: -10px;
+                left: 10px;
+            }
+
+            .testimonial-avatar {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+
+            .testimonial-info h4 {
+                font-size: 0.95rem;
+            }
+
+            .testimonial-info p {
+                font-size: 0.75rem;
+            }
+
+            .testimonial-text {
+                font-size: 0.85rem;
+                line-height: 1.5;
+            }
+
+            .testimonial-stars {
+                font-size: 0.9rem;
+                margin-top: 0.8rem;
+            }
+
+            .testimonials-carousel-wrapper {
+                padding: 0 50px;
+            }
+
+            .carousel-arrow {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+
+            .carousel-arrow-left {
+                left: 5px;
+            }
+
+            .carousel-arrow-right {
+                right: 5px;
+            }
+
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+                margin-bottom: 3rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+
+            .footer-bottom-links {
+                justify-content: center;
+            }
+        }
+    </style>
+    <style>
+        @view-transition {
+            navigation: auto;
+        }
+    </style>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+    <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+</head>
+
+<body>
+    <header id="header">
+        <div class="logo-container" onclick="window.location.href='https://roofandrealms.rightbraininfotech.in/'">
+            <img src="image/logo.png" alt="Logo" style="width: 100px; height: 70px;">
+        </div>
+        <nav id="mainNav"><a href="https://roofandrealms.rightbraininfotech.in/">HOME</a>
+            <div class="dropdown" id="productsDropdown"><span class="nav-item">PRODUCTS ▾</span>
+                <div class="dropdown-content"><a href="/commercial.html"
+                        class="dropdown-item"> <span class="dropdown-item-title">🏢 COMMERCIAL</span> <span
+                            class="dropdown-item-desc">Office buildings, corporate spaces &amp; business hubs</span>
+                    </a> <a href="https://roofandrealms.rightbraininfotech.in/residential" class="dropdown-item"> <span
+                            class="dropdown-item-title">🏠 RESIDENTIAL</span> <span class="dropdown-item-desc">Luxury
+                            villas, smart homes &amp; housing communities</span> </a> <a
+                        href="https://roofandrealms.rightbraininfotech.in/institutional" class="dropdown-item"> <span
+                            class="dropdown-item-title">🎓 INSTITUTIONAL</span> <span
+                            class="dropdown-item-desc">Schools, universities &amp; research facilities</span> </a> <a
+                        href="https://roofandrealms.rightbraininfotech.in/hospitality" class="dropdown-item"> <span
+                            class="dropdown-item-title">🏨 HOSPITALITY</span> <span class="dropdown-item-desc">Hotels,
+                            resorts &amp; premium dining experiences</span> </a> <a
+                        href="https://roofandrealms.rightbraininfotech.in/public-facilities" class="dropdown-item">
+                        <span class="dropdown-item-title">🏛 PUBLIC FACILITIES</span> <span
+                            class="dropdown-item-desc">Government buildings &amp; civic infrastructure</span> </a>
+                </div>
+            </div><a href="https://roofandrealms.rightbraininfotech.in/materials">MATERIALS</a> <a
+                href="./about-us.html">ABOUT US</a> <a
+                href="https://roofandrealms.rightbraininfotech.in/contact">CONTACT</a>
+        </nav><button class="btn btn-primary" id="scheduleMeetingBtn">Schedule Call</button>
+    </header>
+    <main style="width: 100%; overflow-x: hidden;"><!-- Enhanced Hero Section -->
+        <section class="hero" id="home"><!-- Background Slider -->
+            <div class="hero-background">
+                <div class="hero-bg-slide active">
+                    <video src="image/freepik.mp4" autoplay muted loop playsinline class="hero-video"
+                        onerror="this.style.display='none';">
+                    </video>
+                </div>
+            </div>
+        </section><!-- Who We Serve Section -->
+        <section class="who-we-serve" id="who-we-serve">
+            <h2 class="section-title">Who We Serve</h2>
+            <div class="gold-divider"></div>
+            <p class="section-subtitle">Precision-engineered solutions across every sector</p><!-- Commercial -->
+            <div class="serve-row">
+                <div class="serve-image-container"><img src="image/Commercial-home.png"
+                        alt="Modern commercial office building" class="serve-image"
+                        onerror="this.src=''; this.alt='Image failed to load';">
+                </div>
+                <div class="serve-content">
+                    <h3>Commercial</h3>
+                    <p class="serve-subtitle">Launch, expand or reposition commercial assets with factory-controlled
+                        quality and dramatically shorter build cycles — without compromising design or comfort.</p>
+                    <ul class="serve-benefits">
+                        <li>30–60% faster completion</li>
+                        <li>Predictable budgets, fixed-price modular packages</li>
+                        <li>Brand-ready aesthetics and Grade-A comfort</li>
+                        <li>Scalable solutions for growth</li>
+                    </ul><a href="https://roofandrealms.rightbraininfotech.in/commercial" class="serve-link">View
+                        Solutions</a>
+                </div>
+            </div><!-- Residential -->
+            <div class="serve-row">
+                <div class="serve-content">
+                    <h3>Residential</h3>
+                    <p class="serve-subtitle">From luxury villas to sustainable housing communities, we deliver homes
+                        that combine precision engineering with personalized comfort and style.</p>
+                    <ul class="serve-benefits">
+                        <li>Customizable luxury designs</li>
+                        <li>Eco-friendly and energy-efficient</li>
+                        <li>Premium finishes with faster move-in dates</li>
+                        <li>Smart home integration ready</li>
+                    </ul><a href="https://roofandrealms.rightbraininfotech.in/residential" class="serve-link">View
+                        Solutions</a>
+                </div>
+                <div class="serve-image-container"><img src="image/Residential-home.jpg" alt="Luxury residential villa"
+                        class="serve-image" onerror="this.src=''; this.alt='Image failed to load';">
+                </div>
+            </div><!-- Institutional -->
+            <div class="serve-row">
+                <div class="serve-image-container"><img
+                        src="image/Institutional2.jpg"
+                        alt="Modern educational institution" class="serve-image"
+                        onerror="this.src=''; this.alt='Image failed to load';">
+                </div>
+                <div class="serve-content">
+                    <h3>Institutional</h3>
+                    <p class="serve-subtitle">Schools, universities, and research centers with world-class
+                        infrastructure designed for safety, functionality, and inspiring learning environments.</p>
+                    <ul class="serve-benefits">
+                        <li>Safe and spacious learning environments</li>
+                        <li>Minimal disruption during construction</li>
+                        <li>Modern facilities with future-proof design</li>
+                        <li>Compliance with education standards</li>
+                    </ul><a href="https://roofandrealms.rightbraininfotech.in/institutional" class="serve-link">View
+                        Solutions</a>
+                </div>
+            </div><!-- Public Facilities -->
+            <div class="serve-row">
+                <div class="serve-content">
+                    <h3>Public Facilities</h3>
+                    <p class="serve-subtitle">Government buildings, community centers, and civic infrastructure built
+                        with durability, accessibility, and public service excellence in mind.</p>
+                    <ul class="serve-benefits">
+                        <li>Durable and long-lasting construction</li>
+                        <li>Accessible design for all communities</li>
+                        <li>Cost-efficient public investment</li>
+                        <li>Rapid deployment for urgent needs</li>
+                    </ul><a href="https://roofandrealms.rightbraininfotech.in/public-facilities" class="serve-link">View
+                        Solutions</a>
+                </div>
+                <div class="serve-image-container"><img
+                        src="image/shoppingmall.png"
+                        alt="Public community center" class="serve-image"
+                        onerror="this.src=''; this.alt='Image failed to load';">
+                </div>
+            </div><!-- Hospitality -->
+            <div class="serve-row">
+                <div class="serve-image-container"><img
+                        src="image/hospital.jpg"
+                        alt="Luxury hotel resort" class="serve-image"
+                        onerror="this.src=''; this.alt='Image failed to load';">
+                </div>
+                <div class="serve-content">
+                    <h3>Hospitality</h3>
+                    <p class="serve-subtitle">Hotels, resorts, and restaurants designed for luxury, comfort, and
+                        exceptional guest experiences with premium finishes and functional elegance.</p>
+                    <ul class="serve-benefits">
+                        <li>Elegant and functional spaces</li>
+                        <li>Luxurious finishes and amenities</li>
+                        <li>Faster time-to-market for revenue generation</li>
+                        <li>Scalable design for expansion</li>
+                    </ul><a href="https://roofandrealms.rightbraininfotech.in/hospitality" class="serve-link">View
+                        Solutions</a>
+                </div>
+            </div><!-- Interiors -->
+            <div class="serve-row">
+                <div class="serve-content">
+                    <h3>Interiors</h3>
+                    <p class="serve-subtitle">Transform spaces with precision-engineered interior solutions that blend
+                        aesthetic excellence with functional design for residential and commercial applications.</p>
+                    <ul class="serve-benefits">
+                        <li>Custom interior design and execution</li>
+                        <li>Premium materials and finishes</li>
+                        <li>Modular flexibility for future changes</li>
+                        <li>Seamless integration with structure</li>
+                    </ul><a href="https://roofandrealms.rightbraininfotech.in/interiors" class="serve-link">View
+                        Solutions</a>
+                </div>
+                <div class="serve-image-container"><img
+                        src="image/Interiors.jpg"
+                        alt="Modern interior design" class="serve-image"
+                        onerror="this.src=''; this.alt='Image failed to load';">
+                </div>
+            </div>
+        </section><!-- Gallery Section -->
+        <!-- Why Roof & Realms - 5 Pillars Section -->
+        <section class="why-section" id="why">
+            <h2 class="section-title" id="why-title">Why Roof &amp; Realms</h2>
+            <div class="gold-divider"></div>
+            <p class="section-subtitle">We don't just construct — we engineer certainty.</p>
+            <div class="pillars-container">
+                <div class="pillars-row"><!-- Pillar 1: Speed -->
+                    <div class="pillar-column">
+                        <div class="pillar-top">
+                            <div class="pillar-icon-wrapper">
+                                <div class="pillar-icon">
+                                    <svg width="45" height="45" viewbox="0 0 24 24" fill="none" stroke="#0a0a1a"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10" />
+                                        <polyline points="12 6 12 12 16 14"></polyline>
+                                    </svg>
+                                </div>
+                            </div>
+                            <h3>Speed</h3>
+                            <p class="pillar-tagline">Projects Completed 30–60% Faster</p>
+                        </div>
+                        <div class="pillar-body">
+                            <ul class="pillar-benefits">
+                                <li>Parallel factory + site workflows</li>
+                                <li>Weather-independent production</li>
+                                <li>Phased delivery for early revenue</li>
+                            </ul>
+                        </div>
+                    </div><!-- Pillar 2: Quality -->
+                    <div class="pillar-column">
+                        <div class="pillar-top">
+                            <div class="pillar-icon-wrapper">
+                                <div class="pillar-icon">
+                                    <svg width="45" height="45" viewbox="0 0 24 24" fill="none" stroke="#0a0a1a"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path
+                                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <h3>Quality</h3>
+                            <p class="pillar-tagline">Factory-Controlled Precision</p>
+                        </div>
+                        <div class="pillar-body">
+                            <ul class="pillar-benefits">
+                                <li>CNC fabrication, multi-stage QC</li>
+                                <li>Documented material certificates</li>
+                                <li>As-built drawings, not site guesswork</li>
+                            </ul>
+                        </div>
+                    </div><!-- Pillar 3: Predictability -->
+                    <div class="pillar-column">
+                        <div class="pillar-top">
+                            <div class="pillar-icon-wrapper">
+                                <div class="pillar-icon">
+                                    <svg width="45" height="45" viewbox="0 0 24 24" fill="none" stroke="#0a0a1a"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="12" y1="1" x2="12" y2="23"></line>
+                                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <h3>Predictability</h3>
+                            <p class="pillar-tagline">Fixed Costs, Clear Timelines</p>
+                        </div>
+                        <div class="pillar-body">
+                            <ul class="pillar-benefits">
+                                <li>Fixed-price modular packages</li>
+                                <li>Milestone-based timelines</li>
+                                <li>Transparent, documented processes</li>
+                            </ul>
+                        </div>
+                    </div><!-- Pillar 4: Engineering -->
+                    <div class="pillar-column">
+                        <div class="pillar-top">
+                            <div class="pillar-icon-wrapper">
+                                <div class="pillar-icon">
+                                    <svg width="45" height="45" viewbox="0 0 24 24" fill="none" stroke="#0a0a1a"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="3" />
+                                        <path
+                                            d="M12 1v6m0 6v6m5.657-13.657l-4.243 4.243m-3.536 3.536l-4.243 4.242m13.656-.001l-4.242-4.243m-3.536-3.536L1.344 5.657" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <h3>Engineering</h3>
+                            <p class="pillar-tagline">Codified, BIS &amp; NBC Aligned</p>
+                        </div>
+                        <div class="pillar-body">
+                            <ul class="pillar-benefits">
+                                <li>LGSF systems aligned with IS 15916, IS 6820</li>
+                                <li>Seismic &amp; wind design for your zone</li>
+                                <li>ISO-style frameworks for quality &amp; safety</li>
+                            </ul>
+                        </div>
+                    </div><!-- Pillar 5: Accountability -->
+                    <div class="pillar-column">
+                        <div class="pillar-top">
+                            <div class="pillar-icon-wrapper">
+                                <div class="pillar-icon">
+                                    <svg width="45" height="45" viewbox="0 0 24 24" fill="none" stroke="#0a0a1a"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M9 11l3 3L22 4" />
+                                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <h3>Accountability</h3>
+                            <p class="pillar-tagline">One Partner, End-to-End</p>
+                        </div>
+                        <div class="pillar-body">
+                            <ul class="pillar-benefits">
+                                <li>One contract, one partner</li>
+                                <li>Design to commissioning in-house</li>
+                                <li>No vendor finger-pointing</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- Metrics Badge Row -->
+            <div class="metrics-row">
+                <div class="metric-badge">
+                    <div class="metric-icon">
+                        ⚡
+                    </div>
+                    <div class="metric-value">
+                        30–60%
+                    </div>
+                    <div class="metric-label">
+                        Faster
+                    </div>
+                </div>
+                <div class="metric-badge">
+                    <div class="metric-icon">
+                        ♻️
+                    </div>
+                    <div class="metric-value">
+                        60–80%
+                    </div>
+                    <div class="metric-label">
+                        Less Waste
+                    </div>
+                </div>
+                <div class="metric-badge">
+                    <div class="metric-icon">
+                        ⚡
+                    </div>
+                    <div class="metric-value">
+                        15–35%
+                    </div>
+                    <div class="metric-label">
+                        Lower Lifecycle Energy
+                    </div>
+                </div>
+                <div class="metric-badge">
+                    <div class="metric-icon">
+                        🛡️
+                    </div>
+                    <div class="metric-value">
+                        12-Month
+                    </div>
+                    <div class="metric-label">
+                        Defects Liability
+                    </div>
+                </div>
+            </div>
+        </section><!-- Journey Section -->
+        <section class="journey-section" id="journey">
+            <h2 class="section-title" id="journey-title">The Roof &amp; Realms 12-Step Modular Journey</h2>
+            <div class="gold-divider"></div>
+            <p class="section-subtitle">From concept to handover – precision engineered, meticulously executed</p>
+            <div class="journey-timeline-container"><!-- Vertical Timeline Line -->
+                <div class="journey-vertical-line"></div><!-- Journey Steps -->
+                <div class="journey-steps"><!-- Step 1 - Left -->
+                    <div class="journey-step">
+                        <div class="step-circle">
+                            1
+                        </div>
+                        <div class="step-content-box">
+                            <h4>Project Definition &amp; Goals</h4>
+                            <p>Understand your vision, site requirements, budget constraints, and project objectives
+                                through detailed consultation.</p>
+                        </div>
+                    </div><!-- Step 2 - Right -->
+                    <div class="journey-step">
+                        <div class="step-circle">
+                            2
+                        </div>
+                        <div class="step-content-box">
+                            <h4>Design Development &amp; Feasibility</h4>
+                            <p>Create preliminary designs, conduct site analysis, and establish project feasibility with
+                                technical assessments.</p>
+                        </div>
+                    </div><!-- Step 3 - Left -->
+                    <div class="journey-step">
+                        <div class="step-circle">
+                            3
+                        </div>
+                        <div class="step-content-box">
+                            <h4>Engineering &amp; Modular Planning</h4>
+                            <p>Detailed BIM modeling, structural engineering, modular breakdown, and complete technical
+                                documentation.</p>
+                        </div>
+                    </div><!-- Step 4 - Right -->
+                    <div class="journey-step">
+                        <div class="step-circle">
+                            4
+                        </div>
+                        <div class="step-content-box">
+                            <h4>Foundation &amp; Site Preparation</h4>
+                            <p>Precision groundwork, foundation installation, and site infrastructure setup parallel to
+                                factory fabrication.</p>
+                        </div>
+                    </div><!-- Step 5 - Left -->
+                    <div class="journey-step">
+                        <div class="step-circle">
+                            5
+                        </div>
+                        <div class="step-content-box">
+                            <h4>Factory Fabrication (LGSF Frames, Walls, Roofs)</h4>
+                            <p>CNC-controlled fabrication of steel frames, wall panels, roof trusses, and modular
+                                components in controlled factory environment.</p>
+                        </div>
+                    </div><!-- Step 6 - Right -->
+                    <div class="journey-step">
+                        <div class="step-circle">
+                            6
+                        </div>
+                        <div class="step-content-box">
+                            <h4>Module Inspection &amp; Quality Control</h4>
+                            <p>Multi-stage quality checks, dimensional verification, material testing, and compliance
+                                certification at factory.</p>
+                        </div>
+                    </div><!-- Step 7 - Left -->
+                    <div class="journey-step">
+                        <div class="step-circle">
+                            7
+                        </div>
+                        <div class="step-content-box">
+                            <h4>Transportation &amp; Logistics</h4>
+                            <p>Carefully planned transportation of prefabricated modules to site with specialized
+                                handling and protection.</p>
+                        </div>
+                    </div><!-- Step 8 - Right -->
+                    <div class="journey-step">
+                        <div class="step-circle">
+                            8
+                        </div>
+                        <div class="step-content-box">
+                            <h4>On-Site Module Assembly &amp; Connection</h4>
+                            <p>Rapid assembly of modules on prepared foundation, structural connections, and
+                                weatherproofing integration.</p>
+                        </div>
+                    </div><!-- Step 9 - Left -->
+                    <div class="journey-step">
+                        <div class="step-circle">
+                            9
+                        </div>
+                        <div class="step-content-box">
+                            <h4>Systems Integration (MEP)</h4>
+                            <p>Installation of mechanical, electrical, and plumbing systems. HVAC, fire safety, and
+                                smart building integration.</p>
+                        </div>
+                    </div><!-- Step 10 - Right -->
+                    <div class="journey-step">
+                        <div class="step-circle">
+                            10
+                        </div>
+                        <div class="step-content-box">
+                            <h4>Finishing, Site Works &amp; Landscaping</h4>
+                            <p>Interior finishes, exterior cladding, landscaping, paving, and all aesthetic completion
+                                work.</p>
+                        </div>
+                    </div><!-- Step 11 - Left -->
+                    <div class="journey-step">
+                        <div class="step-circle">
+                            11
+                        </div>
+                        <div class="step-content-box">
+                            <h4>Testing, Commissioning &amp; Handover</h4>
+                            <p>Comprehensive systems testing, compliance verification, documentation, final walkthrough,
+                                and official handover.</p>
+                        </div>
+                    </div><!-- Step 12 - Right -->
+                    <div class="journey-step">
+                        <div class="step-circle">
+                            12
+                        </div>
+                        <div class="step-content-box">
+                            <h4>Post-Handover Support &amp; Lifecycle Partnership</h4>
+                            <p>12-month defects liability, maintenance support, warranty management, and long-term
+                                partnership for future needs.</p>
+                        </div>
+                    </div>
+                </div><!-- Process Benefits -->
+
+            </div>
+            <div class="journey-benefits">
+                <h3>Why This Process Works</h3>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            ⏱️
+                        </div>
+                        <h4>Parallel Workflows</h4>
+                        <p>Factory fabrication happens simultaneously with site preparation, cutting 30-60% off
+                            traditional timelines.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            ♻️
+                        </div>
+                        <h4>Reduced Waste</h4>
+                        <p>Factory precision and pre-cut materials reduce construction waste by 60-80% compared to
+                            conventional methods.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            📊
+                        </div>
+                        <h4>Predictable Timelines</h4>
+                        <p>Milestone-based delivery, documented processes, and factory control ensure fixed schedules
+                            and cost certainty.</p>
+                    </div>
+                </div>
+            </div>
+        </section><!-- Testimonials Section -->
+        <section class="testimonials" id="testimonials">
+            <h2 class="section-title" id="testimonials-title">What Our Clients Say</h2>
+            <div class="gold-divider"></div>
+            <p class="section-subtitle">Success stories from our valued clients</p>
+            <div class="testimonials-carousel-wrapper"><button class="carousel-arrow carousel-arrow-left"
+                    id="prevTestimonial">❮</button>
+                <div class="testimonials-carousel-container">
+                    <div class="testimonials-carousel" id="testimonialsCarousel">
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="testimonial-avatar">
+                                    👤
+                                </div>
+                                <div class="testimonial-info">
+                                    <h4>Rajesh Kumar</h4>
+                                    <p>CEO, Tech Innovations Ltd.</p>
+                                </div>
+                            </div>
+                            <p class="testimonial-text">"Roof &amp; Realms delivered our corporate headquarters 45%
+                                faster than traditional construction. The precision and quality exceeded our
+                                expectations."</p>
+                            <div class="testimonial-stars">
+                                ★★★★★
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="testimonial-avatar">
+                                    👤
+                                </div>
+                                <div class="testimonial-info">
+                                    <h4>Priya Sharma</h4>
+                                    <p>Homeowner, Mumbai</p>
+                                </div>
+                            </div>
+                            <p class="testimonial-text">"The luxury villa they built is a masterpiece. Factory quality
+                                with on-site speed—we moved in 3 months earlier than planned."</p>
+                            <div class="testimonial-stars">
+                                ★★★★★
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="testimonial-avatar">
+                                    👤
+                                </div>
+                                <div class="testimonial-info">
+                                    <h4>Dr. Anjali Mehta</h4>
+                                    <p>Principal, Delhi International School</p>
+                                </div>
+                            </div>
+                            <p class="testimonial-text">"Our school expansion was completed with zero delays. Roof &amp;
+                                Realms' modular approach minimized disruption to students."</p>
+                            <div class="testimonial-stars">
+                                ★★★★★
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="testimonial-avatar">
+                                    👤
+                                </div>
+                                <div class="testimonial-info">
+                                    <h4>Vikram Patel</h4>
+                                    <p>Hotel Owner, Goa</p>
+                                </div>
+                            </div>
+                            <p class="testimonial-text">"Outstanding workmanship and attention to detail. Our resort was
+                                completed ahead of schedule with exceptional quality standards."</p>
+                            <div class="testimonial-stars">
+                                ★★★★★
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="testimonial-avatar">
+                                    👤
+                                </div>
+                                <div class="testimonial-info">
+                                    <h4>Sneha Reddy</h4>
+                                    <p>Architect, Bangalore</p>
+                                </div>
+                            </div>
+                            <p class="testimonial-text">"Working with Roof &amp; Realms was seamless. Their BIM
+                                precision and modular expertise transformed our design vision into reality."</p>
+                            <div class="testimonial-stars">
+                                ★★★★★
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="testimonial-avatar">
+                                    👤
+                                </div>
+                                <div class="testimonial-info">
+                                    <h4>Arjun Singh</h4>
+                                    <p>Developer, Pune</p>
+                                </div>
+                            </div>
+                            <p class="testimonial-text">"The cost efficiency and timeline savings were remarkable. Roof
+                                &amp; Realms is now our preferred partner for all projects."</p>
+                            <div class="testimonial-stars">
+                                ★★★★★
+                            </div>
+                        </div>
+                    </div>
+                </div><button class="carousel-arrow carousel-arrow-right" id="nextTestimonial">❯</button>
+            </div>
+        </section>
+        <section class="gallery" id="gallery">
+            <h2 class="section-title" id="gallery-title">Built with Precision. Delivered with Pride.</h2>
+            <div class="gold-divider"></div>
+            <p class="section-subtitle">A cross-section of our delivered projects across residential, commercial,
+                institutional, hospitality and public infrastructure.</p>
+            <div class="gallery-grid"><!-- Row 1 -->
+                <div class="gallery-item"><img
+                        src="image/house.jpg"
+                        alt="Modular Villa" class="gallery-img" onerror="this.src=''; this.alt='Image failed to load';">
+                    <div class="gallery-caption">
+                        Modular Villa
+                    </div>
+                </div>
+                <div class="gallery-item"><img
+                        src="image/office.png"
+                        alt="Office Pod" class="gallery-img" onerror="this.src=''; this.alt='Image failed to load';">
+                    <div class="gallery-caption">
+                        Office Pod
+                    </div>
+                </div>
+                <div class="gallery-item"><img
+                        src="image/working.png"
+                        alt="Co-Working Space" class="gallery-img"
+                        onerror="this.src=''; this.alt='Image failed to load';">
+                    <div class="gallery-caption">
+                        Co-Working Space
+                    </div>
+                </div><!-- Row 2 -->
+                <div class="gallery-item"><img
+                        src="image/Institutional.jpg"
+                        alt="Modern Classroom" class="gallery-img"
+                        onerror="this.src=''; this.alt='Image failed to load';">
+                    <div class="gallery-caption">
+                        Modern Classroom
+                    </div>
+                </div>
+                <div class="gallery-item"><img
+                        src="image/Institutional2.jpg"
+                        alt="Science Lab" class="gallery-img" onerror="this.src=''; this.alt='Image failed to load';">
+                    <div class="gallery-caption">
+                        Science Lab
+                    </div>
+                </div>
+                <div class="gallery-item"><img
+                        src="image/restorent.png"
+                        alt="Restaurant Interior" class="gallery-img"
+                        onerror="this.src=''; this.alt='Image failed to load';">
+                    <div class="gallery-caption">
+                        Restaurant Interior
+                    </div>
+                </div><!-- Row 3 -->
+                <div class="gallery-item"><img
+                        src="image/Residential-home.jpg"
+                        alt="Sample Flat" class="gallery-img" onerror="this.src=''; this.alt='Image failed to load';">
+                    <div class="gallery-caption">
+                        Sample Flat
+                    </div>
+                </div>
+                <div class="gallery-item"><img
+                        src="https:/images.unsplash.com/photo-1566073771259-6a8506099945?w=600&amp;h=400&amp;fit=crop"
+                        alt="Resort Cottage" class="gallery-img"
+                        onerror="this.src=''; this.alt='Image failed to load';">
+                    <div class="gallery-caption">
+                        Resort Cottage
+                    </div>
+                </div>
+                <div class="gallery-item"><img
+                        src="https:/images.unsplash.com/photo-1582407947304-fd86f028f716?w=600&amp;h=400&amp;fit=crop"
+                        alt="Labour Camp" class="gallery-img" onerror="this.src=''; this.alt='Image failed to load';">
+                    <div class="gallery-caption">
+                        Labour Camp
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- Schedule Meeting Modal -->
+    <div class="modal-overlay" id="meetingModal">
+        <div class="modal-container">
+            <div class="modal-header"><button class="modal-close" id="closeModal">×</button>
+                <h2>Schedule a Meeting</h2>
+                <p>Let's discuss your next project</p>
+            </div>
+            <div class="modal-body">
+                <form id="meetingForm">
+                    <div class="form-row">
+                        <div class="form-group"><label for="firstName">First Name *</label> <input type="text"
+                                id="firstName" name="firstName" placeholder="John" required>
+                        </div>
+                        <div class="form-group"><label for="lastName">Last Name *</label> <input type="text"
+                                id="lastName" name="lastName" placeholder="Doe" required>
+                        </div>
+                    </div>
+                    <div class="form-group"><label for="email">Email Address *</label> <input type="email" id="email"
+                            name="email" placeholder="john.doe@example.com" required>
+                    </div>
+                    <div class="form-group"><label for="phone">Phone Number *</label> <input type="tel" id="phone"
+                            name="phone" placeholder="+91 98765 43210" required>
+                    </div>
+                    <div class="form-group"><label for="company">Company Name</label> <input type="text" id="company"
+                            name="company" placeholder="Your Company">
+                    </div>
+                    <div class="form-group"><label for="projectType">Project Type *</label> <select id="projectType"
+                            name="projectType" required>
+                            <option value="">Select project type</option>
+                            <option value="commercial">Commercial</option>
+                            <option value="residential">Residential</option>
+                            <option value="institutional">Institutional</option>
+                            <option value="hospitality">Hospitality</option>
+                            <option value="public">Public Facilities</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label for="preferredDate">Preferred Date *</label> <input type="date"
+                                id="preferredDate" name="preferredDate" required>
+                        </div>
+                        <div class="form-group"><label for="preferredTime">Preferred Time *</label> <input type="time"
+                                id="preferredTime" name="preferredTime" required>
+                        </div>
+                    </div>
+                    <div class="form-group"><label for="message">Project Details</label> <textarea id="message"
+                            name="message" placeholder="Tell us about your project requirements..."></textarea>
+                    </div><button type="submit" class="form-submit" id="submitBtn">Schedule Meeting</button>
+                </form>
+                <div class="success-message" id="successMessage">
+                    <div class="success-icon">
+                        ✓
+                    </div>
+                    <h3>Meeting Scheduled!</h3>
+                    <p>Thank you for your interest. Our team will contact you shortly to confirm the meeting details.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid"><!-- Company Info -->
+                <div class="footer-section">
+                    <div class="logo-container" style="justify-content: flex-start;">
+                        <img src="image/logo.png" alt="Logo" style="width: 200px; height: 100px; margin-bottom: 10px;">
+                    </div>
+                    <p class="footer-tagline" id="tagline"
+                        style="text-align: left; font-size: 1.3rem; margin-bottom: 1rem;">Built with Precision.
+                        Delivered with Pride.</p>
+                    <p style="color: #888; line-height: 1.8; margin-bottom: 1.5rem;">Premium modular construction
+                        solutions for a sustainable future. Transforming ideas into reality with LGSF technology.</p>
+                    <div class="footer-social"><a href="#" class="social-link" aria-label="Facebook">
+                            <svg width="20" height="20" viewbox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                            </svg></a> <a href="#" class="social-link" aria-label="Twitter">
+                            <svg width="20" height="20" viewbox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                            </svg></a> <a href="#" class="social-link" aria-label="LinkedIn">
+                            <svg width="20" height="20" viewbox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg></a> <a href="#" class="social-link" aria-label="Instagram">
+                            <svg width="20" height="20" viewbox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z" />
+                            </svg></a> <a href="#" class="social-link" aria-label="YouTube">
+                            <svg width="20" height="20" viewbox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                            </svg></a>
+                    </div>
+                </div><!-- Quick Links -->
+                <div class="footer-section">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul class="footer-list">
+                        <li><a href="https://roofandrealms.rightbraininfotech.in/">Home</a></li>
+                        <li><a href="./about-us.html">About Us</a></li>
+                        <li><a href="https://roofandrealms.rightbraininfotech.in/materials">Materials</a></li>
+                        <li><a href="https://roofandrealms.rightbraininfotech.in/contact">Contact</a></li>
+                    </ul>
+                </div><!-- Our Solutions -->
+                <div class="footer-section">
+                    <h4 class="footer-heading">Our Solutions</h4>
+                    <ul class="footer-list">
+                        <li><a href="https://roofandrealms.rightbraininfotech.in/commercial">Commercial</a></li>
+                        <li><a href="https://roofandrealms.rightbraininfotech.in/residential">Residential</a></li>
+                        <li><a href="https://roofandrealms.rightbraininfotech.in/institutional">Institutional</a></li>
+                        <li><a href="https://roofandrealms.rightbraininfotech.in/hospitality">Hospitality</a></li>
+                        <li><a href="https://roofandrealms.rightbraininfotech.in/public-facilities">Public
+                                Facilities</a></li>
+                    </ul>
+                </div><!-- Contact Info -->
+                <div class="footer-section">
+                    <h4 class="footer-heading">Get In Touch</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <svg width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg><span>Mumbai, Maharashtra, India</span>
+                        </li>
+                        <li>
+                            <svg width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                            </svg><span>+91 99700 60008</span>
+                        </li>
+                        <li>
+                            <svg width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg><span>info@roofandrealms.com</span>
+                        </li>
+                    </ul><button class="footer-cta"
+                        onclick="document.getElementById('scheduleMeetingBtn').click()">Schedule a Meeting</button>
+                </div>
+            </div><!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p>© 2024 Roof &amp; Realms. All rights reserved.</p>
+                <div class="footer-bottom-links"><a href="#">Privacy Policy</a> <span>•</span> <a href="#">Terms of
+                        Service</a> <span>•</span> <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Element SDK Configuration
+        const defaultConfig = {
+            hero_headline: "Build What Others Promise.",
+            hero_subheadline: "Where precision engineering meets absolute certainty — LGSF modular construction for homes, businesses, institutions and public infrastructure.",
+            hero_supporting: "Roof & Realms specialises in Light Gauge Steel Frame (LGSF) modular construction, combining factory-controlled quality with revolutionary speed. We deliver projects while traditional construction is still breaking ground.",
+            gallery_title: "Modular in Action",
+            testimonials_title: "What Our Clients Say",
+            why_title: "Why Roof & Realms",
+            journey_title: "From Idea to Keys in Hand – The Modular Journey",
+            tagline: "Built with Precision. Delivered with Pride.",
+            font_family: "Montserrat",
+            font_size: 16
+        };
+
+        async function onConfigChange(config) {
+            const heroHeadline = document.getElementById('hero-headline');
+            if (heroHeadline) heroHeadline.textContent = config.hero_headline || defaultConfig.hero_headline;
+
+            const heroSubheadline = document.getElementById('hero-subheadline');
+            if (heroSubheadline) heroSubheadline.textContent = config.hero_subheadline || defaultConfig.hero_subheadline;
+
+            const heroSupporting = document.getElementById('hero-supporting');
+            if (heroSupporting) heroSupporting.textContent = config.hero_supporting || defaultConfig.hero_supporting;
+
+            const galleryTitle = document.getElementById('gallery-title');
+            if (galleryTitle) galleryTitle.textContent = config.gallery_title || defaultConfig.gallery_title;
+
+            const testimonialsTitle = document.getElementById('testimonials-title');
+            if (testimonialsTitle) testimonialsTitle.textContent = config.testimonials_title || defaultConfig.testimonials_title;
+
+            const whyTitle = document.getElementById('why-title');
+            if (whyTitle) whyTitle.textContent = config.why_title || defaultConfig.why_title;
+
+            const journeyTitle = document.getElementById('journey-title');
+            if (journeyTitle) journeyTitle.textContent = config.journey_title || defaultConfig.journey_title;
+
+            const tagline = document.getElementById('tagline');
+            if (tagline) tagline.textContent = config.tagline || defaultConfig.tagline;
+
+            const customFont = config.font_family || defaultConfig.font_family;
+            const baseFont = 'Arial, sans-serif';
+            document.body.style.fontFamily = `${customFont}, ${baseFont}`;
+
+            const baseSize = config.font_size || defaultConfig.font_size;
+            const headlines = document.querySelectorAll('h1');
+            headlines.forEach(h => h.style.fontSize = `${baseSize * 3.125}px`);
+
+            const sectionTitles = document.querySelectorAll('.section-title');
+            sectionTitles.forEach(h => h.style.fontSize = `${baseSize * 2.1875}px`);
+
+            const subtitles = document.querySelectorAll('.section-subtitle, .hero-subheadline, .hero-supporting');
+            subtitles.forEach(p => p.style.fontSize = `${baseSize * 1.25}px`);
+        }
+
+        function mapToCapabilities(config) {
+            return {
+                recolorables: [],
+                borderables: [],
+                fontEditable: {
+                    get: () => config.font_family || defaultConfig.font_family,
+                    set: (value) => {
+                        if (window.elementSdk) {
+                            window.elementSdk.config.font_family = value;
+                            window.elementSdk.setConfig({ font_family: value });
+                        }
+                    }
+                },
+                fontSizeable: {
+                    get: () => config.font_size || defaultConfig.font_size,
+                    set: (value) => {
+                        if (window.elementSdk) {
+                            window.elementSdk.config.font_size = value;
+                            window.elementSdk.setConfig({ font_size: value });
+                        }
+                    }
+                }
+            };
+        }
+
+        function mapToEditPanelValues(config) {
+            return new Map([
+                ["hero_headline", config.hero_headline || defaultConfig.hero_headline],
+                ["hero_subheadline", config.hero_subheadline || defaultConfig.hero_subheadline],
+                ["hero_supporting", config.hero_supporting || defaultConfig.hero_supporting],
+                ["gallery_title", config.gallery_title || defaultConfig.gallery_title],
+                ["testimonials_title", config.testimonials_title || defaultConfig.testimonials_title],
+                ["why_title", config.why_title || defaultConfig.why_title],
+                ["journey_title", config.journey_title || defaultConfig.journey_title],
+                ["tagline", config.tagline || defaultConfig.tagline]
+            ]);
+        }
+
+        // Initialize Element SDK
+        /* if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange,
+                mapToCapabilities,
+                mapToEditPanelValues
+            });
+        } */
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        const productsDropdown = document.getElementById('productsDropdown');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+            mainNav.classList.toggle('active');
+        });
+
+        // Mobile dropdown toggle
+        if (window.innerWidth <= 968) {
+            const navItem = productsDropdown.querySelector('.nav-item');
+            navItem.addEventListener('click', (e) => {
+                e.preventDefault();
+                productsDropdown.classList.toggle('active');
+            });
+        }
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Hero Background Slider
+        let currentBgSlide = 0;
+        const bgSlides = document.querySelectorAll('.hero-bg-slide');
+        const totalBgSlides = bgSlides.length;
+        const heroBgNav = document.getElementById('heroBgNav');
+
+        // Create navigation dots
+        for (let i = 0; i < totalBgSlides; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('hero-bg-dot');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToBgSlide(i));
+            heroBgNav.appendChild(dot);
+        }
+
+        const bgDots = document.querySelectorAll('.hero-bg-dot');
+
+        function showBgSlide(n) {
+            bgSlides.forEach(slide => slide.classList.remove('active'));
+            bgDots.forEach(dot => dot.classList.remove('active'));
+
+            currentBgSlide = (n + totalBgSlides) % totalBgSlides;
+            bgSlides[currentBgSlide].classList.add('active');
+            bgDots[currentBgSlide].classList.add('active');
+        }
+
+        function nextBgSlide() {
+            showBgSlide(currentBgSlide + 1);
+        }
+
+        function goToBgSlide(n) {
+            showBgSlide(n);
+        }
+
+        // Auto-advance background slider
+        setInterval(nextBgSlide, 5000);
+
+        // Testimonials Carousel
+
+        const testimonialsCarousel = document.getElementById('testimonialsCarousel');
+        const prevTestimonial = document.getElementById('prevTestimonial');
+        const nextTestimonial = document.getElementById('nextTestimonial');
+        const testimonialCards = document.querySelectorAll('.testimonial-card');
+
+        let currentTestimonialIndex = 0;
+        const totalTestimonials = testimonialCards.length;
+
+        function getVisibleCards() {
+            const width = window.innerWidth;
+            if (width <= 480) return 1;   // mobile
+            if (width <= 968) return 2;   // tablet
+            return 3;                     // desktop
+        }
+
+        function updateCarousel() {
+            const cardWidth = testimonialCards[0].offsetWidth;
+            const gap = 32; // 2rem = 32px (keep this same as CSS gap/margin)
+            const offset = currentTestimonialIndex * (cardWidth + gap);
+            testimonialsCarousel.style.transform = `translateX(-${offset}px)`;
+        }
+
+        function getMaxIndex() {
+            const visibleCards = getVisibleCards();
+            return Math.max(0, totalTestimonials - visibleCards);
+        }
+
+        function goNext() {
+            const visibleCards = getVisibleCards();
+            const maxIndex = getMaxIndex();
+
+            if (currentTestimonialIndex + visibleCards <= maxIndex) {
+                currentTestimonialIndex += visibleCards;    // move by page
+            } else {
+                currentTestimonialIndex = 0;                // loop to start
+            }
+            updateCarousel();
+        }
+
+        function goPrev() {
+            const visibleCards = getVisibleCards();
+            const maxIndex = getMaxIndex();
+
+            if (currentTestimonialIndex - visibleCards >= 0) {
+                currentTestimonialIndex -= visibleCards;    // move by page
+            } else {
+                currentTestimonialIndex = maxIndex;         // jump to last page
+            }
+            updateCarousel();
+        }
+
+        nextTestimonial.addEventListener('click', goNext);
+        prevTestimonial.addEventListener('click', goPrev);
+
+        // Auto-scroll testimonials
+        let autoScrollInterval = setInterval(goNext, 5000);
+
+        // Pause auto-scroll on hover (optional)
+        testimonialsCarousel.addEventListener('mouseenter', () => {
+            clearInterval(autoScrollInterval);
+        });
+        testimonialsCarousel.addEventListener('mouseleave', () => {
+            autoScrollInterval = setInterval(goNext, 5000);
+        });
+
+        // Responsive carousel
+        window.addEventListener('resize', () => {
+            const maxIndex = getMaxIndex();
+            if (currentTestimonialIndex > maxIndex) {
+                currentTestimonialIndex = maxIndex;
+            }
+            updateCarousel();
+        });
+
+        // Initial position
+        updateCarousel();
+
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#products' && href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        if (mainNav.classList.contains('active')) {
+                            mainNav.classList.remove('active');
+                            mobileMenuBtn.classList.remove('active');
+                        }
+                    }
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.gallery-item, .testimonial-card, .pillar-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(50px)';
+            el.style.transition = 'opacity 1s ease, transform 1s ease';
+            observer.observe(el);
+        });
+
+        // Modal Functionality
+        const scheduleMeetingBtn = document.getElementById('scheduleMeetingBtn');
+        const meetingModal = document.getElementById('meetingModal');
+        const closeModal = document.getElementById('closeModal');
+        const meetingForm = document.getElementById('meetingForm');
+        const successMessage = document.getElementById('successMessage');
+        const submitBtn = document.getElementById('submitBtn');
+
+        // Open modal
+        scheduleMeetingBtn.addEventListener('click', () => {
+            meetingModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Close modal
+        closeModal.addEventListener('click', () => {
+            meetingModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            resetForm();
+        });
+
+        // Close modal when clicking outside
+        meetingModal.addEventListener('click', (e) => {
+            if (e.target === meetingModal) {
+                meetingModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                resetForm();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && meetingModal.classList.contains('active')) {
+                meetingModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                resetForm();
+            }
+        });
+
+        // Form submission
+        meetingForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Disable submit button
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Scheduling...';
+
+            // Simulate form submission (replace with actual API call)
+            await new Promise(resolve => setTimeout(resolve, 1500));
+
+            // Hide form and show success message
+            meetingForm.style.display = 'none';
+            successMessage.classList.add('active');
+
+            // Reset after 4 seconds
+            setTimeout(() => {
+                meetingModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                resetForm();
+            }, 4000);
+        });
+
+        // Reset form function
+        function resetForm() {
+            setTimeout(() => {
+                meetingForm.reset();
+                meetingForm.style.display = 'block';
+                successMessage.classList.remove('active');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Schedule Meeting';
+            }, 300);
+        }
+
+        // Set minimum date to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('preferredDate').setAttribute('min', today);
+    </script>
+    <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'9abcbadde4c133de',t:'MTc2NTM2OTU3OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
+</body>
+
+</html>
