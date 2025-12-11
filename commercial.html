@@ -4,888 +4,1352 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Roof &amp; Realms - Commercial Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sora:wght@100..800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="/_sdk/element_sdk.js"></script>
   <style>
-    body {
-      box-sizing: border-box;
-    }
-    
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0a0a14;
+      color: #ffffff;
+      overflow-x: hidden;
     }
 
-    @keyframes glow {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 1; }
-    }
-
-    .floating-particle {
-      animation: float 6s ease-in-out infinite;
-    }
-
-    .hero {
-            height: 100vh;
-            /* Make full-screen */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            padding: 0;
-            /* Remove padding so the video fits fully */
-        }
-
-        .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-
-        .hero-bg-slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 2s ease-in-out;
-        }
-
-        .hero-bg-slide.active {
-            opacity: 1;
-        }
-
-        .hero-bg-slide video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            /* Full screen look */
-        }
-
-
-        .hero-bg-slide::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            /* background: linear-gradient(135deg, rgba(10, 10, 20, 0.85) 0%, rgba(31, 58, 147, 0.75) 50%, rgba(10, 10, 20, 0.85) 100%); */
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background:
-                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(31, 58, 147, 0.03) 2px, rgba(31, 58, 147, 0.03) 4px),
-                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(31, 58, 147, 0.03) 2px, rgba(31, 58, 147, 0.03) 4px);
-            animation: gridMove 20s linear infinite;
-            pointer-events: none;
-        }
-
-    .gold-glow {
-      box-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
-    }
-
-    .nav-link {
-      position: relative;
-      transition: color 0.3s ease;
-    }
-
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #D4A63F, #f59e0b);
-      transition: width 0.3s ease;
-    }
-
-    .nav-link:hover::after {
+    html, body {
+      height: 100%;
       width: 100%;
     }
 
-    .nav-link:hover {
+    /* Premium Header Styles - Same as index.html */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(10, 10, 20, 0.95);
+      backdrop-filter: blur(20px);
+      padding: 1.2rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(212, 166, 63, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    header.scrolled {
+      padding: 0.8rem 5%;
+      background: rgba(10, 10, 20, 0.98);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+      border-bottom: 1px solid rgba(212, 166, 63, 0.4);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .logo-container:hover {
+      transform: scale(1.02);
+    }
+
+    .logo-text {
+      font-size: 1.6rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #D4A63F 0%, #f4d483 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 0.5px;
+    }
+
+    nav {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    nav > a, .nav-item {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      position: relative;
+      cursor: pointer;
+      padding: 0.5rem 0;
+    }
+
+    nav > a:hover, .nav-item:hover {
       color: #D4A63F;
     }
 
-    .mega-menu {
-      display: none;
+    nav > a::after, .nav-item::after {
+      content: '';
       position: absolute;
-      top: 100%;
+      bottom: 0;
       left: 0;
-      right: 0;
-      background: rgba(15, 23, 42, 0.98);
-      backdrop-filter: blur(10px);
-      border-top: 2px solid rgba(251, 191, 36, 0.3);
-      z-index: 50;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #D4A63F, #f4d483);
+      transition: width 0.4s ease;
     }
 
-    .nav-link.has-mega:hover + .mega-menu,
-    .mega-menu:hover {
-      display: block;
+    nav > a:hover::after, .nav-item:hover::after {
+      width: 100%;
+    }
+
+    /* Mega Menu Dropdown */
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: calc(100% + 1rem);
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, rgba(15, 15, 30, 0.98) 0%, rgba(10, 10, 20, 0.98) 100%);
+      backdrop-filter: blur(20px);
+      min-width: 280px;
+      padding: 1rem;
+      border-radius: 20px;
+      border: 1px solid rgba(212, 166, 63, 0.3);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(31, 58, 147, 0.3);
+      flex-direction: column;
+      gap: 0;
+      opacity: 0;
+      animation: fadeInDown 0.4s ease forwards;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: flex;
+    }
+
+    .dropdown-item {
+      padding: 1rem 1.5rem;
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 12px;
+      transition: all 0.4s ease;
+      border: 1px solid transparent;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dropdown-item:hover {
+      background: rgba(31, 58, 147, 0.25);
+      border-color: #D4A63F;
+      transform: translateX(8px);
+      box-shadow: 0 5px 20px rgba(212, 166, 63, 0.2);
+    }
+
+    .dropdown-item-title {
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: #D4A63F;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .dropdown-item-desc {
+      font-size: 0.85rem;
+      color: #b0b0b0;
+      line-height: 1.4;
+    }
+
+    .header-cta {
+      padding: 0.8rem 2rem;
+      background: linear-gradient(135deg, #D4A63F 0%, #f4d483 100%);
+      color: #0a0a1a;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 5px 20px rgba(212, 166, 63, 0.3);
+      letter-spacing: 0.5px;
+    }
+
+    .header-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 35px rgba(212, 166, 63, 0.5);
+      background: linear-gradient(135deg, #f4d483 0%, #D4A63F 100%);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    .mobile-menu-btn span {
+      width: 28px;
+      height: 3px;
+      background: #D4A63F;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu-btn.active span:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .mobile-menu-btn.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-btn.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: 80px;
+    }
+
+    .hero-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .hero-bg-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-bg-slide video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-bg-slide::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.5;
+    background: black;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      text-align: center;
+      padding: 0.2rem;
+    }
+
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #ffffff 0%, #D4A63F 50%, #ffffff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      color: #e8e8e8;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    /* Benefits Section */
+    .benefits {
+      padding: 2rem 5%;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(180deg, #0a0a14 0%, #12121e 100%);
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
     }
 
     .benefit-card {
-      transition: all 0.3s ease;
+      background: linear-gradient(135deg, rgba(31, 58, 147, 0.2) 0%, rgba(10, 10, 20, 0.9) 100%);
+      padding: 2rem;
+      border-radius: 20px;
+      border: 1px solid rgba(212, 166, 63, 0.3);
+      transition: all 0.5s ease;
+      text-align: center;
     }
 
     .benefit-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 10px 40px rgba(251, 191, 36, 0.2);
+      transform: translateY(-10px);
+      border-color: #D4A63F;
+      box-shadow: 0 20px 50px rgba(212, 166, 63, 0.3);
     }
 
-    .category-image {
-      transition: transform 0.5s ease;
+    .benefit-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      display: inline-block;
     }
 
-    .category-section:hover .category-image {
-      transform: scale(1.05);
+    .benefit-card h3 {
+      color: #D4A63F;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
     }
 
-    .btn-gold {
-      background: linear-gradient(135deg, #D4A63F 0%, #f59e0b 100%);
-      transition: all 0.3s ease;
+    .benefit-card p {
+      color: #c8c8c8;
+      font-size: 0.8rem;
+      line-height: 1.6;
     }
 
-    .btn-gold:hover {
-      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(251, 191, 36, 0.4);
+    /* Commercial Solutions - Alternating Layout */
+    .solution-section {
+      padding: 2rem 5%;
+    }
+
+    .solution-section:nth-child(odd) {
+      background: #0a0a14;
+    }
+
+    .solution-section:nth-child(even) {
+      background: #12121e;
+    }
+
+    .solution-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    @media (max-width: 968px) {
+      .solution-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    .solution-image {
+      width: 100%;
+      height: 400px;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      border: 2px solid rgba(212, 166, 63, 0.3);
+    }
+
+    .solution-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+
+    .solution-image:hover img {
+      transform: scale(1.1);
+    }
+
+    .solution-content {
+      padding: 2rem 0;
+    }
+
+    .solution-content h2 {
+      color: #D4A63F;
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+
+    .solution-content p {
+      color: #c8c8c8;
+      font-size: 0.9rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .solution-content h3 {
+      color: #ffffff;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .solution-features {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+
+    .solution-features li {
+      color: #e8e8e8;
+      font-size: 0.8rem;
+      padding-left: 1.5rem;
+      position: relative;
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+
+    .solution-features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #D4A63F;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .solution-link {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, #D4A63F 0%, #f4d483 100%);
+      color: #0a0a1a;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.4s ease;
+    }
+
+    .solution-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 35px rgba(212, 166, 63, 0.5);
+      background: linear-gradient(135deg, #f4d483 0%, #D4A63F 100%);
+    }
+
+    /* Gallery Section */
+    .gallery-section {
+      padding: 5rem 5%;
+      background: linear-gradient(180deg, #0a0a14 0%, #12121e 100%);
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #ffffff 0%, #D4A63F 50%, #ffffff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: #b8b8b8;
+      font-size: 1.1rem;
+      margin-bottom: 3rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .gallery-item {
+      position: relative;
+      height: 250px;
+      border-radius: 15px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid rgba(212, 166, 63, 0.2);
+      transition: all 0.5s ease;
     }
 
     .gallery-item:hover {
       border-color: #D4A63F;
-      box-shadow: 0 0 30px rgba(251, 191, 36, 0.4);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(212, 166, 63, 0.3);
     }
 
-    .gallery-item:hover > div:first-child {
+    .gallery-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+
+    .gallery-item:hover .gallery-img {
       transform: scale(1.1);
     }
+
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1rem;
+      background: linear-gradient(to top, rgba(10, 10, 20, 0.9), transparent);
+    }
+
+    .gallery-caption h4 {
+      color: #D4A63F;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 6rem 5%;
+      background: linear-gradient(135deg, #1F3A93 0%, #0a0a14 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, #ffffff 0%, #D4A63F 50%, #ffffff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .cta-section p {
+      color: #e8e8e8;
+      font-size: 1.2rem;
+      margin-bottom: 2.5rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.8;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      text-decoration: none;
+      display: inline-block;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #D4A63F 0%, #f4d483 100%);
+      color: #0a0a1a;
+      box-shadow: 0 5px 20px rgba(212, 166, 63, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 35px rgba(212, 166, 63, 0.5);
+      background: linear-gradient(135deg, #f4d483 0%, #D4A63F 100%);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #D4A63F;
+      border: 2px solid #D4A63F;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(212, 166, 63, 0.1);
+      transform: translateY(-3px);
+    }
+
+    /* Footer - Same as index.html */
+    footer {
+      background: linear-gradient(180deg, #0a0a14 0%, #050508 100%);
+      padding: 5rem 5% 3rem;
+      border-top: 1px solid rgba(212, 166, 63, 0.3);
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 4rem;
+      margin-bottom: 4rem;
+    }
+
+    .footer-section h4.footer-heading {
+      color: #D4A63F;
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-list {
+      list-style: none;
+    }
+
+    .footer-list li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-list a {
+      color: #b8b8b8;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+    }
+
+    .footer-list a:hover {
+      color: #D4A63F;
+      padding-left: 5px;
+    }
+
+    .footer-contact {
+      list-style: none;
+    }
+
+    .footer-contact li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.2rem;
+      color: #b8b8b8;
+      margin-bottom: 0.2rem;
+      font-size: 0.6rem;
+      line-height: 1.6;
+    }
+
+    .footer-contact svg {
+      flex-shrink: 0;
+      margin-top: 0.2rem;
+      color: #D4A63F;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(31, 58, 147, 0.3);
+      border: 1px solid rgba(212, 166, 63, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #D4A63F;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .social-link:hover {
+      background: #D4A63F;
+      color: #0a0a1a;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(212, 166, 63, 0.4);
+    }
+
+    .footer-cta {
+      margin-top: 1.5rem;
+      padding: 0.9rem 1.8rem;
+      background: linear-gradient(135deg, #D4A63F 0%, #f4d483 100%);
+      color: #0a0a1a;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      box-shadow: 0 5px 20px rgba(212, 166, 63, 0.3);
+      letter-spacing: 0.5px;
+      width: 100%;
+    }
+
+    .footer-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 35px rgba(212, 166, 63, 0.5);
+      background: linear-gradient(135deg, #f4d483 0%, #D4A63F 100%);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(212, 166, 63, 0.2);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-bottom p {
+      color: #888;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-bottom-links a {
+      color: #b8b8b8;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-bottom-links a:hover {
+      color: #D4A63F;
+    }
+
+    .footer-bottom-links span {
+      color: #555;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1200px) {
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem;
+      }
+    }
+
+    @media (max-width: 968px) {
+      nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100%;
+        width: 320px;
+        background: rgba(10, 10, 20, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 7rem 2.5rem 2.5rem;
+        gap: 2rem;
+        transition: right 0.5s ease;
+        border-left: 1px solid rgba(212, 166, 63, 0.3);
+        box-shadow: -10px 0 50px rgba(0, 0, 0, 0.7);
+      }
+
+      nav.active {
+        right: 0;
+      }
+
+      .mobile-menu-btn {
+        display: flex;
+      }
+
+      .header-cta {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
+
+      .solution-content h2 {
+        font-size: 2rem;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .benefits-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+      }
+
+      .footer-bottom-links {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 1rem 4%;
+      }
+
+      .hero {
+        height: 50vh;
+        margin-top: 70px;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .solution-image {
+        height: 300px;
+      }
+
+      .solution-content h2 {
+        font-size: 1.8rem;
+      }
+
+      .solution-content p {
+        font-size: 1rem;
+      }
+
+      .gallery-item {
+        height: 200px;
+      }
+    }
   </style>
-  <style>@view-transition { navigation: auto; }</style>
-  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
  </head>
- <body class="h-full">
-  <div class="app-wrapper w-full h-full overflow-auto" style="background: #0f172a; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;"><!-- Header -->
-   <header class="sticky top-0 z-40" style="background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(251, 191, 36, 0.1);">
-    <div class="mx-auto px-6 py-4" style="max-width: 1400px;">
-     <div class="flex items-center justify-between"><!-- Logo -->
-      <div class="flex items-center gap-3">
-       <svg width="40" height="40" viewbox="0 0 40 40" fill="none"><path d="M20 2L4 12V28L20 38L36 28V12L20 2Z" fill="url(#gold-gradient)" opacity="0.2" /> <path d="M20 6L8 13V27L20 34L32 27V13L20 6Z" stroke="#D4A63F" stroke-width="2" fill="none" /> <path d="M20 14L14 17.5V24.5L20 28L26 24.5V17.5L20 14Z" fill="#D4A63F" /> <defs>
-         <lineargradient id="gold-gradient" x1="4" y1="2" x2="36" y2="38">
-          <stop stop-color="#D4A63F" />
-          <stop offset="1" stop-color="#f59e0b" />
-         </lineargradient>
-        </defs>
-       </svg><span id="logo-text" style="color: #D4A63F; font-size: 22px; font-weight: 700; letter-spacing: 0.5px;">Roof &amp; Realms</span>
-      </div><!-- Navigation -->
-      <nav class="flex items-center gap-8"><a href="#" class="nav-link" style="color: white; font-weight: 500; font-size: 15px;">HOME</a>
-       <div class="relative"><a href="#" class="nav-link has-mega" style="color: white; font-weight: 500; font-size: 15px;">PRODUCTS</a>
-        <div class="mega-menu">
-         <div class="mx-auto px-6 py-8" style="max-width: 1400px;">
-          <div class="grid grid-cols-3 gap-8">
-           <div>
-            <h3 style="color: #D4A63F; font-weight: 600; margin-bottom: 16px;">Residential</h3>
-            <ul class="space-y-2">
-             <li><a href="#" style="color: #cbd5e1; font-size: 14px;">Villas</a></li>
-             <li><a href="#" style="color: #cbd5e1; font-size: 14px;">Apartments</a></li>
-             <li><a href="#" style="color: #cbd5e1; font-size: 14px;">Farmhouses</a></li>
-            </ul>
-           </div>
-           <div>
-            <h3 style="color: #D4A63F; font-weight: 600; margin-bottom: 16px;">Commercial</h3>
-            <ul class="space-y-2">
-             <li><a href="#offices" style="color: #cbd5e1; font-size: 14px;">Offices</a></li>
-             <li><a href="#showrooms" style="color: #cbd5e1; font-size: 14px;">Showrooms</a></li>
-             <li><a href="#business-centers" style="color: #cbd5e1; font-size: 14px;">Business Centers</a></li>
-            </ul>
-           </div>
-           <div>
-            <h3 style="color: #D4A63F; font-weight: 600; margin-bottom: 16px;">Specialty</h3>
-            <ul class="space-y-2">
-             <li><a href="#site-office" style="color: #cbd5e1; font-size: 14px;">Site Offices</a></li>
-             <li><a href="#sample-flats" style="color: #cbd5e1; font-size: 14px;">Sample Flats</a></li>
-             <li><a href="#clubhouses" style="color: #cbd5e1; font-size: 14px;">Clubhouses</a></li>
-            </ul>
-           </div>
-          </div>
-         </div>
+ <body>
+  <!-- Header -->
+  <header id="header">
+    <div class="logo-container" onclick="window.location.href='./index.html'">
+      <img src="image/logo.png" alt="Logo" style="width: 100px; height: 70px;">
+    </div>
+    <nav id="mainNav">
+      <a href="./index.html">HOME</a>
+      <div class="dropdown" id="productsDropdown">
+        <span class="nav-item">PRODUCTS ▾</span>
+        <div class="dropdown-content">
+          <a href="./commercial.html" class="dropdown-item">
+            <span class="dropdown-item-title">🏢 COMMERCIAL</span>
+          </a>
+          <a href="./residential.html" class="dropdown-item">
+            <span class="dropdown-item-title">🏠 RESIDENTIAL</span>
+          </a>
+          <a href="./institutional.html" class="dropdown-item">
+            <span class="dropdown-item-title">🎓 INSTITUTIONAL</span>
+          </a>
+          <a href="./hospitality.html" class="dropdown-item">
+            <span class="dropdown-item-title">🏨 HOSPITALITY</span>
+          </a>
+          <a href="./public-facilities.html" class="dropdown-item">
+            <span class="dropdown-item-title">🏛 PUBLIC FACILITIES</span>
+          </a>
         </div>
-       </div><a href="#" class="nav-link" style="color: white; font-weight: 500; font-size: 15px;">MATERIAL</a> <a href="#" class="nav-link" style="color: white; font-weight: 500; font-size: 15px;">ABOUT US</a> <a href="#" class="nav-link" style="color: white; font-weight: 500; font-size: 15px;">CONTACT</a>
-      </nav>
-     </div>
+      </div>
+      <a href="./materials.html">MATERIALS</a>
+      <a href="./about-us.html">ABOUT US</a>
+      <a href="./contact.html">CONTACT</a>
+    </nav>
+    <button class="header-cta" onclick="window.location.href='./contact.html'">Schedule Call</button>
+    <div class="mobile-menu-btn" id="mobileMenuBtn">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
-   </header><!-- Hero Section -->
-   <section class="hero" id="home"><!-- Background Slider -->
-            <div class="hero-background">
-                <div class="hero-bg-slide active">
-                    <video src="image/Commercial.mp4" autoplay muted loop playsinline class="hero-video"
-                        onerror="this.style.display='none';">
-                    </video>
-                </div>
-            </div>
-        </section><!-- Benefits Section -->
-   <section style="background: #1e293b; padding: 80px 24px;">
-    <div class="mx-auto" style="max-width: 1400px;">
-     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"><!-- Benefit 1 -->
-      <div class="benefit-card p-8 rounded-xl" style="background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(251, 191, 36, 0.2);">
-       <div class="mb-6">
-        <svg width="56" height="56" viewbox="0 0 56 56" fill="none"><circle cx="28" cy="28" r="28" fill="rgba(251, 191, 36, 0.1)" /> <path d="M28 16C21.373 16 16 21.373 16 28C16 34.627 21.373 40 28 40C34.627 40 40 34.627 40 28C40 21.373 34.627 16 28 16ZM28 18C33.514 18 38 22.486 38 28C38 33.514 33.514 38 28 38C22.486 38 18 33.514 18 28C18 22.486 22.486 18 28 18ZM27 22V29.414L32.293 34.707L33.707 33.293L29 28.586V22H27Z" fill="#D4A63F" />
-        </svg>
-       </div>
-       <h3 style="color: #D4A63F; font-size: 22px; font-weight: 700; margin-bottom: 12px;">30–60% Faster Delivery</h3>
-       <p style="color: #cbd5e1; font-size: 15px; line-height: 1.7;">Parallel factory + site workflows → early revenue.</p>
-      </div><!-- Benefit 2 -->
-      <div class="benefit-card p-8 rounded-xl" style="background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(251, 191, 36, 0.2);">
-       <div class="mb-6">
-        <svg width="56" height="56" viewbox="0 0 56 56" fill="none"><circle cx="28" cy="28" r="28" fill="rgba(251, 191, 36, 0.1)" /> <path d="M28 16L18 21V28C18 33.55 21.84 38.74 28 40C34.16 38.74 38 33.55 38 28V21L28 16ZM28 28H36C35.68 31.92 33.14 35.5 28 37.44V28H20V22.3L28 18.19V28Z" fill="#D4A63F" />
-        </svg>
-       </div>
-       <h3 style="color: #D4A63F; font-size: 22px; font-weight: 700; margin-bottom: 12px;">Predictable Costs</h3>
-       <p style="color: #cbd5e1; font-size: 15px; line-height: 1.7;">Fixed-price modular packages that protect margins.</p>
-      </div><!-- Benefit 3 -->
-      <div class="benefit-card p-8 rounded-xl" style="background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(251, 191, 36, 0.2);">
-       <div class="mb-6">
-        <svg width="56" height="56" viewbox="0 0 56 56" fill="none"><circle cx="28" cy="28" r="28" fill="rgba(251, 191, 36, 0.1)" /> <path d="M18 18V24H22V18H18ZM24 18V24H32V18H24ZM34 18V24H38V18H34ZM18 26V32H22V26H18ZM24 26V32H32V26H24ZM34 26V32H38V26H34ZM18 34V40H22V34H18ZM24 34V40H32V34H24ZM34 34V40H38V34H34Z" fill="#D4A63F" />
-        </svg>
-       </div>
-       <h3 style="color: #D4A63F; font-size: 22px; font-weight: 700; margin-bottom: 12px;">Operational Continuity</h3>
-       <p style="color: #cbd5e1; font-size: 15px; line-height: 1.7;">Expand without disrupting tenants or staff.</p>
-      </div><!-- Benefit 4 -->
-      <div class="benefit-card p-8 rounded-xl" style="background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(251, 191, 36, 0.2);">
-       <div class="mb-6">
-        <svg width="56" height="56" viewbox="0 0 56 56" fill="none"><circle cx="28" cy="28" r="28" fill="rgba(251, 191, 36, 0.1)" /> <path d="M28 16C21.373 16 16 21.373 16 28C16 34.627 21.373 40 28 40C34.627 40 40 34.627 40 28C40 21.373 34.627 16 28 16ZM28 18C33.514 18 38 22.486 38 28C38 28.34 37.98 28.676 37.943 29.01L34 25.066V24C34 22.895 33.105 22 32 22H30V20C30 18.895 29.105 18 28 18ZM19.033 22.957C19.636 22.349 20.287 21.803 21 21.342V24C21 25.105 21.895 26 23 26H27V28C27 29.105 27.895 30 29 30H31V32.928C25.725 32.421 21.579 28.275 21.072 23H23C23.34 23 23.676 22.98 24.01 22.943L19.033 22.957Z" fill="#D4A63F" />
-        </svg>
-       </div>
-       <h3 style="color: #D4A63F; font-size: 22px; font-weight: 700; margin-bottom: 12px;">Future Flexibility</h3>
-       <p style="color: #cbd5e1; font-size: 15px; line-height: 1.7;">Reconfigurable layouts that grow with your business.</p>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-background">
+      <div class="hero-bg-slide active">
+        <video src="image/Commercial.mp4" autoplay muted loop playsinline class="hero-video" onerror="this.style.display='none';"></video>
       </div>
-     </div>
     </div>
-   </section><!-- Offices Section -->
-   <section id="offices" class="category-section" style="background: #0f172a; padding: 100px 24px;">
-    <div class="mx-auto" style="max-width: 1400px;">
-     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-      <div style="overflow: hidden; border-radius: 16px; height: 400px;">
-       <div class="category-image" style="width: 100%; height: 100%; background: linear-gradient(135deg, rgba(30, 58, 138, 0.3), rgba(251, 191, 36, 0.2)), url('image/office4.png'); background-size: cover; background-position: center;"></div>
-      </div>
-      <div>
-       <h2 id="offices-title" style="color: #D4A63F; font-size: 42px; font-weight: 800; margin-bottom: 24px;">Offices</h2>
-       <p style="color: #cbd5e1; font-size: 17px; line-height: 1.8; margin-bottom: 32px;">Modern businesses need workspaces designed fast, delivered predictably and able to evolve as teams grow. Roof &amp; Realms creates modular office buildings, corporate blocks and co-working hubs with flexible floor plates, integrated services and high-end interiors.</p>
-       <h3 style="color: white; font-size: 22px; font-weight: 700; margin-bottom: 20px;">What Sets This Apart:</h3>
-       <ul class="space-y-4 mb-8">
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Rapid occupancy enables revenue and productivity sooner</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Standardised modules = consistent quality across locations</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Insulated envelopes reduce long-term energy costs by 15–35%</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Acoustics create quieter, focused work environments</span></li>
-       </ul><a href="#" class="btn-gold inline-block px-8 py-4 rounded-lg font-semibold text-slate-900" style="font-size: 16px;">Explore Office Buildings</a>
-      </div>
-     </div>
+    <div class="hero-content">
+      <h1>Commercial Modular Solutions</h1>
     </div>
-   </section><!-- Showrooms Section -->
-   <section id="showrooms" class="category-section" style="background: #1e293b; padding: 100px 24px;">
-    <div class="mx-auto" style="max-width: 1400px;">
-     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-      <div class="order-2 lg:order-1">
-       <h2 id="showrooms-title" style="color: #D4A63F; font-size: 42px; font-weight: 800; margin-bottom: 24px;">Showrooms</h2>
-       <p style="color: #cbd5e1; font-size: 17px; line-height: 1.8; margin-bottom: 32px;">Launch your brand experience faster with modular showrooms designed for maximum visibility, flexibility, and speed to market. Perfect for automotive dealerships, retail brands, and experience centers that need premium spaces delivered predictably.</p>
-       <h3 style="color: white; font-size: 22px; font-weight: 700; margin-bottom: 20px;">Key Advantages:</h3>
-       <ul class="space-y-4 mb-8">
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">40–50% faster go-to-market vs traditional construction</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Column-free premium spaces with double-height options</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">��</span> <span style="color: #cbd5e1; font-size: 16px;">Brand-aligned glazing &amp; cladding for perfect aesthetics</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Refresh formats quickly as product lines evolve</span></li>
-       </ul><a href="#" class="btn-gold inline-block px-8 py-4 rounded-lg font-semibold text-slate-900" style="font-size: 16px;">Explore Showroom Solutions</a>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="benefits">
+    <p class="hero-subtitle">Build faster, expand smarter, operate without disruption. Factory-controlled quality with dramatically shorter build cycles.</p>
+
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon">⚡</div>
+        <h3>30–60% Faster Delivery</h3>
+        <p>Parallel factory + site workflows → early revenue.</p>
       </div>
-      <div class="order-1 lg:order-2" style="overflow: hidden; border-radius: 16px; height: 500px;">
-       <div class="category-image" style="width: 100%; height: 100%; background: linear-gradient(135deg, rgba(30, 58, 138, 0.3), rgba(251, 191, 36, 0.2)), url('image/Showrooms.png'); background-size: cover; background-position: center;"></div>
+      <div class="benefit-card">
+        <div class="benefit-icon">💰</div>
+        <h3>Predictable Costs</h3>
+        <p>Fixed-price modular packages that protect margins.</p>
       </div>
-     </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🏢</div>
+        <h3>Operational Continuity</h3>
+        <p>Expand without disrupting tenants or staff.</p>
+      </div>
     </div>
-   </section><!-- Business Centers Section -->
-   <section id="business-centers" class="category-section" style="background: #0f172a; padding: 100px 24px;">
-    <div class="mx-auto" style="max-width: 1400px;">
-     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-      <div style="overflow: hidden; border-radius: 16px; height: 500px;">
-       <div class="category-image" style="width: 100%; height: 100%; background: linear-gradient(135deg, rgba(30, 58, 138, 0.3), rgba(251, 191, 36, 0.2)), url('image/office3.png'); background-size: cover; background-position: center;"></div>
+  </section>
+
+  <!-- Commercial Solutions - Alternating Layout -->
+  
+  <!-- Offices Section - Image Left, Content Right -->
+  <section class="solution-section" id="offices">
+    <div class="solution-container">
+      <div class="solution-image">
+        <img src="image/office4.png" alt="Offices" onerror="this.src=''">
       </div>
-      <div>
-       <h2 id="business-centers-title" style="color: #D4A63F; font-size: 42px; font-weight: 800; margin-bottom: 24px;">Business Centers</h2>
-       <p style="color: #cbd5e1; font-size: 17px; line-height: 1.8; margin-bottom: 32px;">Scalable multi-tenant commercial hubs with private cabins, meeting rooms, and shared amenities. Ideal for tech parks, corporate campuses, and flexible workspace clusters that need rapid deployment and future adaptability.</p>
-       <h3 style="color: white; font-size: 22px; font-weight: 700; margin-bottom: 20px;">How Modular Delivers:</h3>
-       <ul class="space-y-4 mb-8">
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">50–60% faster build time enables early tenant onboarding</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Reconfigure spaces without demolition as tenants change</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Consistent standards across multiple campus buildings</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Lower operating costs via superior insulation</span></li>
-       </ul><a href="#" class="btn-gold inline-block px-8 py-4 rounded-lg font-semibold text-slate-900" style="font-size: 16px;">Explore Business Centers</a>
+      <div class="solution-content">
+        <h2>Offices</h2>
+        <p>Modern businesses need workspaces designed fast, delivered predictably and able to evolve as teams grow. Roof & Realms creates modular office buildings, corporate blocks and co-working hubs with flexible floor plates, integrated services and high-end interiors.</p>
+        <h3>What Sets This Apart:</h3>
+        <ul class="solution-features">
+          <li>Rapid occupancy enables revenue and productivity sooner</li>
+          <li>Standardised modules = consistent quality across locations</li>
+          <li>Insulated envelopes reduce long-term energy costs by 15–35%</li>
+          <li>Acoustics create quieter, focused work environments</li>
+        </ul>
+        <a href="#" class="solution-link">Explore Office Buildings</a>
       </div>
-     </div>
     </div>
-   </section><!-- Site Office Section -->
-   <section id="site-office" class="category-section" style="background: #1e293b; padding: 100px 24px;">
-    <div class="mx-auto" style="max-width: 1400px;">
-     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-      <div class="order-2 lg:order-1">
-       <h2 id="site-office-title" style="color: #D4A63F; font-size: 42px; font-weight: 800; margin-bottom: 24px;">Site Office</h2>
-       <p style="color: #cbd5e1; font-size: 17px; line-height: 1.8; margin-bottom: 32px;">Professional, reusable, climate-controlled site offices that project confidence to stakeholders while providing comfortable working conditions for project teams. Deploy in weeks, reuse across sites, and maintain brand standards.</p>
-       <h3 style="color: white; font-size: 22px; font-weight: 700; margin-bottom: 20px;">Competitive Edge:</h3>
-       <ul class="space-y-4 mb-8">
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Deploy functional offices in weeks, not months</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Reuse across multiple sites → recover 30–40% of initial cost</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Climate-controlled environments boost team productivity</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Reduce temporary construction and project overhead</span></li>
-       </ul><a href="#" class="btn-gold inline-block px-8 py-4 rounded-lg font-semibold text-slate-900" style="font-size: 16px;">Explore Site Offices</a>
+  </section>
+
+  <!-- Showrooms Section - Content Left, Image Right -->
+  <section class="solution-section" id="showrooms">
+    <div class="solution-container">
+      <div class="solution-content">
+        <h2>Showrooms</h2>
+        <p>Launch your brand experience faster with modular showrooms designed for maximum visibility, flexibility, and speed to market. Perfect for automotive dealerships, retail brands, and experience centers that need premium spaces delivered predictably.</p>
+        <h3>Key Advantages:</h3>
+        <ul class="solution-features">
+          <li>40–50% faster go-to-market vs traditional construction</li>
+          <li>Column-free premium spaces with double-height options</li>
+          <li>Brand-aligned glazing & cladding for perfect aesthetics</li>
+          <li>Refresh formats quickly as product lines evolve</li>
+        </ul>
+        <a href="#" class="solution-link">Explore Showroom Solutions</a>
       </div>
-      <div class="order-1 lg:order-2" style="overflow: hidden; border-radius: 16px; height: 500px;">
-       <div class="category-image" style="width: 100%; height: 100%; background: linear-gradient(135deg, rgba(30, 58, 138, 0.3), rgba(251, 191, 36, 0.2)), url('image/office.png'); background-size: cover; background-position: center;"></div>
+      <div class="solution-image">
+        <img src="image/Showrooms.png" alt="Showrooms" onerror="this.src=''">
       </div>
-     </div>
     </div>
-   </section><!-- Sample Flats Section -->
-   <section id="sample-flats" class="category-section" style="background: #0f172a; padding: 100px 24px;">
-    <div class="mx-auto" style="max-width: 1400px;">
-     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-      <div style="overflow: hidden; border-radius: 16px; height: 500px;">
-       <div class="category-image" style="width: 100%; height: 100%; background: linear-gradient(135deg, rgba(30, 58, 138, 0.3), rgba(251, 191, 36, 0.2)), url('image/Residential-home.jpg'); background-size: cover; background-position: center;"></div>
+  </section>
+
+  <!-- Business Centers Section - Image Left, Content Right -->
+  <section class="solution-section" id="business-centers">
+    <div class="solution-container">
+      <div class="solution-image">
+        <img src="image/office3.png" alt="Business Centers" onerror="this.src=''">
       </div>
-      <div>
-       <h2 id="sample-flats-title" style="color: #D4A63F; font-size: 42px; font-weight: 800; margin-bottom: 24px;">Sample Flats</h2>
-       <p style="color: #cbd5e1; font-size: 17px; line-height: 1.8; margin-bottom: 32px;">Accelerate pre-sales with full-scale, furnished sample apartments that showcase exact build quality months before project completion. Give buyers confidence and increase booking velocity with tangible experience.</p>
-       <h3 style="color: white; font-size: 22px; font-weight: 700; margin-bottom: 20px;">Why This Matters:</h3>
-       <ul class="space-y-4 mb-8">
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">40–50% faster launch enables earlier pre-sales revenue</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Show exact build quality, finishes, and spatial feel</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Increase booking velocity and buyer confidence</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Repurpose as staff housing or amenity post-launch</span></li>
-       </ul><a href="#" class="btn-gold inline-block px-8 py-4 rounded-lg font-semibold text-slate-900" style="font-size: 16px;">Explore Sample Flats</a>
+      <div class="solution-content">
+        <h2>Business Centers</h2>
+        <p>Scalable multi-tenant commercial hubs with private cabins, meeting rooms, and shared amenities. Ideal for tech parks, corporate campuses, and flexible workspace clusters that need rapid deployment and future adaptability.</p>
+        <h3>How Modular Delivers:</h3>
+        <ul class="solution-features">
+          <li>50–60% faster build time enables early tenant onboarding</li>
+          <li>Reconfigure spaces without demolition as tenants change</li>
+          <li>Consistent standards across multiple campus buildings</li>
+          <li>Lower operating costs via superior insulation</li>
+        </ul>
+        <a href="#" class="solution-link">Explore Business Centers</a>
       </div>
-     </div>
     </div>
-   </section><!-- Clubhouses Section -->
-   <section id="clubhouses" class="category-section" style="background: #1e293b; padding: 100px 24px;">
-    <div class="mx-auto" style="max-width: 1400px;">
-     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-      <div class="order-2 lg:order-1">
-       <h2 id="clubhouses-title" style="color: #D4A63F; font-size: 42px; font-weight: 800; margin-bottom: 24px;">Clubhouses</h2>
-       <p style="color: #cbd5e1; font-size: 17px; line-height: 1.8; margin-bottom: 32px;">Deliver premium community amenities early to enhance project appeal and resident satisfaction. Modular clubhouses with event spaces, gyms, pools, and social areas that position your development competitively.</p>
-       <h3 style="color: white; font-size: 22px; font-weight: 700; margin-bottom: 20px;">Key Benefits:</h3>
-       <ul class="space-y-4 mb-8">
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Early amenity delivery boosts project appeal during sales</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Premium finishes &amp; event-ready layouts</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Energy-efficient building envelopes reduce operating costs</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Residents experience community early, improving satisfaction</span></li>
-       </ul><a href="#" class="btn-gold inline-block px-8 py-4 rounded-lg font-semibold text-slate-900" style="font-size: 16px;">Explore Clubhouses</a>
+  </section>
+
+  <!-- Site Office Section - Content Left, Image Right -->
+  <section class="solution-section" id="site-office">
+    <div class="solution-container">
+      <div class="solution-content">
+        <h2>Site Office</h2>
+        <p>Professional, reusable, climate-controlled site offices that project confidence to stakeholders while providing comfortable working conditions for project teams. Deploy in weeks, reuse across sites, and maintain brand standards.</p>
+        <h3>Competitive Edge:</h3>
+        <ul class="solution-features">
+          <li>Deploy functional offices in weeks, not months</li>
+          <li>Reuse across multiple sites → recover 30–40% of initial cost</li>
+          <li>Climate-controlled environments boost team productivity</li>
+          <li>Reduce temporary construction and project overhead</li>
+        </ul>
+        <a href="#" class="solution-link">Explore Site Offices</a>
       </div>
-      <div class="order-1 lg:order-2" style="overflow: hidden; border-radius: 16px; height: 500px;">
-       <div class="category-image" style="width: 100%; height: 100%; background: linear-gradient(135deg, rgba(30, 58, 138, 0.3), rgba(251, 191, 36, 0.2)), url('image/club-house.jpg'); background-size: cover; background-position: center;"></div>
+      <div class="solution-image">
+        <img src="image/office.png" alt="Site Office" onerror="this.src=''">
       </div>
-     </div>
     </div>
-   </section><!-- Labour Camps Section -->
-   <section id="labour-camps" class="category-section" style="background: #0f172a; padding: 100px 24px;">
-    <div class="mx-auto" style="max-width: 1400px;">
-     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-      <div style="overflow: hidden; border-radius: 16px; height: 500px;">
-       <div class="category-image" style="width: 100%; height: 100%; background: linear-gradient(135deg, rgba(30, 58, 138, 0.3), rgba(251, 191, 36, 0.2)), url('image/camp.png'); background-size: cover; background-position: center;"></div>
+  </section>
+
+  <!-- Sample Flats Section - Image Left, Content Right -->
+  <section class="solution-section" id="sample-flats">
+    <div class="solution-container">
+      <div class="solution-image">
+        <img src="image/Commercial-home.png" alt="Sample Flats" onerror="this.src=''">
       </div>
-      <div>
-       <h2 id="labour-camps-title" style="color: #D4A63F; font-size: 42px; font-weight: 800; margin-bottom: 24px;">Labour Camps</h2>
-       <p style="color: #cbd5e1; font-size: 17px; line-height: 1.8; margin-bottom: 32px;">Provide dignified, comfortable living conditions for your workforce with modular labour housing that deploys rapidly and relocates efficiently. Improve morale, productivity, and safety while maintaining your corporate standards.</p>
-       <h3 style="color: white; font-size: 22px; font-weight: 700; margin-bottom: 20px;">Operational Advantages:</h3>
-       <ul class="space-y-4 mb-8">
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Deploy dignified housing in weeks, not months</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Improve morale &amp; productivity through better living conditions</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Recover 30–60% investment via relocation to new sites</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Built-in hygiene &amp; ventilation systems</span></li>
-       </ul><a href="#" class="btn-gold inline-block px-8 py-4 rounded-lg font-semibold text-slate-900" style="font-size: 16px;">Explore Labour Housing</a>
+      <div class="solution-content">
+        <h2>Sample Flats</h2>
+        <p>Accelerate pre-sales with full-scale, furnished sample apartments that showcase exact build quality months before project completion. Give buyers confidence and increase booking velocity with tangible experience.</p>
+        <h3>Why This Matters:</h3>
+        <ul class="solution-features">
+          <li>40–50% faster launch enables earlier pre-sales revenue</li>
+          <li>Show exact build quality, finishes, and spatial feel</li>
+          <li>Increase booking velocity and buyer confidence</li>
+          <li>Repurpose as staff housing or amenity post-launch</li>
+        </ul>
+        <a href="#" class="solution-link">Explore Sample Flats</a>
       </div>
-     </div>
     </div>
-   </section><!-- Gyms Section -->
-   <section id="gyms" class="category-section" style="background: #1e293b; padding: 100px 24px;">
-    <div class="mx-auto" style="max-width: 1400px;">
-     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-      <div class="order-2 lg:order-1">
-       <h2 id="gyms-title" style="color: #D4A63F; font-size: 42px; font-weight: 800; margin-bottom: 24px;">Gyms</h2>
-       <p style="color: #cbd5e1; font-size: 17px; line-height: 1.8; margin-bottom: 32px;">Purpose-built modular fitness centers with vibration-resistant structures, acoustic isolation, and climate control. Perfect for residential communities, corporate campuses, and standalone fitness facilities.</p>
-       <h3 style="color: white; font-size: 22px; font-weight: 700; margin-bottom: 20px;">Performance Features:</h3>
-       <ul class="space-y-4 mb-8">
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Vibration-resistant clear-span structures for heavy equipment</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Acoustic isolation prevents sound transfer to adjacent spaces</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Climate stability year-round for member comfort</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Flexible layouts for evolving membership needs</span></li>
-       </ul><a href="#" class="btn-gold inline-block px-8 py-4 rounded-lg font-semibold text-slate-900" style="font-size: 16px;">Explore Gym Modules</a>
+  </section>
+
+  <!-- Clubhouses Section - Content Left, Image Right -->
+  <section class="solution-section" id="clubhouses">
+    <div class="solution-container">
+      <div class="solution-content">
+        <h2>Clubhouses</h2>
+        <p>Deliver premium community amenities early to enhance project appeal and resident satisfaction. Modular clubhouses with event spaces, gyms, pools, and social areas that position your development competitively.</p>
+        <h3>Key Benefits:</h3>
+        <ul class="solution-features">
+          <li>Early amenity delivery boosts project appeal during sales</li>
+          <li>Premium finishes & event-ready layouts</li>
+          <li>Energy-efficient building envelopes reduce operating costs</li>
+          <li>Residents experience community early, improving satisfaction</li>
+        </ul>
+        <a href="#" class="solution-link">Explore Clubhouses</a>
       </div>
-      <div class="order-1 lg:order-2" style="overflow: hidden; border-radius: 16px; height: 500px;">
-       <div class="category-image" style="width: 100%; height: 100%; background: linear-gradient(135deg, rgba(30, 58, 138, 0.3), rgba(251, 191, 36, 0.2)), url('image/gym.jpg'); background-size: cover; background-position: center;"></div>
+      <div class="solution-image">
+        <img src="image/club-house.jpg" alt="Clubhouses" onerror="this.src=''">
       </div>
-     </div>
     </div>
-   </section><!-- Amenities Section -->
-   <section id="amenities" class="category-section" style="background: #0f172a; padding: 100px 24px;">
-    <div class="mx-auto" style="max-width: 1400px;">
-     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-      <div style="overflow: hidden; border-radius: 16px; height: 500px;">
-       <div class="category-image" style="width: 100%; height: 100%; background: linear-gradient(135deg, rgba(30, 58, 138, 0.3), rgba(251, 191, 36, 0.2)), url('image/Interiors.jpg'); background-size: cover; background-position: center;"></div>
+  </section>
+
+  <!-- Labour Camps Section - Image Left, Content Right -->
+  <section class="solution-section" id="labour-camps">
+    <div class="solution-container">
+      <div class="solution-image">
+        <img src="image/camp.png" alt="Labour Camps" onerror="this.src=''">
       </div>
-      <div>
-       <h2 id="amenities-title" style="color: #D4A63F; font-size: 42px; font-weight: 800; margin-bottom: 24px;">Amenities</h2>
-       <p style="color: #cbd5e1; font-size: 17px; line-height: 1.8; margin-bottom: 32px;">From libraries and co-working spaces to cafeterias and recreation rooms, deliver complete lifestyle amenities on schedule with modular construction. Enhance resident satisfaction and project marketability.</p>
-       <h3 style="color: white; font-size: 22px; font-weight: 700; margin-bottom: 20px;">Why Modular Works:</h3>
-       <ul class="space-y-4 mb-8">
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Deliver lifestyle amenities on schedule, boosting sales</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Purpose-built optimized layouts for each amenity type</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Consistent design language across all community spaces</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Reconfigurable &amp; relocatable as community needs evolve</span></li>
-       </ul><a href="#" class="btn-gold inline-block px-8 py-4 rounded-lg font-semibold text-slate-900" style="font-size: 16px;">Explore Amenities</a>
+      <div class="solution-content">
+        <h2>Labour Camps</h2>
+        <p>Provide dignified, comfortable living conditions for your workforce with modular labour housing that deploys rapidly and relocates efficiently. Improve morale, productivity, and safety while maintaining your corporate standards.</p>
+        <h3>Operational Advantages:</h3>
+        <ul class="solution-features">
+          <li>Deploy dignified housing in weeks, not months</li>
+          <li>Improve morale & productivity through better living conditions</li>
+          <li>Recover 30–60% investment via relocation to new sites</li>
+          <li>Built-in hygiene & ventilation systems</li>
+        </ul>
+        <a href="#" class="solution-link">Explore Labour Housing</a>
       </div>
-     </div>
     </div>
-   </section><!-- Security Cabins Section -->
-   <section id="security-cabins" class="category-section" style="background: #1e293b; padding: 100px 24px;">
-    <div class="mx-auto" style="max-width: 1400px;">
-     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-      <div class="order-2 lg:order-1">
-       <h2 id="security-cabins-title" style="color: #D4A63F; font-size: 42px; font-weight: 800; margin-bottom: 24px;">Security Cabins</h2>
-       <p style="color: #cbd5e1; font-size: 17px; line-height: 1.8; margin-bottom: 32px;">Professional security checkpoints and guard cabins that deploy in days with weather-proof durability and brand-aligned aesthetics. Easily repositionable as site layouts evolve.</p>
-       <h3 style="color: white; font-size: 22px; font-weight: 700; margin-bottom: 20px;">Practical Benefits:</h3>
-       <ul class="space-y-4 mb-8">
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Deploy in days with minimal site disruption</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Easily repositionable as security needs change</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Weather-proof durability for year-round operation</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Brand-aligned visual consistency across all entry points</span></li>
-       </ul><a href="#" class="btn-gold inline-block px-8 py-4 rounded-lg font-semibold text-slate-900" style="font-size: 16px;">Explore Security Cabins</a>
+  </section>
+
+  <!-- Gyms Section - Content Left, Image Right -->
+  <section class="solution-section" id="gyms">
+    <div class="solution-container">
+      <div class="solution-content">
+        <h2>Gyms</h2>
+        <p>Purpose-built modular fitness centers with vibration-resistant structures, acoustic isolation, and climate control. Perfect for residential communities, corporate campuses, and standalone fitness facilities.</p>
+        <h3>Performance Features:</h3>
+        <ul class="solution-features">
+          <li>Vibration-resistant clear-span structures for heavy equipment</li>
+          <li>Acoustic isolation prevents sound transfer to adjacent spaces</li>
+          <li>Climate stability year-round for member comfort</li>
+          <li>Flexible layouts for evolving membership needs</li>
+        </ul>
+        <a href="#" class="solution-link">Explore Gym Modules</a>
       </div>
-      <div class="order-1 lg:order-2" style="overflow: hidden; border-radius: 16px; height: 500px;">
-       <div class="category-image" style="width: 100%; height: 100%; background: linear-gradient(135deg, rgba(30, 58, 138, 0.3), rgba(251, 191, 36, 0.2)), url('image/cabin.png'); background-size: cover; background-position: center;"></div>
+      <div class="solution-image">
+        <img src="image/gym.jpg" alt="Gyms" onerror="this.src=''">
       </div>
-     </div>
     </div>
-   </section><!-- Office Pods Section -->
-   <section id="office-pods" class="category-section" style="background: #0f172a; padding: 100px 24px;">
-    <div class="mx-auto" style="max-width: 1400px;">
-     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-      <div style="overflow: hidden; border-radius: 16px; height: 500px;">
-       <div class="category-image" style="width: 100%; height: 100%; background: linear-gradient(135deg, rgba(30, 58, 138, 0.3), rgba(251, 191, 36, 0.2)), url('image/office.png'); background-size: cover; background-position: center;"></div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="gallery-section">
+    <h2 class="section-title">Commercial Projects Gallery</h2>
+    <p class="section-subtitle">A showcase of our delivered commercial projects</p>
+    
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="image/office.png" alt="Offices" class="gallery-img" onerror="this.src=''">
+        <div class="gallery-caption">
+          <h4>Offices</h4>
+        </div>
       </div>
-      <div>
-       <h2 id="office-pods-title" style="color: #D4A63F; font-size: 42px; font-weight: 800; margin-bottom: 24px;">Office Pods</h2>
-       <p style="color: #cbd5e1; font-size: 17px; line-height: 1.8; margin-bottom: 32px;">Acoustically isolated workspace pods for calls, focused work, and private meetings. Perfect for hybrid work environments, co-working spaces, and expanding offices without downtime.</p>
-       <h3 style="color: white; font-size: 22px; font-weight: 700; margin-bottom: 20px;">Strategic Value:</h3>
-       <ul class="space-y-4 mb-8">
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Flexible workspace expansion with no downtime</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Acoustically isolated pods for calls &amp; focus work</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Relocate as needs evolve without renovation</span></li>
-        <li class="flex items-start gap-3"><span style="color: #D4A63F; font-size: 20px;">✓</span> <span style="color: #cbd5e1; font-size: 16px;">Ideal for hybrid work models and flexible seating</span></li>
-       </ul><a href="#" class="btn-gold inline-block px-8 py-4 rounded-lg font-semibold text-slate-900" style="font-size: 16px;">Explore Office Pods</a>
+      <div class="gallery-item">
+        <img src="image/Showrooms.png" alt="Showrooms" class="gallery-img" onerror="this.src=''">
+        <div class="gallery-caption">
+          <h4>Showrooms</h4>
+        </div>
       </div>
-     </div>
+      <div class="gallery-item">
+        <img src="image/office4.png" alt="Business Centers" class="gallery-img" onerror="this.src=''">
+        <div class="gallery-caption">
+          <h4>Business Centers</h4>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="image/Commercial-home.png" alt="Sample Flats" class="gallery-img" onerror="this.src=''">
+        <div class="gallery-caption">
+          <h4>Sample Flats</h4>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="image/club-house.jpg" alt="Clubhouses" class="gallery-img" onerror="this.src=''">
+        <div class="gallery-caption">
+          <h4>Clubhouses</h4>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="image/gym.jpg" alt="Gyms" class="gallery-img" onerror="this.src=''">
+        <div class="gallery-caption">
+          <h4>Gyms</h4>
+        </div>
+      </div>
     </div>
-   </section><!-- Gallery Section -->
-   <section style="background: #1e293b; padding: 100px 24px;">
-    <div class="mx-auto" style="max-width: 1400px;">
-     <h2 style="color: #D4A63F; font-size: 48px; font-weight: 800; text-align: center; margin-bottom: 60px;">Commercial Projects Gallery</h2>
-     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"><!-- Gallery Item 1 - Offices -->
-      <div class="gallery-item" style="position: relative; overflow: hidden; border-radius: 12px; height: 280px; cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease;">
-       <div style="width: 100%; height: 100%; background: linear-gradient(135deg, rgba(30, 58, 138, 0.6), rgba(251, 191, 36, 0.3)), url('image/office.png'); background-size: cover; background-position: center; transition: transform 0.5s ease;"></div>
-       <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(to top, rgba(15, 23, 42, 0.95), transparent);">
-        <h3 style="color: #D4A63F; font-size: 20px; font-weight: 700;">Offices</h3>
-       </div>
-      </div><!-- Gallery Item 2 - Showrooms -->
-      <div class="gallery-item" style="position: relative; overflow: hidden; border-radius: 12px; height: 280px; cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease;">
-       <div style="width: 100%; height: 100%; background: linear-gradient(135deg, rgba(30, 58, 138, 0.6), rgba(251, 191, 36, 0.3)), url('image/showroom.png'); background-size: cover; background-position: center; transition: transform 0.5s ease;"></div>
-       <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(to top, rgba(15, 23, 42, 0.95), transparent);">
-        <h3 style="color: #D4A63F; font-size: 20px; font-weight: 700;">Showrooms</h3>
-       </div>
-      </div><!-- Gallery Item 3 - Business Centers -->
-      <div class="gallery-item" style="position: relative; overflow: hidden; border-radius: 12px; height: 280px; cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease;">
-       <div style="width: 100%; height: 100%; background: linear-gradient(135deg, rgba(30, 58, 138, 0.6), rgba(251, 191, 36, 0.3)), url('image/office4.png'); background-size: cover; background-position: center; transition: transform 0.5s ease;"></div>
-       <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(to top, rgba(15, 23, 42, 0.95), transparent);">
-        <h3 style="color: #D4A63F; font-size: 20px; font-weight: 700;">Business Centers</h3>
-       </div>
-      </div><!-- Gallery Item 4 - Sample Flats -->
-      <div class="gallery-item" style="position: relative; overflow: hidden; border-radius: 12px; height: 280px; cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease;">
-       <div style="width: 100%; height: 100%; background: linear-gradient(135deg, rgba(30, 58, 138, 0.6), rgba(251, 191, 36, 0.3)), url('image/Commercial-home.png'); background-size: cover; background-position: center; transition: transform 0.5s ease;"></div>
-       <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(to top, rgba(15, 23, 42, 0.95), transparent);">
-        <h3 style="color: #D4A63F; font-size: 20px; font-weight: 700;">Sample Flats</h3>
-       </div>
-      </div><!-- Gallery Item 5 - Clubhouses -->
-      <div class="gallery-item" style="position: relative; overflow: hidden; border-radius: 12px; height: 280px; cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease;">
-       <div style="width: 100%; height: 100%; background: linear-gradient(135deg, rgba(30, 58, 138, 0.6), rgba(251, 191, 36, 0.3)), url('image/club-house.jpg'); background-size: cover; background-position: center; transition: transform 0.5s ease;"></div>
-       <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(to top, rgba(15, 23, 42, 0.95), transparent);">
-        <h3 style="color: #D4A63F; font-size: 20px; font-weight: 700;">Clubhouses</h3>
-       </div>
-      </div><!-- Gallery Item 6 - Gyms -->
-      <div class="gallery-item" style="position: relative; overflow: hidden; border-radius: 12px; height: 280px; cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease;">
-       <div style="width: 100%; height: 100%; background: linear-gradient(135deg, rgba(30, 58, 138, 0.6), rgba(251, 191, 36, 0.3)), url('image/gym.jpg'); background-size: cover; background-position: center; transition: transform 0.5s ease;"></div>
-       <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(to top, rgba(15, 23, 42, 0.95), transparent);">
-        <h3 style="color: #D4A63F; font-size: 20px; font-weight: 700;">Gyms</h3>
-       </div>
-      </div><!-- Gallery Item 7 - Labour Camps -->
-      <div class="gallery-item" style="position: relative; overflow: hidden; border-radius: 12px; height: 280px; cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease;">
-       <div style="width: 100%; height: 100%; background: linear-gradient(135deg, rgba(30, 58, 138, 0.6), rgba(251, 191, 36, 0.3)), url('image/camp.png'); background-size: cover; background-position: center; transition: transform 0.5s ease;"></div>
-       <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(to top, rgba(15, 23, 42, 0.95), transparent);">
-        <h3 style="color: #D4A63F; font-size: 20px; font-weight: 700;">Labour Camps</h3>
-       </div>
-      </div><!-- Gallery Item 8 - Amenities -->
-      <div class="gallery-item" style="position: relative; overflow: hidden; border-radius: 12px; height: 280px; cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease;">
-       <div style="width: 100%; height: 100%; background: linear-gradient(135deg, rgba(30, 58, 138, 0.6), rgba(251, 191, 36, 0.3)), url('image/Interiors.jpg'); background-size: cover; background-position: center; transition: transform 0.5s ease;"></div>
-       <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(to top, rgba(15, 23, 42, 0.95), transparent);">
-        <h3 style="color: #D4A63F; font-size: 20px; font-weight: 700;">Amenities</h3>
-       </div>
-      </div><!-- Gallery Item 9 - Security Cabins -->
-     </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <h2>Ready to transform your commercial real estate timelines?</h2>
+    <p>Build faster, operate sooner, and scale confidently with modular precision.</p>
+    <div class="cta-buttons">
+      <a href="./contact.html" class="btn btn-primary">Discuss Your Project</a>
+      <a href="./contact.html" class="btn btn-secondary">Request Commercial Brochure</a>
     </div>
-   </section><!-- Final CTA Section -->
-   <section style="background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%); padding: 120px 24px; position: relative; overflow: hidden;">
-    <div class="absolute inset-0" style="opacity: 0.1;">
-     <div style="position: absolute; top: 20%; left: 10%; width: 200px; height: 200px; background: radial-gradient(circle, #D4A63F 0%, transparent 70%); animation: glow 3s ease-in-out infinite;"></div>
-     <div style="position: absolute; bottom: 20%; right: 10%; width: 250px; height: 250px; background: radial-gradient(circle, #D4A63F 0%, transparent 70%); animation: glow 4s ease-in-out infinite;"></div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-grid">
+        <!-- Company Info -->
+        <div class="footer-section">
+          <div class="logo-container" style="justify-content: flex-start;">
+            <img src="image/logo.png" alt="Logo" style="width: 200px; height: 100px; margin-bottom: 10px;">
+          </div>
+          <p class="footer-tagline" style="text-align: left; font-size: 1.3rem; margin-bottom: 1rem;">Built with Precision. Delivered with Pride.</p>
+          <p style="color: #888; line-height: 1.8; margin-bottom: 1.5rem;">Premium modular construction solutions for a sustainable future. Transforming ideas into reality with LGSF technology.</p>
+          <div class="footer-social">
+            <a href="#" class="social-link" aria-label="Facebook">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+            </a>
+            <a href="#" class="social-link" aria-label="Twitter">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+              </svg>
+            </a>
+            <a href="#" class="social-link" aria-label="LinkedIn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
+            <a href="#" class="social-link" aria-label="Instagram">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-section">
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-list">
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./about-us.html">About Us</a></li>
+            <li><a href="./materials.html">Materials</a></li>
+            <li><a href="./contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Our Solutions -->
+        <div class="footer-section">
+          <h4 class="footer-heading">Our Solutions</h4>
+          <ul class="footer-list">
+            <li><a href="./commercial.html">Commercial</a></li>
+            <li><a href="./residential.html">Residential</a></li>
+            <li><a href="./institutional.html">Institutional</a></li>
+            <li><a href="./hospitality.html">Hospitality</a></li>
+            <li><a href="./public-facilities.html">Public Facilities</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="footer-section">
+          <h4 class="footer-heading">Get In Touch</h4>
+          <ul class="footer-contact">
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              <span>Mumbai, Maharashtra, India</span>
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              <span>+91 99700 60008</span>
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              <span>info@roofandrealms.com</span>
+            </li>
+          </ul>
+          <button class="footer-cta" onclick="window.location.href='./contact.html'">Schedule a Meeting</button>
+        </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <p>© 2024 Roof &amp; Realms. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <span>•</span>
+          <a href="#">Terms of Service</a>
+          <span>•</span>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
     </div>
-    <div class="mx-auto text-center relative z-10" style="max-width: 900px;">
-     <h2 style="color: #D4A63F; font-size: 52px; font-weight: 800; margin-bottom: 24px; line-height: 1.2;">Ready to transform your commercial real estate timelines?</h2>
-     <p style="color: #cbd5e1; font-size: 22px; margin-bottom: 48px; line-height: 1.6;">Build faster, operate sooner, and scale confidently with modular precision.</p>
-     <div class="flex flex-wrap items-center justify-center gap-6"><a href="#" class="btn-gold px-10 py-5 rounded-lg font-semibold text-slate-900" style="font-size: 18px;">Discuss Your Project</a> <a href="#" class="btn-gold px-10 py-5 rounded-lg font-semibold text-slate-900" style="font-size: 18px;">Request Commercial Brochure</a>
-     </div>
-    </div>
-   </section><!-- Footer -->
-   <footer style="background: rgba(15, 23, 42, 0.98); border-top: 1px solid rgba(251, 191, 36, 0.2); padding: 60px 24px 30px;">
-    <div class="mx-auto" style="max-width: 1400px;">
-     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-      <div>
-       <div class="flex items-center gap-3 mb-4">
-        <svg width="32" height="32" viewbox="0 0 40 40" fill="none"><path d="M20 2L4 12V28L20 38L36 28V12L20 2Z" fill="url(#footer-gold-gradient)" opacity="0.2" /> <path d="M20 6L8 13V27L20 34L32 27V13L20 6Z" stroke="#D4A63F" stroke-width="2" fill="none" /> <path d="M20 14L14 17.5V24.5L20 28L26 24.5V17.5L20 14Z" fill="#D4A63F" /> <defs>
-          <lineargradient id="footer-gold-gradient" x1="4" y1="2" x2="36" y2="38">
-           <stop stop-color="#D4A63F" />
-           <stop offset="1" stop-color="#f59e0b" />
-          </lineargradient>
-         </defs>
-        </svg>
-        <h3 style="color: #D4A63F; font-weight: 700; font-size: 18px;">Roof &amp; Realms</h3>
-       </div>
-       <p style="color: #94a3b8; font-size: 14px; line-height: 1.6;">Building the future with modular precision and sustainable innovation.</p>
-       <div class="flex gap-4 mt-6"><a href="#" style="color: #D4A63F; transition: opacity 0.3s;">
-         <svg width="24" height="24" viewbox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
-         </svg></a> <a href="#" style="color: #D4A63F; transition: opacity 0.3s;">
-         <svg width="24" height="24" viewbox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
-         </svg></a> <a href="#" style="color: #D4A63F; transition: opacity 0.3s;">
-         <svg width="24" height="24" viewbox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" /> <circle cx="4" cy="4" r="2" />
-         </svg></a>
-       </div>
-      </div>
-      <div>
-       <h4 style="color: white; font-weight: 600; margin-bottom: 20px; font-size: 16px;">Quick Links</h4>
-       <ul class="space-y-3">
-        <li><a href="#" style="color: #94a3b8; font-size: 14px; transition: color 0.3s;" onmouseover="this.style.color='#D4A63F'" onmouseout="this.style.color='#94a3b8'">Home</a></li>
-        <li><a href="#" style="color: #94a3b8; font-size: 14px; transition: color 0.3s;" onmouseover="this.style.color='#D4A63F'" onmouseout="this.style.color='#94a3b8'">About Us</a></li>
-        <li><a href="#" style="color: #94a3b8; font-size: 14px; transition: color 0.3s;" onmouseover="this.style.color='#D4A63F'" onmouseout="this.style.color='#94a3b8'">Projects</a></li>
-        <li><a href="#" style="color: #94a3b8; font-size: 14px; transition: color 0.3s;" onmouseover="this.style.color='#D4A63F'" onmouseout="this.style.color='#94a3b8'">Materials</a></li>
-        <li><a href="#" style="color: #94a3b8; font-size: 14px; transition: color 0.3s;" onmouseover="this.style.color='#D4A63F'" onmouseout="this.style.color='#94a3b8'">Contact</a></li>
-       </ul>
-      </div>
-      <div>
-       <h4 style="color: white; font-weight: 600; margin-bottom: 20px; font-size: 16px;">Commercial Solutions</h4>
-       <ul class="space-y-3">
-        <li><a href="#offices" style="color: #94a3b8; font-size: 14px; transition: color 0.3s;" onmouseover="this.style.color='#D4A63F'" onmouseout="this.style.color='#94a3b8'">Offices</a></li>
-        <li><a href="#showrooms" style="color: #94a3b8; font-size: 14px; transition: color 0.3s;" onmouseover="this.style.color='#D4A63F'" onmouseout="this.style.color='#94a3b8'">Showrooms</a></li>
-        <li><a href="#business-centers" style="color: #94a3b8; font-size: 14px; transition: color 0.3s;" onmouseover="this.style.color='#D4A63F'" onmouseout="this.style.color='#94a3b8'">Business Centers</a></li>
-        <li><a href="#clubhouses" style="color: #94a3b8; font-size: 14px; transition: color 0.3s;" onmouseover="this.style.color='#D4A63F'" onmouseout="this.style.color='#94a3b8'">Clubhouses</a></li>
-        <li><a href="#gyms" style="color: #94a3b8; font-size: 14px; transition: color 0.3s;" onmouseover="this.style.color='#D4A63F'" onmouseout="this.style.color='#94a3b8'">Gyms</a></li>
-        <li><a href="#office-pods" style="color: #94a3b8; font-size: 14px; transition: color 0.3s;" onmouseover="this.style.color='#D4A63F'" onmouseout="this.style.color='#94a3b8'">Office Pods</a></li>
-       </ul>
-      </div>
-      <div>
-       <h4 style="color: white; font-weight: 600; margin-bottom: 20px; font-size: 16px;">Contact Us</h4>
-       <ul class="space-y-3">
-        <li style="color: #94a3b8; font-size: 14px; line-height: 1.8;"><span style="color: #D4A63F; font-weight: 600;">Email:</span><br>
-          info@roofandrealms.com</li>
-        <li style="color: #94a3b8; font-size: 14px; line-height: 1.8;"><span style="color: #D4A63F; font-weight: 600;">Phone:</span><br>
-          +91 (0)000-000-0000</li>
-        <li style="color: #94a3b8; font-size: 14px; line-height: 1.8;"><span style="color: #D4A63F; font-weight: 600;">Address:</span><br>
-          Mumbai, Maharashtra, India</li>
-       </ul>
-      </div>
-     </div>
-     <div style="border-top: 1px solid rgba(251, 191, 36, 0.1); padding-top: 24px; text-align: center;">
-      <p style="color: #64748b; font-size: 13px;">© 2024 Roof &amp; Realms. All rights reserved. | Designed with precision, built with passion.</p>
-     </div>
-    </div>
-   </footer>
-  </div>
+  </footer>
+
   <script>
-    const defaultConfig = {
-      background_color: "#0f172a",
-      surface_color: "#1e293b",
-      text_color: "#cbd5e1",
-      primary_action_color: "#D4A63F",
-      secondary_action_color: "#f59e0b",
-      font_family: "Inter",
-      font_size: 16,
-      logo_text: "Roof & Realms",
-      hero_title: "Commercial Modular Solutions",
-      hero_subtitle: "Build faster, expand smarter, operate without disruption.",
-      hero_description: "Commercial real estate in India runs on timing and experience. Whether it's an office, showroom or clubhouse, losing months to on-site delays directly impacts rental income, brand perception and investor confidence. Roof & Realms modular solutions allow you to launch, expand or reposition commercial assets with factory-controlled quality and dramatically shorter build cycles without compromising design, comfort or brand image.",
-      offices_title: "Offices",
-      showrooms_title: "Showrooms",
-      business_centers_title: "Business Centers",
-      site_office_title: "Site Office",
-      sample_flats_title: "Sample Flats",
-      clubhouses_title: "Clubhouses",
-      labour_camps_title: "Labour Camps",
-      gyms_title: "Gyms",
-      amenities_title: "Amenities",
-      security_cabins_title: "Security Cabins",
-      office_pods_title: "Office Pods"
-    };
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mainNav = document.getElementById('mainNav');
 
-    async function onConfigChange(config) {
-      const baseFontSize = config.font_size || defaultConfig.font_size;
-      const customFont = config.font_family || defaultConfig.font_family;
-      const baseFontStack = `-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif`;
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenuBtn.classList.toggle('active');
+      mainNav.classList.toggle('active');
+    });
 
-      document.querySelector('.app-wrapper').style.background = config.background_color || defaultConfig.background_color;
-      document.querySelector('.app-wrapper').style.fontFamily = `${customFont}, ${baseFontStack}`;
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Mobile dropdown toggle
+    if (window.innerWidth <= 968) {
+      const navItem = document.querySelector('.dropdown .nav-item');
+      const dropdown = document.getElementById('productsDropdown');
       
-      const logoTextEl = document.getElementById('logo-text');
-      if (logoTextEl) {
-        logoTextEl.textContent = config.logo_text || defaultConfig.logo_text;
-        logoTextEl.style.color = config.primary_action_color || defaultConfig.primary_action_color;
-        logoTextEl.style.fontSize = `${baseFontSize * 1.375}px`;
-      }
-
-      const heroTitleEl = document.getElementById('hero-title');
-      if (heroTitleEl) {
-        heroTitleEl.textContent = config.hero_title || defaultConfig.hero_title;
-        heroTitleEl.style.color = config.primary_action_color || defaultConfig.primary_action_color;
-        heroTitleEl.style.fontSize = `${baseFontSize * 3.5}px`;
-      }
-
-      const heroSubtitleEl = document.getElementById('hero-subtitle');
-      if (heroSubtitleEl) {
-        heroSubtitleEl.textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
-        heroSubtitleEl.style.color = config.text_color || defaultConfig.text_color;
-        heroSubtitleEl.style.fontSize = `${baseFontSize * 1.5}px`;
-      }
-
-      const heroDescEl = document.getElementById('hero-description');
-      if (heroDescEl) {
-        heroDescEl.textContent = config.hero_description || defaultConfig.hero_description;
-        heroDescEl.style.color = config.text_color || defaultConfig.text_color;
-        heroDescEl.style.fontSize = `${baseFontSize * 1.0625}px`;
-      }
-
-      const officesTitleEl = document.getElementById('offices-title');
-      if (officesTitleEl) {
-        officesTitleEl.textContent = config.offices_title || defaultConfig.offices_title;
-        officesTitleEl.style.color = config.primary_action_color || defaultConfig.primary_action_color;
-        officesTitleEl.style.fontSize = `${baseFontSize * 2.625}px`;
-      }
-
-      const showroomsTitleEl = document.getElementById('showrooms-title');
-      if (showroomsTitleEl) {
-        showroomsTitleEl.textContent = config.showrooms_title || defaultConfig.showrooms_title;
-        showroomsTitleEl.style.color = config.primary_action_color || defaultConfig.primary_action_color;
-        showroomsTitleEl.style.fontSize = `${baseFontSize * 2.625}px`;
-      }
-
-      const businessCentersTitleEl = document.getElementById('business-centers-title');
-      if (businessCentersTitleEl) {
-        businessCentersTitleEl.textContent = config.business_centers_title || defaultConfig.business_centers_title;
-        businessCentersTitleEl.style.color = config.primary_action_color || defaultConfig.primary_action_color;
-        businessCentersTitleEl.style.fontSize = `${baseFontSize * 2.625}px`;
-      }
-
-      const siteOfficeTitleEl = document.getElementById('site-office-title');
-      if (siteOfficeTitleEl) {
-        siteOfficeTitleEl.textContent = config.site_office_title || defaultConfig.site_office_title;
-        siteOfficeTitleEl.style.color = config.primary_action_color || defaultConfig.primary_action_color;
-        siteOfficeTitleEl.style.fontSize = `${baseFontSize * 2.625}px`;
-      }
-
-      const sampleFlatsTitleEl = document.getElementById('sample-flats-title');
-      if (sampleFlatsTitleEl) {
-        sampleFlatsTitleEl.textContent = config.sample_flats_title || defaultConfig.sample_flats_title;
-        sampleFlatsTitleEl.style.color = config.primary_action_color || defaultConfig.primary_action_color;
-        sampleFlatsTitleEl.style.fontSize = `${baseFontSize * 2.625}px`;
-      }
-
-      const clubhousesTitleEl = document.getElementById('clubhouses-title');
-      if (clubhousesTitleEl) {
-        clubhousesTitleEl.textContent = config.clubhouses_title || defaultConfig.clubhouses_title;
-        clubhousesTitleEl.style.color = config.primary_action_color || defaultConfig.primary_action_color;
-        clubhousesTitleEl.style.fontSize = `${baseFontSize * 2.625}px`;
-      }
-
-      const labourCampsTitleEl = document.getElementById('labour-camps-title');
-      if (labourCampsTitleEl) {
-        labourCampsTitleEl.textContent = config.labour_camps_title || defaultConfig.labour_camps_title;
-        labourCampsTitleEl.style.color = config.primary_action_color || defaultConfig.primary_action_color;
-        labourCampsTitleEl.style.fontSize = `${baseFontSize * 2.625}px`;
-      }
-
-      const gymsTitleEl = document.getElementById('gyms-title');
-      if (gymsTitleEl) {
-        gymsTitleEl.textContent = config.gyms_title || defaultConfig.gyms_title;
-        gymsTitleEl.style.color = config.primary_action_color || defaultConfig.primary_action_color;
-        gymsTitleEl.style.fontSize = `${baseFontSize * 2.625}px`;
-      }
-
-      const amenitiesTitleEl = document.getElementById('amenities-title');
-      if (amenitiesTitleEl) {
-        amenitiesTitleEl.textContent = config.amenities_title || defaultConfig.amenities_title;
-        amenitiesTitleEl.style.color = config.primary_action_color || defaultConfig.primary_action_color;
-        amenitiesTitleEl.style.fontSize = `${baseFontSize * 2.625}px`;
-      }
-
-      const securityCabinsTitleEl = document.getElementById('security-cabins-title');
-      if (securityCabinsTitleEl) {
-        securityCabinsTitleEl.textContent = config.security_cabins_title || defaultConfig.security_cabins_title;
-        securityCabinsTitleEl.style.color = config.primary_action_color || defaultConfig.primary_action_color;
-        securityCabinsTitleEl.style.fontSize = `${baseFontSize * 2.625}px`;
-      }
-
-      const officePodsTitleEl = document.getElementById('office-pods-title');
-      if (officePodsTitleEl) {
-        officePodsTitleEl.textContent = config.office_pods_title || defaultConfig.office_pods_title;
-        officePodsTitleEl.style.color = config.primary_action_color || defaultConfig.primary_action_color;
-        officePodsTitleEl.style.fontSize = `${baseFontSize * 2.625}px`;
-      }
-
-      const navLinks = document.querySelectorAll('.nav-link');
-      navLinks.forEach(link => {
-        link.style.fontSize = `${baseFontSize * 0.9375}px`;
-      });
-
-      const buttons = document.querySelectorAll('.btn-gold');
-      buttons.forEach(btn => {
-        btn.style.background = `linear-gradient(135deg, ${config.primary_action_color || defaultConfig.primary_action_color} 0%, ${config.secondary_action_color || defaultConfig.secondary_action_color} 100%)`;
-        btn.style.fontSize = `${baseFontSize}px`;
-      });
-
-      const allBodyText = document.querySelectorAll('p:not(#logo-text):not(#hero-title):not(#hero-subtitle):not(#hero-description)');
-      allBodyText.forEach(p => {
-        if (!p.id || !p.id.includes('title')) {
-          p.style.fontSize = `${baseFontSize * 1.0625}px`;
-        }
+      navItem.addEventListener('click', (e) => {
+        e.preventDefault();
+        dropdown.classList.toggle('active');
       });
     }
 
-    function mapToCapabilities(config) {
-      return {
-        recolorables: [
-          {
-            get: () => config.background_color || defaultConfig.background_color,
-            set: (value) => {
-              config.background_color = value;
-              if (window.elementSdk) {
-                window.elementSdk.setConfig({ background_color: value });
-              }
-            }
-          },
-          {
-            get: () => config.surface_color || defaultConfig.surface_color,
-            set: (value) => {
-              config.surface_color = value;
-              if (window.elementSdk) {
-                window.elementSdk.setConfig({ surface_color: value });
-              }
-            }
-          },
-          {
-            get: () => config.text_color || defaultConfig.text_color,
-            set: (value) => {
-              config.text_color = value;
-              if (window.elementSdk) {
-                window.elementSdk.setConfig({ text_color: value });
-              }
-            }
-          },
-          {
-            get: () => config.primary_action_color || defaultConfig.primary_action_color,
-            set: (value) => {
-              config.primary_action_color = value;
-              if (window.elementSdk) {
-                window.elementSdk.setConfig({ primary_action_color: value });
-              }
-            }
-          },
-          {
-            get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
-            set: (value) => {
-              config.secondary_action_color = value;
-              if (window.elementSdk) {
-                window.elementSdk.setConfig({ secondary_action_color: value });
-              }
-            }
-          }
-        ],
-        borderables: [],
-        fontEditable: {
-          get: () => config.font_family || defaultConfig.font_family,
-          set: (value) => {
-            config.font_family = value;
-            if (window.elementSdk) {
-              window.elementSdk.setConfig({ font_family: value });
-            }
-          }
-        },
-        fontSizeable: {
-          get: () => config.font_size || defaultConfig.font_size,
-          set: (value) => {
-            config.font_size = value;
-            if (window.elementSdk) {
-              window.elementSdk.setConfig({ font_size: value });
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href.startsWith('#') && href !== '#') {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+            // Close mobile menu if open
+            if (mainNav.classList.contains('active')) {
+              mainNav.classList.remove('active');
+              mobileMenuBtn.classList.remove('active');
             }
           }
         }
-      };
-    }
-
-    function mapToEditPanelValues(config) {
-      return new Map([
-        ["logo_text", config.logo_text || defaultConfig.logo_text],
-        ["hero_title", config.hero_title || defaultConfig.hero_title],
-        ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
-        ["hero_description", config.hero_description || defaultConfig.hero_description],
-        ["offices_title", config.offices_title || defaultConfig.offices_title],
-        ["showrooms_title", config.showrooms_title || defaultConfig.showrooms_title],
-        ["business_centers_title", config.business_centers_title || defaultConfig.business_centers_title],
-        ["site_office_title", config.site_office_title || defaultConfig.site_office_title],
-        ["sample_flats_title", config.sample_flats_title || defaultConfig.sample_flats_title],
-        ["clubhouses_title", config.clubhouses_title || defaultConfig.clubhouses_title],
-        ["labour_camps_title", config.labour_camps_title || defaultConfig.labour_camps_title],
-        ["gyms_title", config.gyms_title || defaultConfig.gyms_title],
-        ["amenities_title", config.amenities_title || defaultConfig.amenities_title],
-        ["security_cabins_title", config.security_cabins_title || defaultConfig.security_cabins_title],
-        ["office_pods_title", config.office_pods_title || defaultConfig.office_pods_title]
-      ]);
-    }
-
-    if (window.elementSdk) {
-      window.elementSdk.init({
-        defaultConfig,
-        onConfigChange,
-        mapToCapabilities,
-        mapToEditPanelValues
       });
-    }
+    });
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9abeb0c0d2e045af',t:'MTc2NTM5MDEzNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ </body>
 </html>

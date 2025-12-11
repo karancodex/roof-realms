@@ -138,7 +138,7 @@
             width: 100%;
         }
 
-        /* Mega Menu Dropdown */
+        /* Mega Menu Dropdown - Fixed */
         .dropdown {
             position: relative;
         }
@@ -160,6 +160,13 @@
             gap: 0;
             opacity: 0;
             animation: fadeInDown 0.4s ease forwards;
+            z-index: 1001;
+        }
+
+        /* Fixed: Keep dropdown open when hovering over it */
+        .dropdown:hover .dropdown-content,
+        .dropdown-content:hover {
+            display: flex;
         }
 
         @keyframes fadeInDown {
@@ -172,10 +179,6 @@
                 opacity: 1;
                 transform: translateX(-50%) translateY(0);
             }
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: flex;
         }
 
         .dropdown-item {
@@ -282,14 +285,12 @@
         /* Enhanced Hero Section */
         .hero {
             height: 100vh;
-            /* Make full-screen */
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
             padding: 0;
-            /* Remove padding so the video fits fully */
         }
 
         .hero-background {
@@ -319,7 +320,6 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* Full screen look */
         }
 
 
@@ -330,7 +330,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* background: linear-gradient(135deg, rgba(10, 10, 20, 0.85) 0%, rgba(31, 58, 147, 0.75) 50%, rgba(10, 10, 20, 0.85) 100%); */
+            opacity: 0.5;
+            background: black;
         }
 
         .hero::before {
@@ -416,7 +417,7 @@
 
         .hero h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 5.5rem;
+            font-size: 4.5rem;
             font-weight: 900;
             margin-bottom: 2rem;
             background: linear-gradient(135deg, #ffffff 0%, #D4A63F 50%, #ffffff 100%);
@@ -578,7 +579,7 @@
 
         /* Section Styles */
         section {
-            padding: 5rem 5%;
+            padding: 4rem 5%;
             position: relative;
         }
 
@@ -599,7 +600,7 @@
             text-align: center;
             color: #b8b8b8;
             font-size: 1.2rem;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             animation: fadeIn 1s ease-out 0.3s backwards;
             font-weight: 300;
             letter-spacing: 0.5px;
@@ -620,7 +621,7 @@
             background:
                 radial-gradient(circle at 10% 20%, rgba(31, 58, 147, 0.1) 0%, transparent 50%),
                 linear-gradient(180deg, #0a0a14 0%, #12121e 100%);
-            padding: 6rem 0 4rem;
+            padding: 4rem 0 4rem;
         }
 
         .serve-row {
@@ -664,11 +665,6 @@
             transition: border-color 0.6s ease;
             pointer-events: none;
         }
-
-        /* .serve-row:hover .serve-image-container::after {
-            border-color: #D4A63F;
-            box-shadow: inset 0 0 40px rgba(212, 166, 63, 0.4), 0 0 40px rgba(212, 166, 63, 0.4);
-        } */
 
         .serve-content {
             background: linear-gradient(135deg, rgba(31, 58, 147, 0.25) 0%, rgba(10, 10, 20, 0.95) 100%);
@@ -776,7 +772,7 @@
         .serve-link:hover::after {
             transform: translateX(5px);
         }
-        
+
 
         /* Gallery Section */
         .gallery {
@@ -918,7 +914,6 @@
         .testimonials-carousel {
             display: flex;
             gap: 2rem;
-            /* 2rem ≈ 32px → matches JS 'gap' */
             transition: transform 0.5s ease-in-out;
         }
 
@@ -1014,7 +1009,7 @@
             filter: drop-shadow(0 0 8px rgba(212, 166, 63, 0.4));
         }
 
-        /* Why Roof & Realms - 5 Pillars Section */
+        /* Updated: Why Roof & Realms - 5 Pillars Section with Images */
         .why-section {
             background:
                 radial-gradient(circle at 50% 50%, rgba(212, 166, 63, 0.08) 0%, transparent 60%),
@@ -1023,7 +1018,7 @@
                 linear-gradient(135deg, #0a0a14 0%, #12121e 50%, #0a0a14 100%);
             border-top: 1px solid rgba(212, 166, 63, 0.3);
             border-bottom: 1px solid rgba(212, 166, 63, 0.3);
-            padding: 6rem 5% 6rem;
+            padding: 4rem 5% 4rem;
             position: relative;
             overflow: hidden;
         }
@@ -1064,210 +1059,84 @@
         .pillars-row {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 2rem;
+            gap: 1rem;
             margin-bottom: 4rem;
         }
 
-        /* Individual Pillar Column */
-        .pillar-column {
+        /* Pillar Card with Image */
+        .pillar-card {
             background: linear-gradient(180deg, rgba(31, 58, 147, 0.3) 0%, rgba(10, 10, 20, 0.95) 100%);
             border: none;
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
             transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
             cursor: pointer;
             position: relative;
             min-height: 550px;
             display: flex;
             flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            overflow: hidden;
+            border: 2px solid rgba(212, 166, 63, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
-        /* Pillar Capital (Top Decorative Part) */
-        .pillar-column::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 40px;
-            background: linear-gradient(180deg, #f4d483 0%, #D4A63F 50%, #c49636 100%);
-            box-shadow:
-                0 8px 20px rgba(0, 0, 0, 0.6),
-                inset 0 4px 10px rgba(255, 255, 255, 0.3),
-                inset 0 -4px 10px rgba(0, 0, 0, 0.3);
-            z-index: 1;
-            clip-path: polygon(0% 0%, 100% 0%,
-                    95% 25%, 90% 40%, 85% 45%, 80% 47%, 75% 48%, 70% 48.5%, 65% 49%, 60% 49.2%, 55% 49.3%, 50% 49.4%,
-                    45% 49.3%, 40% 49.2%, 35% 49%, 30% 48.5%, 25% 48%, 20% 47%, 15% 45%, 10% 40%, 5% 25%);
-            border-top: 3px solid #f4d483;
-            border-left: 2px solid rgba(212, 166, 63, 0.4);
-            border-right: 2px solid rgba(0, 0, 0, 0.4);
-        }
-
-        /* Pillar Base (Bottom Platform) */
-        .pillar-column::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 50px;
-            background: linear-gradient(180deg, #c49636 0%, #D4A63F 50%, #f4d483 100%);
-            box-shadow:
-                0 -8px 20px rgba(0, 0, 0, 0.6),
-                inset 0 -4px 10px rgba(255, 255, 255, 0.3),
-                inset 0 4px 10px rgba(0, 0, 0, 0.3),
-                0 10px 40px rgba(212, 166, 63, 0.5);
-            z-index: 1;
-            clip-path: polygon(5% 0%, 10% 15%, 15% 25%, 20% 35%, 25% 42%, 30% 47%, 35% 51%, 40% 54%, 45% 56%, 50% 57%,
-                    55% 56%, 60% 54%, 65% 51%, 70% 47%, 75% 42%, 80% 35%, 85% 25%, 90% 15%, 95% 0%,
-                    100% 100%, 0% 100%);
-            border-bottom: 5px solid #D4A63F;
-            border-left: 2px solid rgba(0, 0, 0, 0.4);
-            border-right: 2px solid rgba(212, 166, 63, 0.4);
-        }
-
-        /* Pillar Shaft Body - Vertical Lines */
-        .pillar-body {
-            background:
-                repeating-linear-gradient(90deg,
-                    transparent,
-                    transparent 8%,
-                    rgba(212, 166, 63, 0.15) 8%,
-                    rgba(212, 166, 63, 0.15) 10%,
-                    transparent 10%,
-                    transparent 18%,
-                    rgba(0, 0, 0, 0.2) 18%,
-                    rgba(0, 0, 0, 0.2) 20%),
-                linear-gradient(180deg, rgba(31, 58, 147, 0.2) 0%, rgba(10, 10, 20, 0.9) 100%);
-            border-left: 3px solid rgba(212, 166, 63, 0.3);
-            border-right: 3px solid rgba(0, 0, 0, 0.3);
-            box-shadow:
-                inset 3px 0 15px rgba(212, 166, 63, 0.2),
-                inset -3px 0 15px rgba(0, 0, 0, 0.4);
-        }
-
-        .pillar-column:hover {
+        .pillar-card:hover {
             transform: translateY(-25px) scale(1.05);
+            border-color: #D4A63F;
+            box-shadow: 0 30px 60px rgba(212, 166, 63, 0.4), 0 0 40px rgba(31, 58, 147, 0.3);
             background: linear-gradient(180deg, rgba(212, 166, 63, 0.25) 0%, rgba(31, 58, 147, 0.4) 50%, rgba(10, 10, 20, 0.95) 100%);
             z-index: 20;
         }
 
-        .pillar-column:hover::before {
-            background: linear-gradient(180deg, #f4d483 0%, #D4A63F 50%, #f4d483 100%);
-            box-shadow:
-                0 8px 30px rgba(212, 166, 63, 0.9),
-                inset 0 4px 15px rgba(255, 255, 255, 0.5),
-                inset 0 -4px 15px rgba(0, 0, 0, 0.4);
-        }
-
-        .pillar-column:hover::after {
-            background: linear-gradient(180deg, #c49636 0%, #f4d483 50%, #f4d483 100%);
-            box-shadow:
-                0 -8px 30px rgba(212, 166, 63, 0.9),
-                inset 0 -4px 15px rgba(255, 255, 255, 0.5),
-                inset 0 4px 15px rgba(0, 0, 0, 0.4),
-                0 10px 60px rgba(212, 166, 63, 0.8);
-        }
-
-        .pillar-column:hover .pillar-body {
-            background:
-                repeating-linear-gradient(90deg,
-                    transparent,
-                    transparent 8%,
-                    rgba(212, 166, 63, 0.3) 8%,
-                    rgba(212, 166, 63, 0.3) 10%,
-                    transparent 10%,
-                    transparent 18%,
-                    rgba(0, 0, 0, 0.25) 18%,
-                    rgba(0, 0, 0, 0.25) 20%),
-                linear-gradient(180deg, rgba(212, 166, 63, 0.2) 0%, rgba(31, 58, 147, 0.3) 50%, rgba(10, 10, 20, 0.9) 100%);
-            border-left-color: rgba(212, 166, 63, 0.6);
-            box-shadow:
-                inset 5px 0 20px rgba(212, 166, 63, 0.4),
-                inset -5px 0 20px rgba(0, 0, 0, 0.5);
-        }
-
-        .pillar-top {
-            padding: 4rem 2rem 2rem;
-            text-align: center;
+        .pillar-image-container {
+            width: 100%;
+            height: 250px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
             position: relative;
-            z-index: 2;
+            border: 3px solid rgba(212, 166, 63, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
         }
 
-        .pillar-icon-wrapper {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #D4A63F 0%, #f4d483 50%, #D4A63F 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow:
-                0 15px 50px rgba(212, 166, 63, 0.6),
-                inset 0 -8px 25px rgba(0, 0, 0, 0.4);
-            position: relative;
+        .pillar-card:hover .pillar-image-container {
+            border-color: #D4A63F;
+            box-shadow: 0 15px 35px rgba(212, 166, 63, 0.6);
         }
 
-        .pillar-icon-wrapper::before {
+        .pillar-image {
+            width: 100%;
+            height: 130%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .pillar-card:hover .pillar-image {
+            transform: scale(1.1);
+        }
+
+        .pillar-image-container::after {
             content: '';
             position: absolute;
-            inset: -8px;
-            border-radius: 50%;
-            background: conic-gradient(from 0deg,
-                    #D4A63F 0deg,
-                    #f4d483 60deg,
-                    #D4A63F 120deg,
-                    #f4d483 180deg,
-                    #D4A63F 240deg,
-                    #f4d483 300deg,
-                    #D4A63F 360deg);
-            opacity: 0;
-            animation: rotate 2.5s linear infinite;
-            transition: opacity 0.8s ease;
-        }
-
-        .pillar-column:hover .pillar-icon-wrapper::before {
-            opacity: 1;
-        }
-
-        @keyframes rotate {
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        .pillar-icon-wrapper::after {
-            content: '';
-            position: absolute;
-            inset: 3px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #D4A63F 0%, #f4d483 50%, #D4A63F 100%);
-        }
-
-        .pillar-column:hover .pillar-icon-wrapper {
-            transform: scale(1.2) rotate(360deg);
-            box-shadow:
-                0 20px 70px rgba(212, 166, 63, 1),
-                inset 0 -10px 35px rgba(0, 0, 0, 0.5),
-                0 0 60px rgba(212, 166, 63, 0.8);
-        }
-
-        .pillar-icon {
-            position: relative;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 50%, rgba(10, 10, 20, 0.7) 100%);
             z-index: 1;
-            filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.4));
+        }
+
+        .pillar-content {
+            text-align: center;
+            flex-grow: 1;
             display: flex;
-            align-items: center;
-            justify-content: center;
+            flex-direction: column;
+            justify-content: flex-start;
         }
 
-        .pillar-icon svg {
-            width: 45px;
-            height: 45px;
-        }
-
-        .pillar-column h3 {
+        .pillar-card h3 {
             font-family: 'Playfair Display', serif;
             font-size: 1.6rem;
             background: linear-gradient(135deg, #D4A63F 0%, #f4d483 50%, #ffffff 75%, #f4d483 100%);
@@ -1275,7 +1144,6 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 0.8rem;
-            text-align: center;
             font-weight: 800;
             position: relative;
             z-index: 1;
@@ -1285,28 +1153,18 @@
         .pillar-tagline {
             color: #f0f0f0;
             font-size: 0.95rem;
-            margin-bottom: 0;
+            margin-bottom: 1.5rem;
             font-weight: 600;
-            text-align: center;
             line-height: 1.5;
             position: relative;
             z-index: 1;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
-        .pillar-body {
-            padding: 0 2rem 3rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-            z-index: 2;
-        }
-
         .pillar-benefits {
             list-style: none;
             text-align: left;
+            margin-top: auto;
         }
 
         .pillar-benefits li {
@@ -1319,7 +1177,7 @@
             transition: all 0.4s ease;
         }
 
-        .pillar-column:hover .pillar-benefits li {
+        .pillar-card:hover .pillar-benefits li {
             color: #ffffff;
             transform: translateX(8px);
         }
@@ -1381,12 +1239,22 @@
             font-weight: 500;
         }
 
+        /* Material Section */
+        .material-section {
+            background:
+                radial-gradient(circle at 80% 20%, rgba(212, 166, 63, 0.1) 0%, transparent 50%),
+                linear-gradient(180deg, #0a0a14 0%, #12121e 100%);
+            padding: 4rem 5% 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
         /* Journey Section */
         .journey-section {
             background:
                 radial-gradient(circle at 80% 20%, rgba(212, 166, 63, 0.1) 0%, transparent 50%),
                 linear-gradient(180deg, #0a0a14 0%, #12121e 100%);
-            padding: 8rem 5% 10rem;
+            padding: 4rem 5% 5rem;
             position: relative;
             overflow: hidden;
         }
@@ -1512,9 +1380,9 @@
         }
 
         .step-circle {
-            width: 80px;
-            height: 80px;
-            min-width: 80px;
+            width: 75px;
+            height: 75px;
+            min-width: 75px;
             border-radius: 50%;
             background: linear-gradient(135deg, #1F3A93 0%, #2a4fc9 100%);
             border: 4px solid #D4A63F;
@@ -1539,7 +1407,7 @@
 
         .step-content-box {
             background: linear-gradient(135deg, rgba(31, 58, 147, 0.2) 0%, rgba(10, 10, 20, 0.9) 100%);
-            padding: 1.5rem;
+            padding: 1rem;
             border-radius: 25px;
             border: 2px solid rgba(212, 166, 63, 0.3);
             transition: all 0.6s ease;
@@ -1587,12 +1455,12 @@
         }
 
         .journey-step:nth-child(odd) .step-content-box::after {
-            right: -3rem;
+            right: -1rem;
             background: linear-gradient(90deg, transparent, #D4A63F);
         }
 
         .journey-step:nth-child(even) .step-content-box::after {
-            left: -3rem;
+            left: -2rem;
             background: linear-gradient(90deg, #D4A63F, transparent);
         }
 
@@ -2097,6 +1965,11 @@
             .hero h1 {
                 font-size: 4rem;
             }
+
+            .pillars-row {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+            }
         }
 
         @media (max-width: 968px) {
@@ -2156,6 +2029,7 @@
                 margin-top: 0.8rem;
                 display: none;
                 box-shadow: none;
+                animation: none;
             }
 
             .dropdown.active .dropdown-content {
@@ -2204,11 +2078,6 @@
                 font-size: 2.5rem;
             }
 
-            .journey-road,
-            .journey-steps {
-                min-width: 800px;
-            }
-
             .journey-vertical-line {
                 left: 2rem;
             }
@@ -2239,8 +2108,8 @@
                 gap: 1.5rem;
             }
 
-            .pillar-column {
-                min-height: 450px;
+            .pillar-card {
+                min-height: 500px;
             }
 
             .metrics-row {
@@ -2250,6 +2119,25 @@
             .footer-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .pillars-row {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .pillar-card {
+                min-height: 450px;
+            }
+
+            .pillar-image-container {
+                height: 200px;
+            }
+
+            .pillar-card h3 {
+                font-size: 1.4rem;
             }
         }
 
@@ -2267,7 +2155,7 @@
             }
 
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 1.8rem;
             }
 
             .hero-subheadline {
@@ -2281,20 +2169,6 @@
             .btn {
                 padding: 1rem 2rem;
                 font-size: 0.95rem;
-            }
-
-            .esg-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .esg-image-container {
-                height: 200px;
-            }
-
-            .esg-stats {
-                flex-direction: column;
-                gap: 1rem;
             }
 
             .gallery-grid {
@@ -2360,22 +2234,16 @@
                 gap: 1.5rem;
             }
 
-            .pillar-column {
+            .pillar-card {
                 min-height: auto;
             }
 
-            .pillar-icon-wrapper {
-                width: 80px;
-                height: 80px;
+            .pillar-image-container {
+                height: 180px;
             }
 
-            .pillar-icon svg {
-                width: 40px;
-                height: 40px;
-            }
-
-            .pillar-column h3 {
-                font-size: 1.4rem;
+            .pillar-card h3 {
+                font-size: 1.3rem;
             }
 
             .pillar-tagline {
@@ -2389,7 +2257,6 @@
 
             .testimonials-carousel-container {
                 overflow: hidden;
-                /* Hide extra cards */
                 width: 100%;
             }
 
@@ -2400,7 +2267,6 @@
 
             .testimonial-card {
                 flex: 0 0 calc(100% / 3);
-                /* 3 cards in one row */
                 padding: 1.2rem;
                 box-sizing: border-box;
             }
@@ -2483,36 +2349,46 @@
 <body>
     <header id="header">
         <div class="logo-container" onclick="window.location.href='https://roofandrealms.rightbraininfotech.in/'">
-            <img src="image/logo.png" alt="Logo" style="width: 100px; height: 70px;">
+            <img src="image/logo.png" alt="Logo" style="width: 120px; height: 70px;">
         </div>
         <nav id="mainNav"><a href="https://roofandrealms.rightbraininfotech.in/">HOME</a>
             <div class="dropdown" id="productsDropdown"><span class="nav-item">PRODUCTS ▾</span>
                 <div class="dropdown-content">
-                    <a href="./commercial.html" class="dropdown-item"> <span
-                            class="dropdown-item-title">🏢 COMMERCIAL</span> 
-                            </a> <a href="./residential.html" class="dropdown-item"> <span class="dropdown-item-title">🏠
-                            RESIDENTIAL</span>  </a> 
-                            <a href="./hospitality.html" class="dropdown-item"> <span class="dropdown-item-title">🏨
-                            HOSPITALITY</span>  </a> 
-                            <a href="./institutional.html"
-                        class="dropdown-item"> <span class="dropdown-item-title">🎓 INSTITUTIONAL</span> </a> 
-                        <a href="./public-facilities.html"
-                        class="dropdown-item">
+                    <a href="./commercial.html" class="dropdown-item"> <span class="dropdown-item-title">🏢
+                            COMMERCIAL</span>
+                    </a>
+                    <a href="./hospitality.html" class="dropdown-item"> <span class="dropdown-item-title">🏨
+                            HOSPITALITY</span> </a>
+                    <a href="./residential.html" class="dropdown-item"> <span class="dropdown-item-title">🏠
+                            RESIDENTIAL</span> </a>
+                    <a href="./institutional.html" class="dropdown-item"> <span class="dropdown-item-title">🎓
+                            INSTITUTIONAL</span> </a>
+                    <a href="./public-facilities.html" class="dropdown-item">
                         <span class="dropdown-item-title">🏛 PUBLIC FACILITIES</span> </a>
                 </div>
-            </div><a href="./materials.html">MATERIALS</a> 
-            <a href="./about-us.html">ABOUT US</a> 
+            </div><a href="./materials.html">MATERIALS</a>
+            <a href="./about-us.html">ABOUT US</a>
             <a href="./contact.html">CONTACT</a>
         </nav><button class="btn btn-primary" id="scheduleMeetingBtn">Schedule Call</button>
     </header>
     <main style="width: 100%; overflow-x: hidden;"><!-- Enhanced Hero Section -->
-        <section class="hero" id="home"><!-- Background Slider -->
+        <section class="hero" id="home">
             <div class="hero-background">
                 <div class="hero-bg-slide active">
                     <video src="image/freepik.mp4" autoplay muted loop playsinline class="hero-video"
-                        onerror="this.style.display='none';">
-                    </video>
+                        onerror="this.style.display='none';"></video>
                 </div>
+            </div>
+            <div class="hero-content">
+                <h1>Build What Others Promise.</h1>
+                <p class="hero-subtitle">
+                    Roof & Realms specialises in Light Gauge Steel Frame (LGSF) modular construction transforming how
+                    India builds commercial and residential infrastructure. Our structures combine factory-controlled
+                    quality with revolutionary speed, delivering projects while traditional construction is still
+                    breaking ground.
+
+                </p>
+
             </div>
         </section><!-- Who We Serve Section -->
         <section class="who-we-serve" id="who-we-serve">
@@ -2536,63 +2412,10 @@
                     </ul><a href="./commercial.html" class="serve-link">View
                         Solutions</a>
                 </div>
-            </div><!-- Residential -->
+            </div>
+            <!-- Hospitality -->
             <div class="serve-row">
-                <div class="serve-content">
-                    <h3>Residential</h3>
-                    <p class="serve-subtitle">From luxury villas to sustainable housing communities, we deliver homes
-                        that combine precision engineering with personalized comfort and style.</p>
-                    <ul class="serve-benefits">
-                        <li>Customizable luxury designs</li>
-                        <li>Eco-friendly and energy-efficient</li>
-                        <li>Premium finishes with faster move-in dates</li>
-                        <li>Smart home integration ready</li>
-                    </ul><a href="./residential.html" class="serve-link">View
-                        Solutions</a>
-                </div>
-                <div class="serve-image-container"><img src="image/Residential-home.jpg" alt="Luxury residential villa"
-                        class="serve-image" onerror="this.src=''; this.alt='Image failed to load';">
-                </div>
-            </div><!-- Institutional -->
-            <div class="serve-row">
-                <div class="serve-image-container"><img src="image/Institutional2.jpg"
-                        alt="Modern educational institution" class="serve-image"
-                        onerror="this.src=''; this.alt='Image failed to load';">
-                </div>
-                <div class="serve-content">
-                    <h3>Institutional</h3>
-                    <p class="serve-subtitle">Schools, universities, and research centers with world-class
-                        infrastructure designed for safety, functionality, and inspiring learning environments.</p>
-                    <ul class="serve-benefits">
-                        <li>Safe and spacious learning environments</li>
-                        <li>Minimal disruption during construction</li>
-                        <li>Modern facilities with future-proof design</li>
-                        <li>Compliance with education standards</li>
-                    </ul><a href="./institutional.html" class="serve-link">View
-                        Solutions</a>
-                </div>
-            </div><!-- Public Facilities -->
-            <div class="serve-row">
-                <div class="serve-content">
-                    <h3>Public Facilities</h3>
-                    <p class="serve-subtitle">Government buildings, community centers, and civic infrastructure built
-                        with durability, accessibility, and public service excellence in mind.</p>
-                    <ul class="serve-benefits">
-                        <li>Durable and long-lasting construction</li>
-                        <li>Accessible design for all communities</li>
-                        <li>Cost-efficient public investment</li>
-                        <li>Rapid deployment for urgent needs</li>
-                    </ul><a href="./public-facilities.html" class="serve-link">View
-                        Solutions</a>
-                </div>
-                <div class="serve-image-container"><img src="image/shoppingmall.png" alt="Public community center"
-                        class="serve-image" onerror="this.src=''; this.alt='Image failed to load';">
-                </div>
-            </div><!-- Hospitality -->
-            <div class="serve-row">
-                <div class="serve-image-container"><img src="image/hospital.jpg" alt="Luxury hotel resort"
-                        class="serve-image" onerror="this.src=''; this.alt='Image failed to load';">
-                </div>
+
                 <div class="serve-content">
                     <h3>Hospitality</h3>
                     <p class="serve-subtitle">Hotels, resorts, and restaurants designed for luxury, comfort, and
@@ -2605,7 +2428,66 @@
                     </ul><a href="./hospitality.html" class="serve-link">View
                         Solutions</a>
                 </div>
-            </div><!-- Interiors -->
+                <div class="serve-image-container"><img src="image/hospital.jpg" alt="Luxury hotel resort"
+                        class="serve-image" onerror="this.src=''; this.alt='Image failed to load';">
+                </div>
+            </div><!--
+            <!-- Residential -->
+            <div class="serve-row">
+                <div class="serve-image-container"><img src="image/Residential-home.jpg" alt="Luxury residential villa"
+                        class="serve-image" onerror="this.src=''; this.alt='Image failed to load';">
+                </div>
+                <div class="serve-content">
+                    <h3>Residential</h3>
+                    <p class="serve-subtitle">From luxury villas to sustainable housing communities, we deliver homes
+                        that combine precision engineering with personalized comfort and style.</p>
+                    <ul class="serve-benefits">
+                        <li>Customizable luxury designs</li>
+                        <li>Eco-friendly and energy-efficient</li>
+                        <li>Premium finishes with faster move-in dates</li>
+                        <li>Smart home integration ready</li>
+                    </ul><a href="./residential.html" class="serve-link">View
+                        Solutions</a>
+                </div>
+
+            </div><!-- Institutional -->
+            <div class="serve-row">
+
+                <div class="serve-content">
+                    <h3>Institutional</h3>
+                    <p class="serve-subtitle">Schools, universities, and research centers with world-class
+                        infrastructure designed for safety, functionality, and inspiring learning environments.</p>
+                    <ul class="serve-benefits">
+                        <li>Safe and spacious learning environments</li>
+                        <li>Minimal disruption during construction</li>
+                        <li>Modern facilities with future-proof design</li>
+                        <li>Compliance with education standards</li>
+                    </ul><a href="./institutional.html" class="serve-link">View
+                        Solutions</a>
+                </div>
+                <div class="serve-image-container"><img src="image/Institutional2.jpg"
+                        alt="Modern educational institution" class="serve-image"
+                        onerror="this.src=''; this.alt='Image failed to load';">
+                </div>
+            </div><!-- Public Facilities -->
+            <div class="serve-row">
+                <div class="serve-image-container"><img src="image/shoppingmall.png" alt="Public community center"
+                        class="serve-image" onerror="this.src=''; this.alt='Image failed to load';">
+                </div>
+                <div class="serve-content">
+                    <h3>Public Facilities</h3>
+                    <p class="serve-subtitle">Government buildings, community centers, and civic infrastructure built
+                        with durability, accessibility, and public service excellence in mind.</p>
+                    <ul class="serve-benefits">
+                        <li>Durable and long-lasting construction</li>
+                        <li>Accessible design for all communities</li>
+                        <li>Cost-efficient public investment</li>
+                        <li>Rapid deployment for urgent needs</li>
+                    </ul><a href="./public-facilities.html" class="serve-link">View
+                        Solutions</a>
+                </div>
+
+            </div> <!-- Interiors -->
             <div class="serve-row">
                 <div class="serve-content">
                     <h3>Interiors</h3>
@@ -2629,174 +2511,28 @@
             <h2 class="section-title" id="why-title">Why Roof &amp; Realms</h2>
             <div class="gold-divider"></div>
             <p class="section-subtitle">We don't just construct — we engineer certainty.</p>
-            <div class="pillars-container">
-                <div class="pillars-row"><!-- Pillar 1: Speed -->
-                    <div class="pillar-column">
-                        <div class="pillar-top">
-                            <div class="pillar-icon-wrapper">
-                                <div class="pillar-icon">
-                                    <svg width="45" height="45" viewbox="0 0 24 24" fill="none" stroke="#0a0a1a"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <circle cx="12" cy="12" r="10" />
-                                        <polyline points="12 6 12 12 16 14"></polyline>
-                                    </svg>
-                                </div>
-                            </div>
-                            <h3>Speed</h3>
-                            <p class="pillar-tagline">Projects Completed 30–60% Faster</p>
-                        </div>
-                        <div class="pillar-body">
-                            <ul class="pillar-benefits">
-                                <li>Parallel factory + site workflows</li>
-                                <li>Weather-independent production</li>
-                                <li>Phased delivery for early revenue</li>
-                            </ul>
-                        </div>
-                    </div><!-- Pillar 2: Quality -->
-                    <div class="pillar-column">
-                        <div class="pillar-top">
-                            <div class="pillar-icon-wrapper">
-                                <div class="pillar-icon">
-                                    <svg width="45" height="45" viewbox="0 0 24 24" fill="none" stroke="#0a0a1a"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path
-                                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <h3>Quality</h3>
-                            <p class="pillar-tagline">Factory-Controlled Precision</p>
-                        </div>
-                        <div class="pillar-body">
-                            <ul class="pillar-benefits">
-                                <li>CNC fabrication, multi-stage QC</li>
-                                <li>Documented material certificates</li>
-                                <li>As-built drawings, not site guesswork</li>
-                            </ul>
-                        </div>
-                    </div><!-- Pillar 3: Predictability -->
-                    <div class="pillar-column">
-                        <div class="pillar-top">
-                            <div class="pillar-icon-wrapper">
-                                <div class="pillar-icon">
-                                    <svg width="45" height="45" viewbox="0 0 24 24" fill="none" stroke="#0a0a1a"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <line x1="12" y1="1" x2="12" y2="23"></line>
-                                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <h3>Predictability</h3>
-                            <p class="pillar-tagline">Fixed Costs, Clear Timelines</p>
-                        </div>
-                        <div class="pillar-body">
-                            <ul class="pillar-benefits">
-                                <li>Fixed-price modular packages</li>
-                                <li>Milestone-based timelines</li>
-                                <li>Transparent, documented processes</li>
-                            </ul>
-                        </div>
-                    </div><!-- Pillar 4: Engineering -->
-                    <div class="pillar-column">
-                        <div class="pillar-top">
-                            <div class="pillar-icon-wrapper">
-                                <div class="pillar-icon">
-                                    <svg width="45" height="45" viewbox="0 0 24 24" fill="none" stroke="#0a0a1a"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <circle cx="12" cy="12" r="3" />
-                                        <path
-                                            d="M12 1v6m0 6v6m5.657-13.657l-4.243 4.243m-3.536 3.536l-4.243 4.242m13.656-.001l-4.242-4.243m-3.536-3.536L1.344 5.657" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <h3>Engineering</h3>
-                            <p class="pillar-tagline">Codified, BIS &amp; NBC Aligned</p>
-                        </div>
-                        <div class="pillar-body">
-                            <ul class="pillar-benefits">
-                                <li>LGSF systems aligned with IS 15916, IS 6820</li>
-                                <li>Seismic &amp; wind design for your zone</li>
-                                <li>ISO-style frameworks for quality &amp; safety</li>
-                            </ul>
-                        </div>
-                    </div><!-- Pillar 5: Accountability -->
-                    <div class="pillar-column">
-                        <div class="pillar-top">
-                            <div class="pillar-icon-wrapper">
-                                <div class="pillar-icon">
-                                    <svg width="45" height="45" viewbox="0 0 24 24" fill="none" stroke="#0a0a1a"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M9 11l3 3L22 4" />
-                                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <h3>Accountability</h3>
-                            <p class="pillar-tagline">One Partner, End-to-End</p>
-                        </div>
-                        <div class="pillar-body">
-                            <ul class="pillar-benefits">
-                                <li>One contract, one partner</li>
-                                <li>Design to commissioning in-house</li>
-                                <li>No vendor finger-pointing</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+            <div class="pillars-row">
+
+                <img src="image/pillars/pillar.png" alt="Speed Pillar" class="pillar-image"
+                    onerror="this.src='image/placeholder.png'; this.alt='Speed Pillar';">
+                <img src="image/pillars/pillar 2.png" alt="Quality Pillar" class="pillar-image"
+                    onerror="this.src='image/placeholder.png'; this.alt='Quality Pillar';">
+                <img src="image/pillars/pillar 3.png" alt="Predictability Pillar" class="pillar-image"
+                    onerror="this.src='image/placeholder.png'; this.alt='Predictability Pillar';">
+                <img src="image/pillars/pillar 4.png" alt="Engineering Pillar" class="pillar-image"
+                    onerror="this.src='image/placeholder.png'; this.alt='Engineering Pillar';">
+                <img src="image/pillars/pillar 5.png" alt="Sustainability Pillar" class="pillar-image"
+                    onerror="this.src='image/placeholder.png'; this.alt='Sustainability Pillar';">
             </div><!-- Metrics Badge Row -->
-            <div class="metrics-row">
-                <div class="metric-badge">
-                    <div class="metric-icon">
-                        ⚡
-                    </div>
-                    <div class="metric-value">
-                        30–60%
-                    </div>
-                    <div class="metric-label">
-                        Faster
-                    </div>
-                </div>
-                <div class="metric-badge">
-                    <div class="metric-icon">
-                        ♻️
-                    </div>
-                    <div class="metric-value">
-                        60–80%
-                    </div>
-                    <div class="metric-label">
-                        Less Waste
-                    </div>
-                </div>
-                <div class="metric-badge">
-                    <div class="metric-icon">
-                        ⚡
-                    </div>
-                    <div class="metric-value">
-                        15–35%
-                    </div>
-                    <div class="metric-label">
-                        Lower Lifecycle Energy
-                    </div>
-                </div>
-                <div class="metric-badge">
-                    <div class="metric-icon">
-                        🛡️
-                    </div>
-                    <div class="metric-value">
-                        12-Month
-                    </div>
-                    <div class="metric-label">
-                        Defects Liability
-                    </div>
-                </div>
-            </div>
+
         </section><!-- Material Section -->
         <section class="material-section" id="material">
             <h2 class="section-title" id="material-title">Materials &amp; Technology</h2>
             <div class="gold-divider"></div>
             <p class="section-subtitle">Premium components engineered for performance and longevity</p>
-            <div style="display: flex; justify-content: center; align-items: center;"> 
-            <img src="image/material.jpeg" style="object-fit: cover; width: 110vh; height: 85vh;" class="material-image" alt="Modern interior design">
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <img src="image/material.jpeg" style="object-fit: cover; width: 110vh; height: 85vh;"
+                    class="material-image" alt="Modern interior design">
             </div>
         </section><!-- Journey Section -->
         <section class="journey-section" id="journey">
@@ -3385,7 +3121,12 @@
         } */
 
         // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenuBtn = document.createElement('div');
+        mobileMenuBtn.id = 'mobileMenuBtn';
+        mobileMenuBtn.className = 'mobile-menu-btn';
+        mobileMenuBtn.innerHTML = '<span></span><span></span><span></span>';
+        document.getElementById('header').appendChild(mobileMenuBtn);
+
         const mainNav = document.getElementById('mainNav');
         const productsDropdown = document.getElementById('productsDropdown');
 
@@ -3394,12 +3135,49 @@
             mainNav.classList.toggle('active');
         });
 
-        // Mobile dropdown toggle
+        // Fixed: Enhanced dropdown functionality
+        let dropdownTimeout;
+        const dropdown = document.querySelector('.dropdown');
+        const dropdownContent = document.querySelector('.dropdown-content');
+
+        // Desktop: Show on hover, hide with delay
+        if (window.innerWidth > 968) {
+            dropdown.addEventListener('mouseenter', () => {
+                clearTimeout(dropdownTimeout);
+                dropdownContent.style.display = 'flex';
+            });
+
+            dropdown.addEventListener('mouseleave', () => {
+                dropdownTimeout = setTimeout(() => {
+                    dropdownContent.style.display = 'none';
+                }, 300);
+            });
+
+            dropdownContent.addEventListener('mouseenter', () => {
+                clearTimeout(dropdownTimeout);
+            });
+
+            dropdownContent.addEventListener('mouseleave', () => {
+                dropdownTimeout = setTimeout(() => {
+                    dropdownContent.style.display = 'none';
+                }, 300);
+            });
+        }
+
+        // Mobile: Toggle on click
         if (window.innerWidth <= 968) {
             const navItem = productsDropdown.querySelector('.nav-item');
             navItem.addEventListener('click', (e) => {
                 e.preventDefault();
+                e.stopPropagation();
                 productsDropdown.classList.toggle('active');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!productsDropdown.contains(e.target)) {
+                    productsDropdown.classList.remove('active');
+                }
             });
         }
 
@@ -3419,13 +3197,20 @@
         const totalBgSlides = bgSlides.length;
         const heroBgNav = document.getElementById('heroBgNav');
 
-        // Create navigation dots
-        for (let i = 0; i < totalBgSlides; i++) {
-            const dot = document.createElement('div');
-            dot.classList.add('hero-bg-dot');
-            if (i === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => goToBgSlide(i));
-            heroBgNav.appendChild(dot);
+        // Create navigation dots if not exists
+        if (!heroBgNav) {
+            const navContainer = document.createElement('div');
+            navContainer.className = 'hero-bg-nav';
+            navContainer.id = 'heroBgNav';
+            document.querySelector('.hero').appendChild(navContainer);
+
+            for (let i = 0; i < totalBgSlides; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('hero-bg-dot');
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToBgSlide(i));
+                navContainer.appendChild(dot);
+            }
         }
 
         const bgDots = document.querySelectorAll('.hero-bg-dot');
