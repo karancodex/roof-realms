@@ -1,0 +1,2625 @@
+<!doctype html>
+<html lang="en" class="h-full">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Facilities - Roof &amp; Realms</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sora:wght@100..800&display=swap"
+        rel="stylesheet">
+    <script src="/_sdk/element_sdk.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&amp;family=Playfair+Display:wght@400;700&amp;display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #0A1A2F;
+            color: #f5f5f5;
+            overflow-x: hidden;
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+        }
+
+        /* Premium Header Styles - Same as index.html */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 20, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 166, 63, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 0.8rem 5%;
+            background: rgba(10, 10, 20, 0.98);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            border-bottom: 1px solid rgba(212, 166, 63, 0.4);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container:hover {
+            transform: scale(1.02);
+        }
+
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #D4A63F 0%, #f4d483 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.5px;
+        }
+
+        nav {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        nav>a,
+        .nav-item {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+            padding: 0.5rem 0;
+        }
+
+        nav>a:hover,
+        .nav-item:hover {
+            color: #D4A63F;
+        }
+
+        nav>a::after,
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #D4A63F, #f4d483);
+            transition: width 0.4s ease;
+        }
+
+        nav>a:hover::after,
+        .nav-item:hover::after {
+            width: 100%;
+        }
+
+        /* Mega Menu Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: calc(100% + 1rem);
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(180deg, rgba(15, 15, 30, 0.98) 0%, rgba(10, 10, 20, 0.98) 100%);
+            backdrop-filter: blur(20px);
+            min-width: 280px;
+            padding: 1rem;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 166, 63, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(31, 58, 147, 0.3);
+            flex-direction: column;
+            gap: 0;
+            opacity: 0;
+            animation: fadeInDown 0.4s ease forwards;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: flex;
+        }
+
+        .dropdown-item {
+            padding: 1rem 1.5rem;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.4s ease;
+            border: 1px solid transparent;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(31, 58, 147, 0.25);
+            border-color: #D4A63F;
+            transform: translateX(8px);
+            box-shadow: 0 5px 20px rgba(212, 166, 63, 0.2);
+        }
+
+        .dropdown-item-title {
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: #D4A63F;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .dropdown-item-desc {
+            font-size: 0.85rem;
+            color: #b0b0b0;
+            line-height: 1.4;
+        }
+
+        .header-cta {
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #D4A63F 0%, #f4d483 100%);
+            color: #0a0a1a;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 5px 20px rgba(212, 166, 63, 0.3);
+            letter-spacing: 0.5px;
+        }
+
+        .header-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 35px rgba(212, 166, 63, 0.5);
+            background: linear-gradient(135deg, #f4d483 0%, #D4A63F 100%);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .mobile-menu-btn span {
+            width: 28px;
+            height: 3px;
+            background: #D4A63F;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        .heading-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Sticky Header - Original */
+        .original-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(10, 26, 47, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 166, 63, 0.2);
+        }
+
+        /* Navigation Hover Effects */
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #D4A63F;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            color: #D4A63F;
+        }
+
+        /* Hero Section with Blueprint Overlay */
+        .hero {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-bg-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-bg-slide video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-bg-slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.5;
+            background: black;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            text-align: center;
+            padding: 0.2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #D4A63F 50%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+
+        .blueprint-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(212, 166, 63, 0.1) 39px, rgba(212, 166, 63, 0.1) 40px),
+                repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(212, 166, 63, 0.1) 39px, rgba(212, 166, 63, 0.1) 40px);
+            opacity: 0.3;
+            animation: blueprintScroll 40s linear infinite;
+        }
+
+        @keyframes blueprintScroll {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(40px, 40px);
+            }
+        }
+
+        .gold-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(212, 166, 63, 0.15) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.5;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            50% {
+                opacity: 0.8;
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+        }
+
+        /* Animated Counters */
+        .counter-badge {
+            background: rgba(212, 166, 63, 0.1);
+            border: 1px solid #D4A63F;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #D4A63F;
+            white-space: nowrap;
+            animation: slideInRight 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        .counter-badge:nth-child(1) {
+            animation-delay: 0.3s;
+        }
+
+        .counter-badge:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .counter-badge:nth-child(3) {
+            animation-delay: 0.7s;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* CTA Buttons */
+        .cta-primary {
+            background: #D4A63F;
+            color: #0A1A2F;
+            padding: 16px 32px;
+            font-weight: 700;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            border: 2px solid #D4A63F;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-primary:hover {
+            background: transparent;
+            color: #D4A63F;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(212, 166, 63, 0.3);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: #D4A63F;
+            padding: 16px 32px;
+            font-weight: 700;
+            border-radius: 4px;
+            border: 2px solid #D4A63F;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-secondary:hover {
+            background: #D4A63F;
+            color: #0A1A2F;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(212, 166, 63, 0.3);
+        }
+
+        /* Small CTA Buttons */
+        .cta-small {
+            background: transparent;
+            color: #D4A63F;
+            padding: 10px 24px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            border: 2px solid #D4A63F;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-block;
+        }
+
+        .cta-small:hover {
+            background: #D4A63F;
+            color: #0A1A2F;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(212, 166, 63, 0.3);
+        }
+
+        /* Gold Divider */
+        .gold-divider {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #D4A63F, transparent);
+            margin: 40px auto;
+        }
+
+        /* Icon Cards */
+        .icon-card {
+            background: rgba(31, 58, 147, 0.2);
+            border: 1px solid rgba(212, 166, 63, 0.3);
+            padding: 32px 24px;
+            border-radius: 8px;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .icon-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .icon-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .icon-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .icon-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .icon-card:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .icon-card:nth-child(6) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .icon-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(212, 166, 63, 0.2);
+            border-color: #D4A63F;
+            background: rgba(31, 58, 147, 0.4);
+        }
+
+        .icon-wrapper {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, rgba(212, 166, 63, 0.2), rgba(212, 166, 63, 0.05));
+            border: 2px solid #D4A63F;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            transition: all 0.3s ease;
+        }
+
+        .icon-card:hover .icon-wrapper {
+            transform: rotateY(360deg);
+            background: linear-gradient(135deg, rgba(212, 166, 63, 0.4), rgba(212, 166, 63, 0.1));
+        }
+
+        /* Steel Frame Overlay */
+        .steel-frame {
+            position: relative;
+        }
+
+        .steel-frame::before,
+        .steel-frame::after {
+            content: '';
+            position: absolute;
+            background: rgba(212, 166, 63, 0.4);
+        }
+
+        .steel-frame::before {
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+        }
+
+        .steel-frame::after {
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+        }
+
+        /* Section Backgrounds */
+        .section-dark {
+            background: #0A1A2F;
+        }
+
+        .section-mid {
+            background: linear-gradient(180deg, #0A1A2F 0%, #1F3A93 50%, #0A1A2F 100%);
+        }
+
+        /* Facility Row - Alternating */
+        .facility-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        .facility-row.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .facility-row.reverse {
+            direction: rtl;
+        }
+
+        .facility-row.reverse>* {
+            direction: ltr;
+        }
+
+        .facility-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 2px solid rgba(212, 166, 63, 0.3);
+            background: rgba(31, 58, 147, 0.2);
+            aspect-ratio: 4/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s ease;
+        }
+
+        .facility-image:hover {
+            border-color: #D4A63F;
+            transform: scale(1.02);
+            box-shadow: 0 12px 40px rgba(212, 166, 63, 0.3);
+        }
+
+        .facility-image svg {
+            opacity: 0.7;
+            transition: all 0.4s ease;
+        }
+
+        .facility-image:hover svg {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        .facility-content h3 {
+            font-size: 2rem;
+            color: #D4A63F;
+            margin-bottom: 16px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .facility-content .benefits-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .facility-content .benefits-list li {
+            padding-left: 28px;
+            position: relative;
+            margin-bottom: 12px;
+            color: #e5e5e5;
+            line-height: 1.6;
+        }
+
+        .facility-content .benefits-list li::before {
+            content: '▸';
+            color: #D4A63F;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .micro-icon {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-right: 16px;
+            font-size: 0.8rem;
+            color: #D4A63F;
+            opacity: 0.8;
+        }
+
+        /* Procurement Cards */
+        .procurement-card {
+            background: rgba(31, 58, 147, 0.2);
+            border: 1px solid rgba(212, 166, 63, 0.3);
+            padding: 32px;
+            border-radius: 8px;
+            transition: all 0.4s ease;
+        }
+
+        .procurement-card:hover {
+            border-color: #D4A63F;
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(212, 166, 63, 0.2);
+        }
+
+        .procurement-card h4 {
+            color: #D4A63F;
+            font-weight: 700;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+
+        /* Blueprint Tech Cards */
+        .blueprint-card {
+            background: linear-gradient(135deg, rgba(31, 58, 147, 0.3), rgba(10, 26, 47, 0.8));
+            border: 1px solid rgba(212, 166, 63, 0.3);
+            padding: 32px;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .blueprint-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                repeating-linear-gradient(0deg, transparent, transparent 19px, rgba(212, 166, 63, 0.05) 19px, rgba(212, 166, 63, 0.05) 20px),
+                repeating-linear-gradient(90deg, transparent, transparent 19px, rgba(212, 166, 63, 0.05) 19px, rgba(212, 166, 63, 0.05) 20px);
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        .blueprint-card>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .blueprint-card:hover {
+            transform: rotateY(5deg) rotateX(2deg);
+            border-color: #D4A63F;
+            box-shadow: 0 15px 40px rgba(212, 166, 63, 0.3);
+        }
+
+        .blueprint-card h4 {
+            color: #D4A63F;
+            font-weight: 700;
+            margin-bottom: 16px;
+            font-size: 1.2rem;
+        }
+
+        .blueprint-card ul {
+            list-style: none;
+        }
+
+        .blueprint-card ul li {
+            padding-left: 24px;
+            position: relative;
+            margin-bottom: 10px;
+            color: #e5e5e5;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .blueprint-card ul li::before {
+            content: '●';
+            color: #D4A63F;
+            position: absolute;
+            left: 0;
+            font-size: 0.8em;
+        }
+
+        /* Performance Badges */
+        .performance-badge {
+            background: rgba(10, 26, 47, 0.6);
+            border: 2px solid #D4A63F;
+            padding: 24px 32px;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.4s ease;
+            opacity: 0;
+            animation: slideInLeft 0.8s ease forwards;
+        }
+
+        .performance-badge:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .performance-badge:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .performance-badge:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        .performance-badge:nth-child(4) {
+            animation-delay: 0.8s;
+        }
+
+        .performance-badge:nth-child(5) {
+            animation-delay: 1s;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .performance-badge:hover {
+            background: rgba(212, 166, 63, 0.1);
+            transform: translateY(-4px);
+            box-shadow: 0 0 30px rgba(212, 166, 63, 0.4);
+        }
+
+        .performance-badge .badge-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #D4A63F;
+            display: block;
+            margin-bottom: 8px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .performance-badge .badge-label {
+            font-size: 0.85rem;
+            color: #e5e5e5;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Download Link */
+        .download-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #D4A63F;
+            color: #0A1A2F;
+            padding: 16px 32px;
+            font-weight: 700;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+        }
+
+        .download-link:hover {
+            background: transparent;
+            color: #D4A63F;
+            border: 2px solid #D4A63F;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(212, 166, 63, 0.3);
+        }
+
+        /* Timeline Styles */
+        .timeline-step {
+            position: relative;
+        }
+
+        .timeline-number {
+            display: inline-block;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: rgba(212, 166, 63, 0.3);
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 8px;
+        }
+
+        .timeline-dot {
+            width: 20px;
+            height: 20px;
+            background: #D4A63F;
+            border: 4px solid #0A1A2F;
+            border-radius: 50%;
+            position: relative;
+            z-index: 10;
+            flex-shrink: 0;
+        }
+
+        /* Case Study Cards */
+        .case-study-card {
+            background: rgba(31, 58, 147, 0.2);
+            border: 1px solid rgba(212, 166, 63, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .case-study-card:hover {
+            transform: translateY(-8px);
+            border-color: #D4A63F;
+            box-shadow: 0 12px 30px rgba(212, 166, 63, 0.3);
+        }
+
+        .case-study-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            border-bottom: 2px solid rgba(212, 166, 63, 0.3);
+        }
+
+        .case-study-content {
+            padding: 24px;
+        }
+
+        .case-study-content h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .case-study-result {
+            font-size: 0.9rem;
+            color: #D4A63F;
+            font-weight: 600;
+            margin-bottom: 16px;
+            padding: 8px 12px;
+            background: rgba(212, 166, 63, 0.1);
+            border-radius: 4px;
+        }
+
+        .case-study-bullets {
+            list-style: none;
+            margin: 16px 0;
+        }
+
+        .case-study-bullets li {
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 8px;
+            color: #e5e5e5;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .case-study-bullets li::before {
+            content: '▸';
+            color: #D4A63F;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .read-more-link {
+            display: inline-block;
+            color: #D4A63F;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-top: 12px;
+        }
+
+        .read-more-link:hover {
+            transform: translateX(4px);
+        }
+
+        /* Maintenance Cards */
+        .maintenance-card {
+            background: rgba(31, 58, 147, 0.2);
+            border: 1px solid rgba(212, 166, 63, 0.3);
+            padding: 32px 24px;
+            border-radius: 8px;
+            transition: all 0.4s ease;
+            text-align: center;
+        }
+
+        .maintenance-card:hover {
+            transform: translateY(-6px);
+            border-color: #D4A63F;
+            box-shadow: 0 12px 30px rgba(212, 166, 63, 0.2);
+        }
+
+        .maintenance-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(212, 166, 63, 0.15), rgba(212, 166, 63, 0.05));
+            border: 2px solid #D4A63F;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .maintenance-card:hover .maintenance-icon {
+            transform: rotateY(360deg);
+            background: linear-gradient(135deg, rgba(212, 166, 63, 0.3), rgba(212, 166, 63, 0.1));
+        }
+
+        .maintenance-card h4 {
+            color: #D4A63F;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+        }
+
+        .maintenance-card p {
+            color: #e5e5e5;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Regulatory Panel */
+        .regulatory-panel {
+            background: rgba(31, 58, 147, 0.3);
+            border: 2px solid rgba(212, 166, 63, 0.3);
+            padding: 48px 32px;
+            border-radius: 8px;
+        }
+
+        .regulatory-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 16px;
+            background: rgba(10, 26, 47, 0.5);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .regulatory-item:hover {
+            background: rgba(10, 26, 47, 0.8);
+            transform: translateX(4px);
+        }
+
+        .regulatory-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .regulatory-item h5 {
+            color: #D4A63F;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .regulatory-item p {
+            color: #e5e5e5;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 2px solid rgba(212, 166, 63, 0.3);
+            background: rgba(31, 58, 147, 0.2);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            aspect-ratio: 4/3;
+        }
+
+        .gallery-item:hover {
+            border-color: #D4A63F;
+            transform: scale(1.05);
+            box-shadow: 0 12px 40px rgba(212, 166, 63, 0.4);
+            z-index: 10;
+        }
+
+        .gallery-item svg {
+            width: 100%;
+            height: 100%;
+            transition: all 0.4s ease;
+        }
+
+        .gallery-item:hover svg {
+            transform: scale(1.1);
+        }
+
+        /* FAQ Styles */
+        .faq-container {
+            max-width: 100%;
+        }
+
+        .faq-item {
+            background: rgba(31, 58, 147, 0.2);
+            border: 1px solid rgba(212, 166, 63, 0.3);
+            border-radius: 8px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: #D4A63F;
+        }
+
+        .faq-question {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            color: #D4A63F;
+        }
+
+        .faq-icon {
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+            stroke: #D4A63F;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 24px;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 24px 24px 24px;
+        }
+
+        .faq-answer p {
+            color: #e5e5e5;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* Procurement Floating Card */
+        .procurement-floating-card {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            width: 380px;
+            max-height: 80%;
+            overflow-y: auto;
+            background: linear-gradient(135deg, rgba(10, 26, 47, 0.98), rgba(31, 58, 147, 0.98));
+            border: 2px solid #D4A63F;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            backdrop-filter: blur(10px);
+            transform: translateY(calc(100% + 100px));
+            transition: transform 0.5s ease;
+        }
+
+        .procurement-floating-card.visible {
+            transform: translateY(0);
+        }
+
+        .procurement-floating-card h3 {
+            color: #D4A63F;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .procurement-floating-card p {
+            color: #e5e5e5;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .procurement-form label {
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        .procurement-form label span {
+            display: block;
+            color: #D4A63F;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .procurement-form input,
+        .procurement-form select,
+        .procurement-form textarea {
+            width: 100%;
+            padding: 10px 12px;
+            background: rgba(10, 26, 47, 0.6);
+            border: 1px solid rgba(212, 166, 63, 0.3);
+            border-radius: 4px;
+            color: #fff;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .procurement-form input:focus,
+        .procurement-form select:focus,
+        .procurement-form textarea:focus {
+            outline: none;
+            border-color: #D4A63F;
+            background: rgba(10, 26, 47, 0.8);
+        }
+
+        .procurement-form input::placeholder,
+        .procurement-form textarea::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .file-label input[type="file"] {
+            font-size: 0.8rem;
+            padding: 8px;
+        }
+
+        .procurement-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .procurement-buttons .cta-primary,
+        .procurement-buttons .cta-secondary {
+            padding: 12px 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Final CTA Section */
+        .final-cta-section {
+            background: linear-gradient(135deg, #0A1A2F 0%, #1F3A93 100%);
+            border-top: 3px solid #D4A63F;
+            border-bottom: 3px solid #D4A63F;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(212, 166, 63, 0.05) 39px, rgba(212, 166, 63, 0.05) 40px),
+                repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(212, 166, 63, 0.05) 39px, rgba(212, 166, 63, 0.05) 40px);
+            opacity: 0.3;
+        }
+
+        .final-cta-section>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Footer Styles */
+        footer {
+            background: linear-gradient(180deg, #0a0a14 0%, #050508 100%);
+            padding: 5rem 5% 3rem;
+            border-top: 1px solid rgba(212, 166, 63, 0.3);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-section h4.footer-heading {
+            color: #D4A63F;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-list {
+            list-style: none;
+        }
+
+        .footer-list li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-list a {
+            color: #b8b8b8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .footer-list a:hover {
+            color: #D4A63F;
+            padding-left: 5px;
+        }
+
+        .footer-contact {
+            list-style: none;
+        }
+
+        .footer-contact li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.2rem;
+            color: #b8b8b8;
+            margin-bottom: 0.2rem;
+            font-size: 0.6rem;
+            line-height: 1.6;
+        }
+
+        .footer-contact svg {
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+            color: #D4A63F;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(31, 58, 147, 0.3);
+            border: 1px solid rgba(212, 166, 63, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #D4A63F;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: #D4A63F;
+            color: #0a0a1a;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(212, 166, 63, 0.4);
+        }
+
+        .footer-cta {
+            margin-top: 1.5rem;
+            padding: 0.9rem 1.8rem;
+            background: linear-gradient(135deg, #D4A63F 0%, #f4d483 100%);
+            color: #0a0a1a;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 20px rgba(212, 166, 63, 0.3);
+            letter-spacing: 0.5px;
+            width: 100%;
+        }
+
+        .footer-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 35px rgba(212, 166, 63, 0.5);
+            background: linear-gradient(135deg, #f4d483 0%, #D4A63F 100%);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(212, 166, 63, 0.2);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom p {
+            color: #888;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-bottom-links a {
+            color: #b8b8b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom-links a:hover {
+            color: #D4A63F;
+        }
+
+        .footer-bottom-links span {
+            color: #555;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 968px) {
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100%;
+                width: 320px;
+                background: rgba(10, 10, 20, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 7rem 2.5rem 2.5rem;
+                gap: 2rem;
+                transition: right 0.5s ease;
+                border-left: 1px solid rgba(212, 166, 63, 0.3);
+                box-shadow: -10px 0 50px rgba(0, 0, 0, 0.7);
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .header-cta {
+                display: none;
+            }
+
+            .hero-section {
+                padding: 80px 0 60px;
+            }
+
+            .counter-badge {
+                font-size: 0.7rem;
+                padding: 6px 12px;
+            }
+
+            .icon-card {
+                margin-bottom: 16px;
+            }
+
+            .facility-row {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                margin-bottom: 60px;
+            }
+
+            .facility-row.reverse {
+                direction: ltr;
+            }
+
+            .performance-badge {
+                margin-bottom: 16px;
+            }
+
+            .timeline-step {
+                flex-direction: column !important;
+            }
+
+            .timeline-dot {
+                margin: 12px 0;
+            }
+
+            .procurement-floating-card {
+                position: static;
+                width: 100%;
+                margin-top: 40px;
+                transform: translateY(0);
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+
+            .case-study-card {
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+
+            .footer-bottom-links {
+                justify-content: center;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 1rem 4%;
+            }
+
+            .hero-section {
+                margin-top: 70px;
+            }
+
+            .procurement-buttons {
+                flex-direction: column;
+            }
+
+            .procurement-buttons .cta-primary,
+            .procurement-buttons .cta-secondary {
+                width: 100%;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Parallax Effect */
+        .parallax-layer {
+            transition: transform 0.3s ease-out;
+        }
+
+        /* Scroll Reveal */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+    <style>
+        @view-transition {
+            navigation: auto;
+        }
+    </style>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+</head>
+
+<body class="h-full w-full">
+    <!-- Header -->
+    <header id="header">
+        <div class="logo-container" onclick="window.location.href='./index.html'">
+            <img src="image/logo.png" alt="Logo" style="width: 100px; height: 70px;">
+        </div>
+        <nav id="mainNav">
+            <a href="./index.html">HOME</a>
+            <div class="dropdown" id="productsDropdown">
+                <span class="nav-item">PRODUCTS ▾</span>
+                <div class="dropdown-content">
+                    <a href="./commercial.html" class="dropdown-item"> <span class="dropdown-item-title">🏢
+                            COMMERCIAL</span>
+                    </a>
+                    <a href="./hospitality.html" class="dropdown-item"> <span class="dropdown-item-title">🏨
+                            HOSPITALITY</span> </a>
+                    <a href="./residential.html" class="dropdown-item"> <span class="dropdown-item-title">🏠
+                            RESIDENTIAL</span> </a>
+                    <a href="./institutional.html" class="dropdown-item"> <span class="dropdown-item-title">🎓
+                            INSTITUTIONAL</span> </a>
+                    <a href="./public-facilities.html" class="dropdown-item">
+                        <span class="dropdown-item-title">🏛 PUBLIC FACILITIES</span> </a>
+                </div>
+            </div>
+            </div>
+            <a href="./materials.html">MATERIALS</a>
+            <a href="./about-us.html">ABOUT US</a>
+            <a href="./contact.html">CONTACT</a>
+        </nav>
+        <button class="header-cta" onclick="window.location.href='./contact.html'">Schedule Call</button>
+        <div class="mobile-menu-btn" id="mobileMenuBtn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero"><!-- Video Background -->
+        <div class="hero-background">
+            <div class="hero-bg-slide active">
+                <video src="image/Commercial.mp4" autoplay muted loop playsinline class="hero-video"
+                    onerror="this.style.display='none';"></video>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10"><!-- Counter Badges -->
+
+            <div class="max-w-4xl ">
+                <h1 id="hero-title" class="heading-font text-5xl md:text-7xl font-bold mb-6"
+                    style="color: #D4A63F; line-height: 1.2;">Public Facilities — Civic Infrastructure, Delivered Faster
+                </h1>
+                <p id="hero-subtitle" class="text-xl md:text-2xl mb-6 text-white font-light">Rapid, visible civic
+                    delivery with predictable costs, minimal site disruption and options for relocation or repurposing.
+                </p>
+                <p class="text-base md:text-lg mb-10 text-gray-300 leading-relaxed max-w-3xl">Cities and municipalities
+                    must deliver visible public infrastructure quickly and responsibly. Roof &amp; Realms offers
+                    modular, off-site manufactured public facilities—community centres, sports pavilions, sanitation
+                    blocks, municipal offices and pop-up civic assets—that compress delivery time, reduce on-site
+                    nuisance, and fit tight public budgets while meeting standards for durability and safety.</p>
+                <!-- CTAs -->
+            </div>
+        </div>
+    </section><!-- WHY MODULAR IS RIGHT FOR PUBLIC WORKS -->
+    <section class="section-mid py-24 steel-frame">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="heading-font text-4xl md:text-5xl font-bold mb-4" style="color: #D4A63F;">Why Modular is
+                    Right for Public Works</h2>
+                <div class="gold-divider"></div>
+                <p class="text-lg text-gray-300 max-w-3xl mx-auto">Government-grade solutions that balance speed, budget
+                    accountability, and community impact</p>
+            </div><!-- Icon Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"><!-- Card 1: Speed -->
+                <div class="icon-card">
+                    <div class="icon-wrapper">
+                        <svg width="32" height="32" viewbox="0 0 24 24" fill="none" stroke="#D4A63F" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M12 6v6l4 2" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center" style="color: #D4A63F;">Speed</h3>
+                    <p class="text-sm text-gray-300 text-center leading-relaxed"><strong>Visible Progress
+                            Quickly</strong><br>
+                        Off-site fabrication proceeds in parallel with site prep. Modules arrive 40–60% faster than
+                        traditional construction.</p>
+                </div><!-- Card 2: Budget Certainty -->
+                <div class="icon-card">
+                    <div class="icon-wrapper">
+                        <svg width="32" height="32" viewbox="0 0 24 24" fill="none" stroke="#D4A63F" stroke-width="2">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center" style="color: #D4A63F;">Budget Certainty</h3>
+                    <p class="text-sm text-gray-300 text-center leading-relaxed"><strong>Fixed &amp; Scalable
+                            Costs</strong><br>
+                        Factory-controlled pricing minimizes change orders. Public procurement teams appreciate
+                        predictable budgets.</p>
+                </div><!-- Card 3: Low Disruption -->
+                <div class="icon-card">
+                    <div class="icon-wrapper">
+                        <svg width="32" height="32" viewbox="0 0 24 24" fill="none" stroke="#D4A63F" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                            <circle cx="12" cy="10" r="3" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center" style="color: #D4A63F;">Low Disruption</h3>
+                    <p class="text-sm text-gray-300 text-center leading-relaxed"><strong>Clean, Low-Dust
+                            Installations</strong><br>
+                        Shorter on-site work means less noise, dust, and traffic impact—critical for populated civic
+                        areas.</p>
+                </div><!-- Card 4: Relocatable -->
+                <div class="icon-card">
+                    <div class="icon-wrapper">
+                        <svg width="32" height="32" viewbox="0 0 24 24" fill="none" stroke="#D4A63F" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                            <polyline points="9 22 9 12 15 12 15 22" />
+                            <path d="M5 10h14" stroke-dasharray="2 2" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center" style="color: #D4A63F;">Relocatable</h3>
+                    <p class="text-sm text-gray-300 text-center leading-relaxed"><strong>Reuse &amp; Reassign
+                            Modules</strong><br>
+                        Redeploy community centres or health posts as urban planning evolves—maximize long-term asset
+                        value.</p>
+                </div><!-- Card 5: Compliance Ready -->
+                <div class="icon-card">
+                    <div class="icon-wrapper">
+                        <svg width="32" height="32" viewbox="0 0 24 24" fill="none" stroke="#D4A63F" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                            <polyline points="22 4 12 14.01 9 11.01" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center" style="color: #D4A63F;">Compliance Ready</h3>
+                    <p class="text-sm text-gray-300 text-center leading-relaxed"><strong>BIS / NBC / ISO
+                            Alignment</strong><br>
+                        Pre-engineered modules meet fire, structural, and accessibility codes—streamlining inspections
+                        and approvals.</p>
+                </div><!-- Card 6: Sustainability -->
+                <div class="icon-card">
+                    <div class="icon-wrapper">
+                        <svg width="32" height="32" viewbox="0 0 24 24" fill="none" stroke="#D4A63F" stroke-width="2">
+                            <path d="M12 2C8 2 4 6 4 12s4 10 8 10 8-4 8-10c0-4-2-6-4-6s-4 2-4 6 2 6 4 6" />
+                            <circle cx="12" cy="12" r="2" fill="#D4A63F" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center" style="color: #D4A63F;">Sustainability</h3>
+                    <p class="text-sm text-gray-300 text-center leading-relaxed"><strong>Less Waste, Less Water, Lower
+                            Lifecycle Energy</strong><br>
+                        Factory precision cuts material waste by 60–80%, and controlled environments reduce water
+                        consumption.</p>
+                </div>
+            </div>
+        </div>
+    </section><!-- TYPES OF PUBLIC FACILITIES -->
+    <section class="section-dark py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="heading-font text-4xl md:text-5xl font-bold mb-4" style="color: #D4A63F;">Types of Public
+                    Facilities</h2>
+                <div class="gold-divider"></div>
+                <p class="text-lg text-gray-300 max-w-3xl mx-auto">Comprehensive civic solutions engineered for rapid
+                    deployment and long-term durability</p>
+            </div><!-- Facility 1: Community Centres -->
+            <div class="facility-row scroll-reveal">
+                <div class="facility-image"><img src="image/public-facilities.png" alt="Community Centre"
+                        onerror="this.style.display='none';" style="width: 100%; height: 100%; object-fit: cover;">
+                    <svg width="100%" height="100%" viewbox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        style="position: absolute; top: 0; left: 0; opacity: 0;"><!-- Building Structure -->
+                        <rect x="50" y="80" width="300" height="180" fill="rgba(31, 58, 147, 0.3)" stroke="#D4A63F"
+                            stroke-width="2" />
+                        <rect x="60" y="90" width="120" height="150" fill="rgba(10, 26, 47, 0.4)" stroke="#D4A63F"
+                            stroke-width="1.5" />
+                        <rect x="200" y="90" width="140" height="150" fill="rgba(10, 26, 47, 0.4)" stroke="#D4A63F"
+                            stroke-width="1.5" /> <!-- Windows -->
+                        <rect x="75" y="110" width="35" height="40" fill="rgba(212, 166, 63, 0.2)" stroke="#D4A63F"
+                            stroke-width="1" />
+                        <rect x="130" y="110" width="35" height="40" fill="rgba(212, 166, 63, 0.2)" stroke="#D4A63F"
+                            stroke-width="1" />
+                        <rect x="220" y="110" width="35" height="40" fill="rgba(212, 166, 63, 0.2)" stroke="#D4A63F"
+                            stroke-width="1" />
+                        <rect x="285" y="110" width="35" height="40" fill="rgba(212, 166, 63, 0.2)" stroke="#D4A63F"
+                            stroke-width="1" /> <!-- Door -->
+                        <rect x="90" y="200" width="50" height="60" fill="rgba(212, 166, 63, 0.3)" stroke="#D4A63F"
+                            stroke-width="2" />
+                        <circle cx="130" cy="230" r="3" fill="#D4A63F" /> <!-- Roof -->
+                        <path d="M40 80 L200 40 L360 80" stroke="#D4A63F" stroke-width="2.5"
+                            fill="rgba(31, 58, 147, 0.2)" /> <!-- People silhouettes -->
+                        <circle cx="250" cy="215" r="8" fill="#D4A63F" opacity="0.6" />
+                        <path d="M250 223 L250 245 M240 235 L260 235 M245 245 L240 260 M255 245 L260 260"
+                            stroke="#D4A63F" stroke-width="2" opacity="0.6" />
+                    </svg>
+                </div>
+                <div class="facility-content">
+                    <h3>Community Centres</h3>
+                    <p class="text-gray-300 mb-4"><strong>Use cases:</strong> Multi-purpose halls, skill centres,
+                        meeting rooms, training centres<br><strong>What we deliver:</strong> Flexible layout, washrooms,
+                        storage, AV-ready spaces</p>
+                    <ul class="benefits-list">
+                        <li>Fast social program rollouts with immediate occupancy</li>
+                        <li>Low-maintenance finishes designed for high-traffic use</li>
+                        <li>Multi-use layouts that adapt to evolving community needs</li>
+                    </ul>
+                    <div class="flex items-center gap-4 mb-4"><span class="micro-icon">
+                            <svg width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                            </svg> Accessible </span> <span class="micro-icon">
+                            <svg width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                                <path d="M2 17l10 5 10-5M2 12l10 5 10-5" />
+                            </svg> Fire Safe </span> <span class="micro-icon">
+                            <svg width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M8 12h8" />
+                                <path d="M12 8v8" />
+                            </svg> Wheelchair Ready </span>
+                    </div><button class="cta-small">Request Community Centre Design Pack</button>
+                </div>
+            </div><!-- Facility 2: Sports Complex & Pavilions -->
+            <div class="facility-row reverse scroll-reveal">
+                <div class="facility-image"><img src="image/Sports Complex.png" alt="Sports Complex"
+                        onerror="this.style.display='none';" style="width: 100%; height: 100%; object-fit: cover;">
+                    <svg width="100%" height="100%" viewbox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        style="position: absolute; top: 0; left: 0; opacity: 0;"><!-- Sports Hall -->
+                        <rect x="40" y="100" width="320" height="160" fill="rgba(31, 58, 147, 0.3)" stroke="#D4A63F"
+                            stroke-width="2.5" />
+                        <path d="M40 100 L200 40 L360 100" stroke="#D4A63F" stroke-width="2.5"
+                            fill="rgba(212, 166, 63, 0.1)" /> <!-- Court lines -->
+                        <line x1="100" y1="130" x2="300" y2="130" stroke="#D4A63F" stroke-width="1.5" opacity="0.5" />
+                        <line x1="100" y1="230" x2="300" y2="230" stroke="#D4A63F" stroke-width="1.5" opacity="0.5" />
+                        <line x1="200" y1="130" x2="200" y2="230" stroke="#D4A63F" stroke-width="1.5" opacity="0.5" />
+                        <circle cx="200" cy="180" r="30" stroke="#D4A63F" stroke-width="1.5" fill="none"
+                            opacity="0.5" /> <!-- Bleachers -->
+                        <rect x="60" y="140" width="20" height="100" fill="rgba(212, 166, 63, 0.2)" stroke="#D4A63F"
+                            stroke-width="1" />
+                        <rect x="320" y="140" width="20" height="100" fill="rgba(212, 166, 63, 0.2)" stroke="#D4A63F"
+                            stroke-width="1" /> <!-- Basketball hoop -->
+                        <rect x="95" y="165" width="5" height="30" fill="#D4A63F" />
+                        <rect x="85" y="165" width="25" height="5" fill="#D4A63F" />
+                    </svg>
+                </div>
+                <div class="facility-content">
+                    <h3>Sports Complex &amp; Pavilions</h3>
+                    <p class="text-gray-300 mb-4"><strong>Use cases:</strong> Indoor courts, pavilions, change rooms,
+                        spectator stands<br><strong>What we deliver:</strong> Clear-span halls, vibration-resistant
+                        floors, spectator amenities</p>
+                    <ul class="benefits-list">
+                        <li>Phased seating expansion for growing attendance</li>
+                        <li>Acoustic design and natural ventilation for athlete comfort</li>
+                        <li>Durable flooring designed for high-impact sports use</li>
+                    </ul>
+                    <div class="flex items-center gap-4 mb-4"><span class="micro-icon">
+                            <svg width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                            </svg> Accessible </span> <span class="micro-icon">
+                            <svg width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                            </svg> Fire Safe </span> <span class="micro-icon">
+                            <svg width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                            </svg> Wheelchair Ready </span>
+                    </div><button class="cta-small">View Sports Solutions</button>
+                </div>
+            </div><!-- Facility 3: Sanitation Blocks -->
+            <div class="facility-row scroll-reveal">
+                <div class="facility-image"><img src="/image/public-facilities1.png" alt="Sanitation Block"
+                        onerror="this.style.display='none';" style="width: 100%; height: 100%; object-fit: cover;">
+                    <svg width="100%" height="100%" viewbox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        style="position: absolute; top: 0; left: 0; opacity: 0;"><!-- Building -->
+                        <rect x="80" y="100" width="240" height="150" fill="rgba(31, 58, 147, 0.3)" stroke="#D4A63F"
+                            stroke-width="2" /> <!-- Dividers for stalls -->
+                        <line x1="160" y1="100" x2="160" y2="250" stroke="#D4A63F" stroke-width="1.5" />
+                        <line x1="240" y1="100" x2="240" y2="250" stroke="#D4A63F" stroke-width="1.5" /> <!-- Doors -->
+                        <rect x="100" y="180" width="40" height="60" fill="rgba(212, 166, 63, 0.2)" stroke="#D4A63F"
+                            stroke-width="2" />
+                        <rect x="180" y="180" width="40" height="60" fill="rgba(212, 166, 63, 0.2)" stroke="#D4A63F"
+                            stroke-width="2" />
+                        <rect x="260" y="180" width="40" height="60" fill="rgba(212, 166, 63, 0.2)" stroke="#D4A63F"
+                            stroke-width="2" /> <!-- Icons -->
+                        <circle cx="120" cy="130" r="15" stroke="#D4A63F" stroke-width="2" fill="none" />
+                        <path d="M120 120 L120 140" stroke="#D4A63F" stroke-width="2.5" />
+                        <circle cx="120" cy="115" r="5" fill="#D4A63F" /> <!-- Water drops -->
+                        <path
+                            d="M200 125 C200 125 195 135 195 140 C195 145 197.5 147.5 200 147.5 C202.5 147.5 205 145 205 140 C205 135 200 125 200 125 Z"
+                            fill="rgba(212, 166, 63, 0.5)" /> <!-- Roof -->
+                        <path d="M70 100 L200 80 L330 100" stroke="#D4A63F" stroke-width="2"
+                            fill="rgba(31, 58, 147, 0.2)" />
+                    </svg>
+                </div>
+                <div class="facility-content">
+                    <h3>Sanitation Blocks &amp; Public Toilets</h3>
+                    <p class="text-gray-300 mb-4"><strong>Use cases:</strong> Public toilets, sanitation centers for
+                        markets, transit hubs<br><strong>What we deliver:</strong> Pre-waterproofed pods, accessible
+                        design, easy maintenance access</p>
+                    <ul class="benefits-list">
+                        <li>Fast deployment with minimal site work required</li>
+                        <li>Hygienic factory-installed plumbing and waterproofing</li>
+                        <li>Code-compliant accessibility and ventilation systems</li>
+                    </ul>
+                    <div class="flex items-center gap-4 mb-4"><span class="micro-icon">
+                            <svg width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                            </svg> Accessible </span> <span class="micro-icon">
+                            <svg width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                            </svg> Fire Safe </span> <span class="micro-icon">
+                            <svg width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                            </svg> Wheelchair Ready </span>
+                    </div><button class="cta-small">Sanitation Systems Brochure</button>
+                </div>
+            </div><!-- Facility 4: Civic Offices & Kiosks -->
+            <div class="facility-row reverse scroll-reveal">
+                <div class="facility-image"><img src="image/public-facilities2.png" alt="Civic Office"
+                        onerror="this.style.display='none';" style="width: 100%; height: 100%; object-fit: cover;">
+                    <svg width="100%" height="100%" viewbox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        style="position: absolute; top: 0; left: 0; opacity: 0;"><!-- Main Kiosk -->
+                        <rect x="120" y="120" width="160" height="140" fill="rgba(31, 58, 147, 0.3)" stroke="#D4A63F"
+                            stroke-width="2.5" /> <!-- Counter Window -->
+                        <rect x="140" y="160" width="120" height="50" fill="rgba(212, 166, 63, 0.2)" stroke="#D4A63F"
+                            stroke-width="2" />
+                        <line x1="140" y1="185" x2="260" y2="185" stroke="#D4A63F" stroke-width="1" /> <!-- Door -->
+                        <rect x="230" y="210" width="40" height="50" fill="rgba(10, 26, 47, 0.5)" stroke="#D4A63F"
+                            stroke-width="2" /> <!-- Roof -->
+                        <path d="M110 120 L200 95 L290 120" stroke="#D4A63F" stroke-width="2.5"
+                            fill="rgba(212, 166, 63, 0.15)" /> <!-- Sign -->
+                        <rect x="160" y="140" width="80" height="15" fill="rgba(212, 166, 63, 0.3)" stroke="#D4A63F"
+                            stroke-width="1" /> <!-- AC Unit -->
+                        <rect x="150" y="240" width="30" height="15" fill="rgba(212, 166, 63, 0.2)" stroke="#D4A63F"
+                            stroke-width="1" />
+                    </svg>
+                </div>
+                <div class="facility-content">
+                    <h3>Civic Offices &amp; Kiosks</h3>
+                    <p class="text-gray-300 mb-4"><strong>Use cases:</strong> Ward offices, voting booths, municipal
+                        kiosks, toll booths, info kiosks<br><strong>What we deliver:</strong> Secure,
+                        climate-controlled, branded cabins with MEP provisions</p>
+                    <ul class="benefits-list">
+                        <li>Quick set-up for rapid civic service deployment</li>
+                        <li>Relocatable for temporary or evolving site requirements</li>
+                        <li>Consistent civic branding across multiple locations</li>
+                    </ul>
+                    <div class="flex items-center gap-4 mb-4"><span class="micro-icon">
+                            <svg width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                            </svg> Accessible </span> <span class="micro-icon">
+                            <svg width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                            </svg> Fire Safe </span> <span class="micro-icon">
+                            <svg width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                            </svg> Wheelchair Ready </span>
+                    </div><button class="cta-small">Explore Civic Kiosks</button>
+                </div>
+            </div><!-- Facility 5: Emergency Shelters -->
+            <div class="facility-row scroll-reveal">
+                <div class="facility-image"><img src="image/Sports Complex1.png" alt="Emergency Shelter"
+                        onerror="this.style.display='none';" style="width: 100%; height: 100%; object-fit: cover;">
+                    <svg width="100%" height="100%" viewbox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        style="position: absolute; top: 0; left: 0; opacity: 0;"><!-- Shelter Row -->
+                        <rect x="50" y="120" width="90" height="100" fill="rgba(31, 58, 147, 0.3)" stroke="#D4A63F"
+                            stroke-width="2" />
+                        <rect x="155" y="120" width="90" height="100" fill="rgba(31, 58, 147, 0.3)" stroke="#D4A63F"
+                            stroke-width="2" />
+                        <rect x="260" y="120" width="90" height="100" fill="rgba(31, 58, 147, 0.3)" stroke="#D4A63F"
+                            stroke-width="2" /> <!-- Doors -->
+                        <rect x="80" y="170" width="30" height="50" fill="rgba(212, 166, 63, 0.2)" stroke="#D4A63F"
+                            stroke-width="2" />
+                        <rect x="185" y="170" width="30" height="50" fill="rgba(212, 166, 63, 0.2)" stroke="#D4A63F"
+                            stroke-width="2" />
+                        <rect x="290" y="170" width="30" height="50" fill="rgba(212, 166, 63, 0.2)" stroke="#D4A63F"
+                            stroke-width="2" /> <!-- Windows -->
+                        <rect x="60" y="140" width="25" height="20" fill="rgba(212, 166, 63, 0.15)" stroke="#D4A63F"
+                            stroke-width="1" />
+                        <rect x="105" y="140" width="25" height="20" fill="rgba(212, 166, 63, 0.15)" stroke="#D4A63F"
+                            stroke-width="1" /> <!-- Medical Cross -->
+                        <path d="M200 145 L200 160 M192.5 152.5 L207.5 152.5" stroke="#D4A63F" stroke-width="3" />
+                        <!-- Simple roofs -->
+                        <path d="M45 120 L95 105 L145 120" stroke="#D4A63F" stroke-width="2"
+                            fill="rgba(212, 166, 63, 0.1)" />
+                        <path d="M150 120 L200 105 L250 120" stroke="#D4A63F" stroke-width="2"
+                            fill="rgba(212, 166, 63, 0.1)" />
+                        <path d="M255 120 L305 105 L355 120" stroke="#D4A63F" stroke-width="2"
+                            fill="rgba(212, 166, 63, 0.1)" />
+                    </svg>
+                </div>
+                <div class="facility-content">
+                    <h3>Temporary Relief &amp; Emergency Shelters</h3>
+                    <p class="text-gray-300 mb-4"><strong>Use cases:</strong> Disaster response shelters, temporary
+                        clinics, relief logistics hubs<br><strong>What we deliver:</strong> Insulated, rapid-assemble
+                        shelters with basic services and sanitation</p>
+                    <ul class="benefits-list">
+                        <li>Deployable in days for immediate emergency response</li>
+                        <li>Durable in harsh weather conditions and extreme climates</li>
+                        <li>Relocatable after need for maximum asset utilization</li>
+                    </ul>
+                    <div class="flex items-center gap-4 mb-4"><span class="micro-icon">
+                            <svg width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                            </svg> Accessible </span> <span class="micro-icon">
+                            <svg width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                            </svg> Fire Safe </span> <span class="micro-icon">
+                            <svg width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                            </svg> Wheelchair Ready </span>
+                    </div><button class="cta-small">Emergency Response Solutions</button>
+                </div>
+            </div>
+        </div>
+    </section><!-- PROCUREMENT & TENDER READINESS -->
+    <section class="section-mid py-24 steel-frame">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="heading-font text-4xl md:text-5xl font-bold mb-4" style="color: #D4A63F;">Procurement &amp;
+                    Tender Readiness</h2>
+                <div class="gold-divider"></div>
+                <p class="text-lg text-gray-300 max-w-3xl mx-auto">Streamlined documentation and fixed-price packages
+                    designed for government procurement processes</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12"><!-- Card 1 -->
+                <div class="procurement-card">
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0">
+                            <svg width="48" height="48" viewbox="0 0 24 24" fill="none" stroke="#D4A63F"
+                                stroke-width="2">
+                                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h4>Fixed-Price Packages for Tenders</h4>
+                            <p class="text-gray-300 text-sm leading-relaxed">Transparent, all-inclusive pricing
+                                eliminates change orders and budget overruns. Pre-configured packages for common civic
+                                facility types allow rapid bid preparation.</p>
+                        </div>
+                    </div>
+                </div><!-- Card 2 -->
+                <div class="procurement-card">
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0">
+                            <svg width="48" height="48" viewbox="0 0 24 24" fill="none" stroke="#D4A63F"
+                                stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                <polyline points="14 2 14 8 20 8" />
+                                <line x1="16" y1="13" x2="8" y2="13" />
+                                <line x1="16" y1="17" x2="8" y2="17" />
+                                <polyline points="10 9 9 9 8 9" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h4>Milestone-Based Delivery &amp; Inspection Reports</h4>
+                            <p class="text-gray-300 text-sm leading-relaxed">Clear delivery phases tied to payment
+                                schedules. Factory QC reports, third-party inspection certificates, and photo
+                                documentation for every milestone.</p>
+                        </div>
+                    </div>
+                </div><!-- Card 3 -->
+                <div class="procurement-card">
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0">
+                            <svg width="48" height="48" viewbox="0 0 24 24" fill="none" stroke="#D4A63F"
+                                stroke-width="2">
+                                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+                                <polyline points="13 2 13 9 20 9" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h4>Comprehensive Document Packs</h4>
+                            <p class="text-gray-300 text-sm leading-relaxed">Complete bid-ready documentation: BOQ,
+                                material test certificates, MEP layouts, structural MTCs, O&amp;M manuals, as-built
+                                drawings, warranty documents.</p>
+                        </div>
+                    </div>
+                </div><!-- Card 4 -->
+                <div class="procurement-card">
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0">
+                            <svg width="48" height="48" viewbox="0 0 24 24" fill="none" stroke="#D4A63F"
+                                stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                                <polyline points="22 4 12 14.01 9 11.01" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h4>Pre-Installation Audits &amp; Factory QC</h4>
+                            <p class="text-gray-300 text-sm leading-relaxed">Factory quality control reports,
+                                dimensional verification, material compliance certificates—all attachable to procurement
+                                bids for technical evaluation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- TECHNICAL SPECS — PUBLIC GRADE -->
+    <section class="section-dark py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="heading-font text-4xl md:text-5xl font-bold mb-4" style="color: #D4A63F;">Technical Specs —
+                    Public Grade</h2>
+                <div class="gold-divider"></div>
+                <p class="text-lg text-gray-300 max-w-3xl mx-auto">Engineering specifications designed for BIS &amp; NBC
+                    compliance and long-term civic durability</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"><!-- Structure -->
+                <div class="blueprint-card scroll-reveal">
+                    <div class="flex items-start gap-4 mb-4">
+                        <svg width="40" height="40" viewbox="0 0 24 24" fill="none" stroke="#D4A63F" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                            <polyline points="9 22 9 12 15 12 15 22" />
+                        </svg>
+                        <h4>Structure</h4>
+                    </div>
+                    <ul>
+                        <li>LGSF frames, galvanised steel (TATA / JSW equivalent)</li>
+                        <li>Typical stud depth: 89mm</li>
+                        <li>Designed per BIS 801 &amp; NBC 2016</li>
+                        <li>Seismic Zone III–V ready</li>
+                        <li>Factory pre-assembled modules</li>
+                    </ul>
+                </div><!-- Walls -->
+                <div class="blueprint-card scroll-reveal">
+                    <div class="flex items-start gap-4 mb-4">
+                        <svg width="40" height="40" viewbox="0 0 24 24" fill="none" stroke="#D4A63F" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7" />
+                            <rect x="14" y="3" width="7" height="7" />
+                            <rect x="14" y="14" width="7" height="7" />
+                            <rect x="3" y="14" width="7" height="7" />
+                        </svg>
+                        <h4>Walls</h4>
+                    </div>
+                    <ul>
+                        <li>CLC panels / drywall options</li>
+                        <li>Acoustic performance: STC 45+</li>
+                        <li>Thermal insulation: U-value 0.4 W/m²K</li>
+                        <li>Fire-rated partitions available</li>
+                        <li>Pre-finished or paint-ready surfaces</li>
+                    </ul>
+                </div><!-- Floors -->
+                <div class="blueprint-card scroll-reveal">
+                    <div class="flex items-start gap-4 mb-4">
+                        <svg width="40" height="40" viewbox="0 0 24 24" fill="none" stroke="#D4A63F" stroke-width="2">
+                            <path d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <h4>Floors</h4>
+                    </div>
+                    <ul>
+                        <li>Vibration-resistant decks for sports facilities</li>
+                        <li>Anti-skid finishes for public walkways</li>
+                        <li>Load capacity: 3–5 kN/m²</li>
+                        <li>Moisture-resistant underlayment</li>
+                        <li>Accessible ramp-ready design</li>
+                    </ul>
+                </div><!-- Roofs -->
+                <div class="blueprint-card scroll-reveal">
+                    <div class="flex items-start gap-4 mb-4">
+                        <svg width="40" height="40" viewbox="0 0 24 24" fill="none" stroke="#D4A63F" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                            <polyline points="9 22 9 12 15 12 15 22" />
+                            <path d="M3 9L12 2L21 9" stroke-width="2.5" />
+                        </svg>
+                        <h4>Roofs</h4>
+                    </div>
+                    <ul>
+                        <li>Metal deck with rigid insulation</li>
+                        <li>Waterproof membrane (TPO/EPDM)</li>
+                        <li>Integrated rainwater outlets</li>
+                        <li>Wind load: up to 150 km/h</li>
+                        <li>Optional solar-ready mounting</li>
+                    </ul>
+                </div><!-- MEP -->
+                <div class="blueprint-card scroll-reveal">
+                    <div class="flex items-start gap-4 mb-4">
+                        <svg width="40" height="40" viewbox="0 0 24 24" fill="none" stroke="#D4A63F" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="12" y1="8" x2="12" y2="12" />
+                            <line x1="12" y1="16" x2="12.01" y2="16" />
+                            <path d="M8 12h8" />
+                        </svg>
+                        <h4>MEP Systems</h4>
+                    </div>
+                    <ul>
+                        <li>Pre-routed electrical conduits</li>
+                        <li>Prefitted plumbing rough-ins</li>
+                        <li>Switchboard with MCBs &amp; RCCBs</li>
+                        <li>Ventilation for sanitation blocks</li>
+                        <li>Energy-efficient LED lighting</li>
+                    </ul>
+                </div><!-- Accessibility -->
+                <div class="blueprint-card scroll-reveal">
+                    <div class="flex items-start gap-4 mb-4">
+                        <svg width="40" height="40" viewbox="0 0 24 24" fill="none" stroke="#D4A63F" stroke-width="2">
+                            <circle cx="12" cy="8" r="2" />
+                            <path d="M12 10v4" />
+                            <path d="M12 14l-4 6" />
+                            <path d="M12 14l4 6" />
+                            <path d="M8 16h8" />
+                        </svg>
+                        <h4>Accessibility</h4>
+                    </div>
+                    <ul>
+                        <li>Ramps: 1:12 gradient per NBC</li>
+                        <li>Accessible toilet dimensions</li>
+                        <li>Tactile signage provisions</li>
+                        <li>Wheelchair-friendly door widths (900mm)</li>
+                        <li>Handrails &amp; grab bars included</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-12"><button class="cta-secondary">View Full Material Specifications</button>
+            </div>
+        </div>
+    </section><!-- PERFORMANCE & SUSTAINABILITY METRICS -->
+    <section class="section-mid py-24 steel-frame">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="heading-font text-4xl md:text-5xl font-bold mb-4" style="color: #D4A63F;">Performance &amp;
+                    Sustainability Metrics</h2>
+                <div class="gold-divider"></div>
+                <p class="text-lg text-gray-300 max-w-3xl mx-auto">Quantified benefits for responsible public
+                    infrastructure delivery</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                <div class="performance-badge"><span class="badge-number">30–60%</span> <span class="badge-label">Faster
+                        Delivery</span>
+                </div>
+                <div class="performance-badge"><span class="badge-number">60–80%</span> <span class="badge-label">Less
+                        Construction Waste</span>
+                </div>
+                <div class="performance-badge"><span class="badge-number">60–70%</span> <span class="badge-label">Lower
+                        Site Water Use</span>
+                </div>
+                <div class="performance-badge"><span class="badge-number">15–35%</span> <span class="badge-label">Lower
+                        Lifecycle Energy</span>
+                </div>
+                <div class="performance-badge"><span class="badge-number">12-Month</span> <span
+                        class="badge-label">Defects Liability</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <!-- Company Info -->
+                <div class="footer-section">
+                    <div class="logo-container" style="justify-content: flex-start;">
+                        <img src="image/logo.png" alt="Logo" style="width: 200px; height: 100px; margin-bottom: 10px;">
+                    </div>
+                    <p class="footer-tagline" style="text-align: left; font-size: 1.3rem; margin-bottom: 1rem;">Built
+                        with Precision. Delivered with Pride.</p>
+                    <p style="color: #888; line-height: 1.8; margin-bottom: 1.5rem;">Premium modular construction
+                        solutions for a sustainable future. Transforming ideas into reality with LGSF technology.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul class="footer-list">
+                        <li><a href="./index.html">Home</a></li>
+                        <li><a href="./about-us.html">About Us</a></li>
+                        <li><a href="./materials.html">Materials</a></li>
+                        <li><a href="./contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Our Solutions -->
+                <div class="footer-section">
+                    <h4 class="footer-heading">Our Solutions</h4>
+                    <ul class="footer-list">
+                        <li><a href="./commercial.html">Commercial</a></li>
+                        <li><a href="./residential.html">Residential</a></li>
+                        <li><a href="./institutional.html">Institutional</a></li>
+                        <li><a href="./hospitality.html">Hospitality</a></li>
+                        <li><a href="./public-facilities.html">Public Facilities</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="footer-section">
+                    <h4 class="footer-heading">Get In Touch</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg>
+                            <span>Mumbai, Maharashtra, India</span>
+                        </li>
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                            </svg>
+                            <span>+91 99700 60008</span>
+                        </li>
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                            <span>info@roofandrealms.com</span>
+                        </li>
+                    </ul>
+                    <button class="footer-cta" onclick="window.location.href='./contact.html'">Schedule a
+                        Meeting</button>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p>© 2024 Roof &amp; Realms. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <span>•</span>
+                    <a href="#">Terms of Service</a>
+                    <span>•</span>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const defaultConfig = {
+            company_name: "ROOF & REALMS",
+            hero_title: "Public Facilities — Civic Infrastructure, Delivered Faster",
+            hero_subtitle: "Rapid, visible civic delivery with predictable costs, minimal site disruption and options for relocation or repurposing.",
+            cta_primary: "Explore Community Solutions",
+            cta_secondary: "Request Civic Capabilities Brief",
+            background_color: "#0A1A2F",
+            accent_color: "#D4A63F",
+            secondary_color: "#1F3A93",
+            text_color: "#f5f5f5",
+            font_family: "Montserrat",
+            font_size: 16
+        };
+
+        async function onConfigChange(config) {
+            const companyName = config.company_name || defaultConfig.company_name;
+            const heroTitle = config.hero_title || defaultConfig.hero_title;
+            const heroSubtitle = config.hero_subtitle || defaultConfig.hero_subtitle;
+            const ctaPrimary = config.cta_primary || defaultConfig.cta_primary;
+            const ctaSecondary = config.cta_secondary || defaultConfig.cta_secondary;
+            const fontFamily = config.font_family || defaultConfig.font_family;
+            const fontSize = config.font_size || defaultConfig.font_size;
+            const backgroundColor = config.background_color || defaultConfig.background_color;
+            const accentColor = config.accent_color || defaultConfig.accent_color;
+            const secondaryColor = config.secondary_color || defaultConfig.secondary_color;
+            const textColor = config.text_color || defaultConfig.text_color;
+
+            // Update text content
+            const companyNameEl = document.getElementById('company-name');
+            if (companyNameEl) companyNameEl.textContent = companyName;
+
+            const heroTitleEl = document.getElementById('hero-title');
+            if (heroTitleEl) heroTitleEl.textContent = heroTitle;
+
+            const heroSubtitleEl = document.getElementById('hero-subtitle');
+            if (heroSubtitleEl) heroSubtitleEl.textContent = heroSubtitle;
+
+            const ctaPrimaryEl = document.getElementById('cta-primary');
+            if (ctaPrimaryEl) ctaPrimaryEl.textContent = ctaPrimary;
+
+            const ctaSecondaryEl = document.getElementById('cta-secondary');
+            if (ctaSecondaryEl) ctaSecondaryEl.textContent = ctaSecondary;
+
+            // Apply font family
+            const baseFontStack = 'sans-serif';
+            document.body.style.fontFamily = `${fontFamily}, ${baseFontStack}`;
+
+            // Apply font sizes
+            if (heroTitleEl) heroTitleEl.style.fontSize = `${fontSize * 3}px`;
+            if (heroSubtitleEl) heroSubtitleEl.style.fontSize = `${fontSize * 1.25}px`;
+
+            // Apply colors
+            document.body.style.backgroundColor = backgroundColor;
+            document.body.style.color = textColor;
+
+            if (heroTitleEl) heroTitleEl.style.color = accentColor;
+
+            const allHeadings = document.querySelectorAll('h2, h3');
+            allHeadings.forEach(heading => {
+                if (heading.classList.contains('heading-font') || heading.parentElement.classList.contains('icon-card')) {
+                    heading.style.color = accentColor;
+                }
+            });
+        }
+
+        function mapToCapabilities(config) {
+            return {
+                recolorables: [
+                    {
+                        get: () => config.background_color || defaultConfig.background_color,
+                        set: (value) => {
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ background_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.accent_color || defaultConfig.accent_color,
+                        set: (value) => {
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ accent_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.secondary_color || defaultConfig.secondary_color,
+                        set: (value) => {
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ secondary_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.text_color || defaultConfig.text_color,
+                        set: (value) => {
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ text_color: value });
+                            }
+                        }
+                    }
+                ],
+                borderables: [],
+                fontEditable: {
+                    get: () => config.font_family || defaultConfig.font_family,
+                    set: (value) => {
+                        if (window.elementSdk) {
+                            window.elementSdk.setConfig({ font_family: value });
+                        }
+                    }
+                },
+                fontSizeable: {
+                    get: () => config.font_size || defaultConfig.font_size,
+                    set: (value) => {
+                        if (window.elementSdk) {
+                            window.elementSdk.setConfig({ font_size: value });
+                        }
+                    }
+                }
+            };
+        }
+
+        function mapToEditPanelValues(config) {
+            return new Map([
+                ["company_name", config.company_name || defaultConfig.company_name],
+                ["hero_title", config.hero_title || defaultConfig.hero_title],
+                ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
+                ["cta_primary", config.cta_primary || defaultConfig.cta_primary],
+                ["cta_secondary", config.cta_secondary || defaultConfig.cta_secondary]
+            ]);
+        }
+
+        // Initialize Element SDK
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange,
+                mapToCapabilities,
+                mapToEditPanelValues
+            });
+        }
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+            mainNav.classList.toggle('active');
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Parallax effect on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxLayers = document.querySelectorAll('.parallax-layer');
+            parallaxLayers.forEach(layer => {
+                const speed = 0.3;
+                layer.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal, .facility-row').forEach(el => {
+            observer.observe(el);
+        });
+
+        // CTA Button handlers
+        document.getElementById('cta-primary').addEventListener('click', () => {
+            console.log('Explore Community Solutions clicked');
+        });
+
+        document.getElementById('cta-secondary').addEventListener('click', () => {
+            console.log('Request Civic Capabilities Brief clicked');
+        });
+
+        // All CTA small buttons
+        document.querySelectorAll('.cta-small').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                console.log('CTA clicked:', e.target.textContent);
+            });
+        });
+
+        // Mobile dropdown toggle
+        if (window.innerWidth <= 968) {
+            const navItem = document.querySelector('.dropdown .nav-item');
+            const dropdown = document.getElementById('productsDropdown');
+
+            navItem.addEventListener('click', (e) => {
+                e.preventDefault();
+                dropdown.classList.toggle('active');
+            });
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href.startsWith('#') && href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        // Close mobile menu if open
+                        if (mainNav.classList.contains('active')) {
+                            mainNav.classList.remove('active');
+                            mobileMenuBtn.classList.remove('active');
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

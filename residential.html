@@ -1,165 +1,337 @@
 <!doctype html>
 <html lang="en" class="h-full">
- <head>
+
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Residential Solutions - Roof &amp; Realms</title>
+  <title>Residential Solutions - Roof & Realms</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sora:wght@100..800&display=swap"
+    rel="stylesheet">
   <script src="/_sdk/element_sdk.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body {
-      box-sizing: border-box;
-    }
-
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    html, body {
-      height: 100%;
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0a0a14;
+      color: #ffffff;
       overflow-x: hidden;
     }
 
-    .main-wrapper {
+    html,
+    body {
+      height: 100%;
       width: 100%;
-      height: 100%;
-      overflow-y: auto;
-      overflow-x: hidden;
     }
 
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes slideLeft {
-      from {
-        opacity: 0;
-        transform: translateX(-60px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    @keyframes slideRight {
-      from {
-        opacity: 0;
-        transform: translateX(60px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    @keyframes zoomIn {
-      from {
-        opacity: 0;
-        transform: scale(0.95);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-10px);
-      }
-    }
-
-    @keyframes shimmer {
-      0% {
-        left: -100%;
-      }
-      100% {
-        left: 100%;
-      }
-    }
-
-    .animate-fade-up {
-      animation: fadeUp 1s ease-out;
-    }
-
-    .animate-slide-left {
-      animation: slideLeft 1s ease-out;
-    }
-
-    .animate-slide-right {
-      animation: slideRight 1s ease-out;
-    }
-
-    .animate-zoom {
-      animation: zoomIn 1s ease-out;
-    }
-
-    .float-icon {
-      animation: float 3s ease-in-out infinite;
-    }
-
-    .hero-video-wrapper {
-      position: absolute;
+    /* Premium Header Styles - Same as commercial page */
+    header {
+      position: fixed;
       top: 0;
       left: 0;
+      right: 0;
+      background: rgba(10, 10, 20, 0.95);
+      backdrop-filter: blur(20px);
+      padding: 1.2rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(212, 166, 63, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    header.scrolled {
+      padding: 0.8rem 5%;
+      background: rgba(10, 10, 20, 0.98);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+      border-bottom: 1px solid rgba(212, 166, 63, 0.4);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .logo-container:hover {
+      transform: scale(1.02);
+    }
+
+    .logo-text {
+      font-size: 1.6rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #D4A63F 0%, #f4d483 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 0.5px;
+    }
+
+    nav {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    nav>a,
+    .nav-item {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      position: relative;
+      cursor: pointer;
+      padding: 0.5rem 0;
+    }
+
+    nav>a:hover,
+    .nav-item:hover {
+      color: #D4A63F;
+    }
+
+    nav>a::after,
+    .nav-item::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #D4A63F, #f4d483);
+      transition: width 0.4s ease;
+    }
+
+    nav>a:hover::after,
+    .nav-item:hover::after {
       width: 100%;
-      height: 100%;
+    }
+
+    /* Mega Menu Dropdown */
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: calc(100% + 1rem);
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, rgba(15, 15, 30, 0.98) 0%, rgba(10, 10, 20, 0.98) 100%);
+      backdrop-filter: blur(20px);
+      min-width: 280px;
+      padding: 1rem;
+      border-radius: 20px;
+      border: 1px solid rgba(212, 166, 63, 0.3);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(31, 58, 147, 0.3);
+      flex-direction: column;
+      gap: 0;
+      opacity: 0;
+      animation: fadeInDown 0.4s ease forwards;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: flex;
+    }
+
+    .dropdown-item {
+      padding: 1rem 1.5rem;
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 12px;
+      transition: all 0.4s ease;
+      border: 1px solid transparent;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      position: relative;
       overflow: hidden;
     }
 
-    .hero-video-wrapper video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .dropdown-item:hover {
+      background: rgba(31, 58, 147, 0.25);
+      border-color: #D4A63F;
+      transform: translateX(8px);
+      box-shadow: 0 5px 20px rgba(212, 166, 63, 0.2);
     }
 
-    .hero-overlay {
+    .dropdown-item-title {
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: #D4A63F;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .dropdown-item-desc {
+      font-size: 0.85rem;
+      color: #b0b0b0;
+      line-height: 1.4;
+    }
+
+    .header-cta {
+      padding: 0.8rem 2rem;
+      background: linear-gradient(135deg, #D4A63F 0%, #f4d483 100%);
+      color: #0a0a1a;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 5px 20px rgba(212, 166, 63, 0.3);
+      letter-spacing: 0.5px;
+    }
+
+    .header-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 35px rgba(212, 166, 63, 0.5);
+      background: linear-gradient(135deg, #f4d483 0%, #D4A63F 100%);
+    }
+
+    /* Mobile Menu */
+    .mobile-menu-btn {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    .mobile-menu-btn span {
+      width: 28px;
+      height: 3px;
+      background: #D4A63F;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu-btn.active span:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .mobile-menu-btn.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-btn.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: 80px;
+    }
+
+    .hero-background {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(135deg, rgba(10, 26, 47, 0.9) 0%, rgba(31, 58, 147, 0.8) 50%, rgba(10, 26, 47, 0.9) 100%);
+      z-index: 0;
     }
 
-    .section-image {
+    .hero-bg-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-bg-slide video {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.6s ease;
     }
 
-    .section-image:hover {
-      transform: scale(1.05);
+    .hero-bg-slide::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.5;
+      background: black;
     }
 
-    .card-3d {
-      transition: all 0.5s ease;
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      text-align: center;
+      padding: 0.2rem;
     }
 
-    .card-3d:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(212, 166, 63, 0.4);
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #ffffff 0%, #D4A63F 50%, #ffffff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      color: #e8e8e8;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .gold-divider {
+      width: 100px;
       height: 3px;
       background: linear-gradient(90deg, transparent, #D4A63F, transparent);
+      margin: 2rem auto;
       position: relative;
-      overflow: hidden;
     }
 
     .gold-divider::after {
@@ -167,607 +339,1144 @@
       position: absolute;
       top: 0;
       left: -100%;
-      width: 50%;
+      width: 100%;
       height: 100%;
       background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
-      animation: shimmer 3s infinite;
+      animation: shimmer 2s infinite;
     }
 
-    .nav-link {
-      position: relative;
-      transition: color 0.3s ease;
+    @keyframes shimmer {
+      100% {
+        left: 100%;
+      }
     }
 
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 50%;
-      width: 0;
-      height: 2px;
-      background: #D4A63F;
-      transition: all 0.3s ease;
-      transform: translateX(-50%);
+    /* Benefits Section */
+    .benefits-section {
+      padding: 5rem 5%;
+      background: linear-gradient(180deg, #0a0a14 0%, #12121e 100%);
     }
 
-    .nav-link:hover::after {
-      width: 100%;
-    }
-
-    .sticky-nav {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(10, 26, 47, 0.98);
-      backdrop-filter: blur(15px);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    }
-
-    .benefit-box {
-      background: linear-gradient(135deg, rgba(31, 58, 147, 0.6), rgba(10, 26, 47, 0.6));
-      border: 2px solid #D4A63F;
-      border-radius: 15px;
-      padding: 2rem;
-      backdrop-filter: blur(10px);
-      transition: all 0.4s ease;
-    }
-
-    .benefit-box:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 35px rgba(212, 166, 63, 0.5);
-      border-color: #FFD700;
-    }
-
-    .text-glow {
-      text-shadow: 0 0 20px rgba(212, 166, 63, 0.5);
-    }
-
-    .gradient-text {
-      background: linear-gradient(135deg, #D4A63F 0%, #FFD700 100%);
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #ffffff 0%, #D4A63F 50%, #ffffff 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    .image-container {
+    .section-subtitle {
+      text-align: center;
+      color: #b8b8b8;
+      font-size: 1.1rem;
+      margin-bottom: 3rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .benefit-card {
+      background: linear-gradient(135deg, rgba(31, 58, 147, 0.2) 0%, rgba(10, 10, 20, 0.9) 100%);
+      padding: 2.5rem;
+      border-radius: 20px;
+      border: 1px solid rgba(212, 166, 63, 0.3);
+      transition: all 0.5s ease;
+      text-align: center;
       position: relative;
       overflow: hidden;
+    }
+
+    .benefit-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(212, 166, 63, 0.1), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .benefit-card:hover::before {
+      left: 100%;
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-10px);
+      border-color: #D4A63F;
+      box-shadow: 0 20px 50px rgba(212, 166, 63, 0.3);
+    }
+
+    .benefit-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #D4A63F 0%, #f4d483 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      margin: 0 auto 1.5rem;
+      transition: all 0.5s ease;
+    }
+
+    .benefit-card:hover .benefit-icon {
+      transform: rotate(360deg) scale(1.1);
+      box-shadow: 0 10px 30px rgba(212, 166, 63, 0.5);
+    }
+
+    .benefit-card h3 {
+      color: #D4A63F;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .benefit-card p {
+      color: #c8c8c8;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    /* Residential Types Section */
+    .residential-section {
+      padding: 5rem 5%;
+      background: #0a0a14;
+    }
+
+    .residential-types {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .residential-card {
+      background: linear-gradient(135deg, rgba(31, 58, 147, 0.2) 0%, rgba(10, 10, 20, 0.9) 100%);
       border-radius: 20px;
-      border: 3px solid #D4A63F;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+      border: 1px solid rgba(212, 166, 63, 0.3);
+      transition: all 0.5s ease;
+      position: relative;
+    }
+
+    .residential-card:hover {
+      transform: translateY(-15px);
+      border-color: #D4A63F;
+      box-shadow: 0 25px 60px rgba(212, 166, 63, 0.3);
+    }
+
+    .residential-image {
+      height: 250px;
+      width: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+
+    .residential-card:hover .residential-image {
+      transform: scale(1.1);
+    }
+
+    .residential-content {
+      padding: 2rem;
+    }
+
+    .residential-badge {
+      display: inline-block;
+      background: rgba(212, 166, 63, 0.2);
+      color: #D4A63F;
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      border: 1px solid #D4A63F;
+    }
+
+    .residential-content h3 {
+      color: #D4A63F;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .residential-content p {
+      color: #c8c8c8;
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .residential-features {
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+
+    .residential-features li {
+      color: #e8e8e8;
+      font-size: 0.9rem;
+      padding-left: 1.5rem;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+
+    .residential-features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #D4A63F;
+      font-weight: 700;
+    }
+
+    .residential-link {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      background: linear-gradient(135deg, #D4A63F 0%, #f4d483 100%);
+      color: #0a0a1a;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.4s ease;
+    }
+
+    .residential-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 35px rgba(212, 166, 63, 0.5);
+      background: linear-gradient(135deg, #f4d483 0%, #D4A63F 100%);
+    }
+
+    /* Gallery Section */
+    .gallery-section {
+      padding: 5rem 5%;
+      background: linear-gradient(180deg, #12121e 0%, #0a0a14 100%);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
     }
 
     .gallery-item {
       position: relative;
+      height: 250px;
+      border-radius: 15px;
       overflow: hidden;
-      border-radius: 12px;
-      border: 2px solid #D4A63F;
+      cursor: pointer;
+      border: 2px solid rgba(212, 166, 63, 0.2);
       transition: all 0.5s ease;
     }
 
-    .gallery-item img {
+    .gallery-item:hover {
+      border-color: #D4A63F;
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(212, 166, 63, 0.3);
+    }
+
+    .gallery-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.6s ease;
+      transition: transform 0.7s ease;
     }
 
-    .gallery-item:hover img {
-      transform: scale(1.15) rotate(2deg);
+    .gallery-item:hover .gallery-img {
+      transform: scale(1.1);
     }
 
-    .gallery-item::before {
-      content: '';
+    .gallery-caption {
       position: absolute;
-      top: 0;
+      bottom: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(212, 166, 63, 0.7), rgba(31, 58, 147, 0.7));
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      z-index: 1;
+      right: 0;
+      padding: 1rem;
+      background: linear-gradient(to top, rgba(10, 10, 20, 0.9), transparent);
     }
 
-    .gallery-item:hover::before {
-      opacity: 1;
+    .gallery-caption h4 {
+      color: #D4A63F;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    /* Process Section */
+    .process-section {
+      padding: 5rem 5%;
+      background: linear-gradient(135deg, #1F3A93 0%, #0a0a14 100%);
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .process-card {
+      background: linear-gradient(135deg, rgba(212, 166, 63, 0.1) 0%, rgba(31, 58, 147, 0.2) 100%);
+      padding: 2rem;
+      border-radius: 20px;
+      text-align: center;
+      border: 1px solid rgba(212, 166, 63, 0.3);
+      transition: all 0.5s ease;
+      position: relative;
+    }
+
+    .process-card:hover {
+      transform: translateY(-8px);
+      border-color: #D4A63F;
+      box-shadow: 0 15px 40px rgba(212, 166, 63, 0.3);
+    }
+
+    .process-number {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #D4A63F 0%, #f4d483 100%);
+      color: #0a0a1a;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin: 0 auto 1rem;
+    }
+
+    .process-card h3 {
+      color: #D4A63F;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .process-card p {
+      color: #c8c8c8;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 6rem 5%;
+      background: linear-gradient(135deg, #1F3A93 0%, #0a0a14 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, #ffffff 0%, #D4A63F 50%, #ffffff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .cta-section p {
+      color: #e8e8e8;
+      font-size: 1.2rem;
+      margin-bottom: 2.5rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.8;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      text-decoration: none;
+      display: inline-block;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #D4A63F 0%, #f4d483 100%);
+      color: #0a0a1a;
+      box-shadow: 0 5px 20px rgba(212, 166, 63, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 35px rgba(212, 166, 63, 0.5);
+      background: linear-gradient(135deg, #f4d483 0%, #D4A63F 100%);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #D4A63F;
+      border: 2px solid #D4A63F;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(212, 166, 63, 0.1);
+      transform: translateY(-3px);
+    }
+
+    /* Footer - Same as commercial page */
+    footer {
+      background: linear-gradient(180deg, #0a0a14 0%, #050508 100%);
+      padding: 5rem 5% 3rem;
+      border-top: 1px solid rgba(212, 166, 63, 0.3);
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 4rem;
+      margin-bottom: 4rem;
+    }
+
+    .footer-section h4.footer-heading {
+      color: #D4A63F;
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-list {
+      list-style: none;
+    }
+
+    .footer-list li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-list a {
+      color: #b8b8b8;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+    }
+
+    .footer-list a:hover {
+      color: #D4A63F;
+      padding-left: 5px;
+    }
+
+    .footer-contact {
+      list-style: none;
+    }
+
+    .footer-contact li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      color: #b8b8b8;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .footer-contact svg {
+      flex-shrink: 0;
+      margin-top: 0.2rem;
+      color: #D4A63F;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(31, 58, 147, 0.3);
+      border: 1px solid rgba(212, 166, 63, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #D4A63F;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .social-link:hover {
+      background: #D4A63F;
+      color: #0a0a1a;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(212, 166, 63, 0.4);
+    }
+
+    .footer-cta {
+      margin-top: 1.5rem;
+      padding: 0.9rem 1.8rem;
+      background: linear-gradient(135deg, #D4A63F 0%, #f4d483 100%);
+      color: #0a0a1a;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      box-shadow: 0 5px 20px rgba(212, 166, 63, 0.3);
+      letter-spacing: 0.5px;
+      width: 100%;
+    }
+
+    .footer-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 35px rgba(212, 166, 63, 0.5);
+      background: linear-gradient(135deg, #f4d483 0%, #D4A63F 100%);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(212, 166, 63, 0.2);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-bottom p {
+      color: #888;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-bottom-links a {
+      color: #b8b8b8;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-bottom-links a:hover {
+      color: #D4A63F;
+    }
+
+    .footer-bottom-links span {
+      color: #555;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1200px) {
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem;
+      }
+    }
+
+    @media (max-width: 968px) {
+      nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100%;
+        width: 320px;
+        background: rgba(10, 10, 20, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 7rem 2.5rem 2.5rem;
+        gap: 2rem;
+        transition: right 0.5s ease;
+        border-left: 1px solid rgba(212, 166, 63, 0.3);
+        box-shadow: -10px 0 50px rgba(0, 0, 0, 0.7);
+      }
+
+      nav.active {
+        right: 0;
+      }
+
+      .mobile-menu-btn {
+        display: flex;
+      }
+
+      .dropdown-content {
+        position: static;
+        transform: none;
+        margin-top: 0.8rem;
+        display: none;
+        box-shadow: none;
+      }
+
+      .dropdown.active .dropdown-content {
+        display: flex;
+      }
+
+      .header-cta {
+        display: none;
+      }
+
+      .hero {
+        height: 60vh;
+        min-height: 400px;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .residential-types {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn {
+        width: 100%;
+        max-width: 300px;
+      }
     }
 
     @media (max-width: 768px) {
-      .grid-section {
-        grid-template-columns: 1fr !important;
+      .benefits-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .process-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+      }
+
+      .footer-bottom-links {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 1rem 4%;
+      }
+
+      .hero {
+        height: 50vh;
+        min-height: 300px;
+        margin-top: 70px;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+      }
+
+      .residential-card {
+        margin: 0 1rem;
+      }
+
+      .gallery-item {
+        height: 200px;
       }
     }
   </style>
-  <style>@view-transition { navigation: auto; }</style>
-  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
- </head>
- <body class="h-full">
-  <div class="main-wrapper" style="background: #0A1A2F;"><!-- HEADER -->
-   <header class="sticky-nav">
-    <nav style="max-width: 1400px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; align-items: center; justify-content: space-between;"><!-- Logo -->
-     <div style="display: flex; align-items: center; gap: 0.75rem;">
-      <svg width="50" height="50" viewbox="0 0 50 50" fill="none"><rect width="50" height="50" rx="12" fill="#D4A63F" /> <path d="M25 12L38 20V35L25 43L12 35V20L25 12Z" fill="#0A1A2F" /> <path d="M25 18L32 22V33L25 37L18 33V22L25 18Z" fill="#D4A63F" />
-      </svg>
-      <div>
-       <div id="logo-name" style="font-size: 1.7rem; font-weight: 900; color: #D4A63F; line-height: 1.2;">
-        Roof &amp; Realms
-       </div>
-       <div style="font-size: 0.65rem; color: #D4A63F; letter-spacing: 3px; opacity: 0.9;">
-        MODULAR SOLUTIONS
-       </div>
-      </div>
-     </div><!-- Navigation -->
-     <div style="display: flex; gap: 2.5rem; align-items: center;"><a href="#" class="nav-link" style="color: white; text-decoration: none; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.5px;">HOME</a> <a href="#" class="nav-link" style="color: white; text-decoration: none; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.5px;">PRODUCTS</a> <a href="#" class="nav-link" style="color: white; text-decoration: none; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.5px;">MATERIAL</a> <a href="#" class="nav-link" style="color: white; text-decoration: none; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.5px;">ABOUT</a> <a href="#" class="nav-link" style="color: white; text-decoration: none; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.5px;">CONTACT</a>
-     </div>
-    </nav>
-   </header><!-- HERO SECTION WITH VIDEO -->
-   <section style="position: relative; height: 500px; display: flex; align-items: center; overflow: hidden;"><!-- Background Video -->
-    <div class="hero-video-wrapper">
-     <video autoplay muted loop playsinline><source src="https://cdn.coverr.co/videos/coverr-aerial-view-of-beautiful-resort-1061/1080p.mp4" type="video/mp4">
-     </video>
-    </div><!-- Overlay -->
-    <div class="hero-overlay"></div><!-- Content -->
-    <div style="position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 2rem; width: 100%;">
-     <div style="max-width: 700px;">
-      <div class="animate-fade-up" style="display: inline-block; background: rgba(212, 166, 63, 0.3); padding: 0.4rem 1.2rem; border-radius: 50px; margin-bottom: 1rem; border: 2px solid #D4A63F;"><span style="color: #D4A63F; font-weight: 700; font-size: 0.75rem; letter-spacing: 1px;">✦ PREMIUM CONSTRUCTION</span>
-      </div>
-      <h1 id="hero-headline" class="animate-fade-up text-glow" style="font-size: 3rem; font-weight: 900; color: #D4A63F; margin-bottom: 1rem; line-height: 1.1; animation-delay: 0.2s;">Residential Modular Solutions</h1>
-      <h2 id="hero-subheadline" class="animate-fade-up" style="font-size: 1.3rem; font-weight: 600; color: white; margin-bottom: 1rem; line-height: 1.4; animation-delay: 0.4s;">Homes engineered for speed, comfort, design and certainty.</h2>
-      <div class="gold-divider animate-fade-up" style="width: 100px; margin: 1rem 0; animation-delay: 0.6s;"></div>
-      <p id="hero-description" class="animate-fade-up" style="font-size: 0.95rem; color: rgba(255, 255, 255, 0.95); line-height: 1.6; max-width: 650px; animation-delay: 0.8s;">For today's home buyer, time, comfort and design matter as much as structure. Roof &amp; Realms modular residential solutions are engineered to feel like premium RCC homes while eliminating years of construction uncertainty.</p>
-     </div>
-    </div>
-   </section><!-- BENEFITS SECTION - GRID STYLE -->
-   <section style="background: linear-gradient(180deg, #0A1A2F 0%, #1F3A93 50%, #0A1A2F 100%); padding: 3rem 2rem;">
-    <div style="max-width: 1200px; margin: 0 auto;">
-     <div style="text-align: center; margin-bottom: 2.5rem;">
-      <h2 class="gradient-text" style="font-size: 2rem; font-weight: 900; margin-bottom: 0.5rem;">Core Advantages</h2>
-      <div class="gold-divider" style="width: 120px; margin: 0.8rem auto;"></div>
-      <p style="color: rgba(255, 255, 255, 0.85); font-size: 0.95rem;">Experience modular excellence</p>
-     </div>
-     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;"><!-- Benefit 1 -->
-      <div class="benefit-box">
-       <div style="text-align: center;">
-        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #D4A63F, #FFD700); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 1rem; box-shadow: 0 5px 15px rgba(212, 166, 63, 0.5);">
-         ⚡
-        </div>
-        <h3 style="font-size: 1.3rem; font-weight: 900; color: #D4A63F; margin-bottom: 0.8rem;">60% Faster</h3>
-        <p style="color: rgba(255, 255, 255, 0.9); line-height: 1.5; font-size: 0.9rem;">Factory-controlled assembly eliminates site delays. Move in months earlier.</p>
-       </div>
-      </div><!-- Benefit 2 -->
-      <div class="benefit-box">
-       <div style="text-align: center;">
-        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #D4A63F, #FFD700); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 1rem; box-shadow: 0 5px 15px rgba(212, 166, 63, 0.5);">
-         🏠
-        </div>
-        <h3 style="font-size: 1.3rem; font-weight: 900; color: #D4A63F; margin-bottom: 0.8rem;">Superior Comfort</h3>
-        <p style="color: rgba(255, 255, 255, 0.9); line-height: 1.5; font-size: 0.9rem;">Enhanced insulation keeps homes cooler, warmer, and quieter year-round.</p>
-       </div>
-      </div><!-- Benefit 3 -->
-      <div class="benefit-box">
-       <div style="text-align: center;">
-        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #D4A63F, #FFD700); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 1rem; box-shadow: 0 5px 15px rgba(212, 166, 63, 0.5);">
-         ✓
-        </div>
-        <h3 style="font-size: 1.3rem; font-weight: 900; color: #D4A63F; margin-bottom: 0.8rem;">Quality Assured</h3>
-        <p style="color: rgba(255, 255, 255, 0.9); line-height: 1.5; font-size: 0.9rem;">Every component documented and tested with complete traceability.</p>
-       </div>
-      </div>
-     </div>
-    </div>
-   </section><!-- VILLAS SECTION - IMAGE RIGHT, CONTENT LEFT -->
-   <section style="background: #0A1A2F; padding: 3rem 2rem;">
-    <div style="max-width: 1200px; margin: 0 auto;">
-     <div class="grid-section" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center;"><!-- Content LEFT -->
-      <div class="animate-slide-left">
-       <div style="display: inline-block; background: rgba(212, 166, 63, 0.2); padding: 0.4rem 1rem; border-radius: 50px; margin-bottom: 1rem; border: 2px solid #D4A63F;"><span style="color: #D4A63F; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.5px;">LUXURY LIVING</span>
-       </div>
-       <h2 class="gradient-text" style="font-size: 2.5rem; font-weight: 900; margin-bottom: 1rem; line-height: 1.1;">Villas</h2>
-       <div class="gold-divider" style="width: 80px; margin: 1rem 0;"></div>
-       <p style="color: rgba(255, 255, 255, 0.95); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">Premium aesthetics with double-height spaces, cleaner detailing, and strong insulation. Modular villas deliver architectural excellence without compromising on luxury or comfort.</p>
-       <div style="display: grid; gap: 0.8rem;">
-        <div style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: linear-gradient(135deg, rgba(212, 166, 63, 0.15), rgba(31, 58, 147, 0.15)); border-radius: 8px; border-left: 3px solid #D4A63F;"><span style="color: #D4A63F; font-size: 1.2rem; font-weight: 900;">✓</span> <span style="color: white; font-size: 0.9rem; font-weight: 600;">Premium Precision-Built Aesthetics</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: linear-gradient(135deg, rgba(212, 166, 63, 0.15), rgba(31, 58, 147, 0.15)); border-radius: 8px; border-left: 3px solid #D4A63F;"><span style="color: #D4A63F; font-size: 1.2rem; font-weight: 900;">✓</span> <span style="color: white; font-size: 0.9rem; font-weight: 600;">Energy Efficient - Lower Bills</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: linear-gradient(135deg, rgba(212, 166, 63, 0.15), rgba(31, 58, 147, 0.15)); border-radius: 8px; border-left: 3px solid #D4A63F;"><span style="color: #D4A63F; font-size: 1.2rem; font-weight: 900;">✓</span> <span style="color: white; font-size: 0.9rem; font-weight: 600;">Superior Sound Insulation</span>
-        </div>
-       </div>
-      </div><!-- Image RIGHT -->
-      <div class="animate-slide-right image-container"><img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&amp;q=80" alt="Luxury Villa" class="section-image" style="height: 350px;">
-      </div>
-     </div>
-    </div>
-   </section><!-- FARMHOUSES SECTION - IMAGE LEFT, CONTENT RIGHT -->
-   <section style="background: linear-gradient(135deg, #1F3A93 0%, #0A1A2F 100%); padding: 3rem 2rem;">
-    <div style="max-width: 1200px; margin: 0 auto;">
-     <div class="grid-section" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center;"><!-- Image LEFT -->
-      <div class="animate-slide-left image-container"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1200&amp;q=80" alt="Farmhouse" class="section-image" style="height: 350px;">
-      </div><!-- Content RIGHT -->
-      <div class="animate-slide-right">
-       <div style="display: inline-block; background: rgba(212, 166, 63, 0.2); padding: 0.4rem 1rem; border-radius: 50px; margin-bottom: 1rem; border: 2px solid #D4A63F;"><span style="color: #D4A63F; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.5px;">COUNTRY LIVING</span>
-       </div>
-       <h2 class="gradient-text" style="font-size: 2.5rem; font-weight: 900; margin-bottom: 1rem; line-height: 1.1;">Farmhouses</h2>
-       <div class="gold-divider" style="width: 80px; margin: 1rem 0;"></div>
-       <p style="color: rgba(255, 255, 255, 0.95); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">Build on remote terrain with minimal environmental impact. Engineered to be comfortable across extreme climates while maintaining fast execution with premium finishes.</p>
-       <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
-        <div style="text-align: center; padding: 1rem; background: rgba(212, 166, 63, 0.15); border-radius: 10px; border: 2px solid #D4A63F;">
-         <div style="font-size: 2rem; margin-bottom: 0.5rem;">
-          🏔️
-         </div>
-         <h4 style="color: #D4A63F; font-weight: 800; margin-bottom: 0.3rem; font-size: 0.95rem;">Remote Ready</h4>
-         <p style="color: rgba(255, 255, 255, 0.85); font-size: 0.8rem; line-height: 1.4;">Any terrain</p>
-        </div>
-        <div style="text-align: center; padding: 1rem; background: rgba(212, 166, 63, 0.15); border-radius: 10px; border: 2px solid #D4A63F;">
-         <div style="font-size: 2rem; margin-bottom: 0.5rem;">
-          🌿
-         </div>
-         <h4 style="color: #D4A63F; font-weight: 800; margin-bottom: 0.3rem; font-size: 0.95rem;">Eco-Friendly</h4>
-         <p style="color: rgba(255, 255, 255, 0.85); font-size: 0.8rem; line-height: 1.4;">Low impact</p>
-        </div>
-        <div style="text-align: center; padding: 1rem; background: rgba(212, 166, 63, 0.15); border-radius: 10px; border: 2px solid #D4A63F;">
-         <div style="font-size: 2rem; margin-bottom: 0.5rem;">
-          ❄️
-         </div>
-         <h4 style="color: #D4A63F; font-weight: 800; margin-bottom: 0.3rem; font-size: 0.95rem;">All-Climate</h4>
-         <p style="color: rgba(255, 255, 255, 0.85); font-size: 0.8rem; line-height: 1.4;">Weather proof</p>
-        </div>
-        <div style="text-align: center; padding: 1rem; background: rgba(212, 166, 63, 0.15); border-radius: 10px; border: 2px solid #D4A63F;">
-         <div style="font-size: 2rem; margin-bottom: 0.5rem;">
-          🔥
-         </div>
-         <h4 style="color: #D4A63F; font-weight: 800; margin-bottom: 0.3rem; font-size: 0.95rem;">Fast Build</h4>
-         <p style="color: rgba(255, 255, 255, 0.85); font-size: 0.8rem; line-height: 1.4;">Rapid timeline</p>
-        </div>
-       </div>
-      </div>
-     </div>
-    </div>
-   </section><!-- APARTMENTS SECTION - IMAGE RIGHT, CONTENT LEFT -->
-   <section style="background: #0A1A2F; padding: 3rem 2rem;">
-    <div style="max-width: 1200px; margin: 0 auto;">
-     <div class="grid-section" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center;"><!-- Content LEFT -->
-      <div class="animate-slide-left">
-       <div style="display: inline-block; background: rgba(212, 166, 63, 0.2); padding: 0.4rem 1rem; border-radius: 50px; margin-bottom: 1rem; border: 2px solid #D4A63F;"><span style="color: #D4A63F; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.5px;">MULTI-STORY</span>
-       </div>
-       <h2 class="gradient-text" style="font-size: 2.5rem; font-weight: 900; margin-bottom: 1rem; line-height: 1.1;">Apartments (G+3)</h2>
-       <div class="gold-divider" style="width: 80px; margin: 1rem 0;"></div>
-       <p style="color: rgba(255, 255, 255, 0.95); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">Multi-story residential buildings engineered for speed and consistency. Perfect for developers seeking faster project delivery and superior quality control across all units.</p>
-       <div style="background: linear-gradient(135deg, rgba(212, 166, 63, 0.2), rgba(31, 58, 147, 0.2)); padding: 1.5rem; border-radius: 15px; border: 2px solid rgba(212, 166, 63, 0.5);">
-        <h3 style="color: #D4A63F; font-size: 1.2rem; font-weight: 900; margin-bottom: 1rem; text-align: center;">Developer Benefits</h3>
-        <div style="display: grid; gap: 0.8rem;">
-         <div style="display: flex; align-items: center; gap: 0.8rem;">
-          <div style="background: #D4A63F; color: #0A1A2F; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1rem; flex-shrink: 0;">
-           1
-          </div><span style="color: white; font-size: 0.9rem; font-weight: 600;">40-50% faster Phase 1 handover</span>
-         </div>
-         <div style="display: flex; align-items: center; gap: 0.8rem;">
-          <div style="background: #D4A63F; color: #0A1A2F; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1rem; flex-shrink: 0;">
-           2
-          </div><span style="color: white; font-size: 0.9rem; font-weight: 600;">Earlier sales velocity and ROI</span>
-         </div>
-         <div style="display: flex; align-items: center; gap: 0.8rem;">
-          <div style="background: #D4A63F; color: #0A1A2F; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1rem; flex-shrink: 0;">
-           3
-          </div><span style="color: white; font-size: 0.9rem; font-weight: 600;">Consistent quality across floors</span>
-         </div>
-         <div style="display: flex; align-items: center; gap: 0.8rem;">
-          <div style="background: #D4A63F; color: #0A1A2F; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1rem; flex-shrink: 0;">
-           4
-          </div><span style="color: white; font-size: 0.9rem; font-weight: 600;">Scalable across multiple cities</span>
-         </div>
-        </div>
-       </div>
-      </div><!-- Image RIGHT -->
-      <div class="animate-slide-right image-container"><img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&amp;q=80" alt="Apartment Complex" class="section-image" style="height: 350px;">
-      </div>
-     </div>
-    </div>
-   </section><!-- STUDIOS & PENTHOUSES - CARD STYLE WITH IMAGES -->
-   <section style="background: linear-gradient(180deg, #1F3A93 0%, #0A1A2F 100%); padding: 3rem 2rem;">
-    <div style="max-width: 1200px; margin: 0 auto;">
-     <div style="text-align: center; margin-bottom: 2.5rem;">
-      <h2 class="gradient-text" style="font-size: 2rem; font-weight: 900; margin-bottom: 0.5rem;">Compact &amp; Luxury Options</h2>
-      <div class="gold-divider" style="width: 120px; margin: 0.8rem auto;"></div>
-      <p style="color: rgba(255, 255, 255, 0.85); font-size: 0.95rem;">From efficient studios to luxurious penthouses</p>
-     </div>
-     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;"><!-- Studios Card -->
-      <div class="card-3d" style="position: relative; border-radius: 15px; overflow: hidden; border: 2px solid #D4A63F; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);">
-       <div style="height: 200px; overflow: hidden;"><img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&amp;q=80" alt="Studio" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease;">
-       </div>
-       <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(10, 26, 47, 0.98), rgba(31, 58, 147, 0.98));">
-        <div style="display: inline-block; background: rgba(212, 166, 63, 0.2); padding: 0.3rem 0.8rem; border-radius: 50px; margin-bottom: 0.8rem; border: 1px solid #D4A63F;"><span style="color: #D4A63F; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.5px;">COMPACT LIVING</span>
-        </div>
-        <h2 class="gradient-text" style="font-size: 1.8rem; font-weight: 900; margin-bottom: 0.8rem;">Studios</h2>
-        <p style="color: rgba(255, 255, 255, 0.95); font-size: 0.9rem; line-height: 1.5; margin-bottom: 1rem;">Efficient living spaces optimized for modern lifestyles. Perfect for rental properties, co-living projects, and first-time homeowners.</p>
-        <div style="display: flex; flex-wrap: wrap; gap: 0.6rem;"><span style="background: rgba(212, 166, 63, 0.25); color: #D4A63F; padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; border: 2px solid #D4A63F; font-weight: 700;">Cost Effective</span> <span style="background: rgba(212, 166, 63, 0.25); color: #D4A63F; padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; border: 2px solid #D4A63F; font-weight: 700;">Fast Income</span> <span style="background: rgba(212, 166, 63, 0.25); color: #D4A63F; padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; border: 2px solid #D4A63F; font-weight: 700;">Smart Layout</span>
-        </div>
-       </div>
-      </div><!-- Penthouses Card -->
-      <div class="card-3d" style="position: relative; border-radius: 15px; overflow: hidden; border: 2px solid #D4A63F; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);">
-       <div style="height: 200px; overflow: hidden;"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&amp;q=80" alt="Penthouse" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease;">
-       </div>
-       <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(10, 26, 47, 0.98), rgba(31, 58, 147, 0.98));">
-        <div style="display: inline-block; background: rgba(212, 166, 63, 0.2); padding: 0.3rem 0.8rem; border-radius: 50px; margin-bottom: 0.8rem; border: 1px solid #D4A63F;"><span style="color: #D4A63F; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.5px;">LUXURY LIVING</span>
-        </div>
-        <h2 class="gradient-text" style="font-size: 1.8rem; font-weight: 900; margin-bottom: 0.8rem;">Penthouses</h2>
-        <p style="color: rgba(255, 255, 255, 0.95); font-size: 0.9rem; line-height: 1.5; margin-bottom: 1rem;">Luxury at new heights with premium terraces and glass features. Signature architecture delivered faster with lightweight LGSF construction.</p>
-        <div style="display: flex; flex-wrap: wrap; gap: 0.6rem;"><span style="background: rgba(212, 166, 63, 0.25); color: #D4A63F; padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; border: 2px solid #D4A63F; font-weight: 700;">Lightweight LGSF</span> <span style="background: rgba(212, 166, 63, 0.25); color: #D4A63F; padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; border: 2px solid #D4A63F; font-weight: 700;">Premium Terraces</span> <span style="background: rgba(212, 166, 63, 0.25); color: #D4A63F; padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; border: 2px solid #D4A63F; font-weight: 700;">Fast Delivery</span>
-        </div>
-       </div>
-      </div>
-     </div>
-    </div>
-   </section><!-- GALLERY SECTION - MASONRY STYLE -->
-   <section style="background: #0A1A2F; padding: 3rem 2rem;">
-    <div style="max-width: 1200px; margin: 0 auto;">
-     <div style="text-align: center; margin-bottom: 2.5rem;">
-      <h2 class="gradient-text" style="font-size: 2rem; font-weight: 900; margin-bottom: 0.5rem;">Our Portfolio</h2>
-      <div class="gold-divider" style="width: 120px; margin: 0.8rem auto;"></div>
-      <p style="color: rgba(255, 255, 255, 0.85); font-size: 0.95rem;">Explore premium modular homes we've delivered</p>
-     </div>
-     <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;">
-      <div class="gallery-item" style="height: 220px; grid-column: span 2; grid-row: span 2;"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&amp;q=80" alt="Villa Exterior">
-      </div>
-      <div class="gallery-item" style="height: 220px;"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&amp;q=80" alt="Modern Interior">
-      </div>
-      <div class="gallery-item" style="height: 220px;"><img src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=600&amp;q=80" alt="Living Space">
-      </div>
-      <div class="gallery-item" style="height: 220px;"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=600&amp;q=80" alt="Bedroom">
-      </div>
-      <div class="gallery-item" style="height: 220px;"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&amp;q=80" alt="Kitchen">
-      </div>
-      <div class="gallery-item" style="height: 220px; grid-column: span 2;"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=900&amp;q=80" alt="Apartment Complex">
-      </div>
-      <div class="gallery-item" style="height: 220px;"><img src="https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?w=600&amp;q=80" alt="Dining">
-      </div>
-      <div class="gallery-item" style="height: 220px;"><img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&amp;q=80" alt="Outdoor">
-      </div>
-     </div>
-    </div>
-   </section><!-- CTA SECTION - CENTERED STYLE -->
-   <section style="background: linear-gradient(135deg, #1F3A93 0%, #0A1A2F 50%, #1F3A93 100%); padding: 3rem 2rem; position: relative; overflow: hidden;"><!-- Decorative Elements -->
-    <div style="position: absolute; top: -100px; left: -100px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(212, 166, 63, 0.2) 0%, transparent 70%); border-radius: 50%; filter: blur(80px);"></div>
-    <div style="position: absolute; bottom: -100px; right: -100px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(212, 166, 63, 0.2) 0%, transparent 70%); border-radius: 50%; filter: blur(80px);"></div>
-    <div style="max-width: 900px; margin: 0 auto; text-align: center; position: relative; z-index: 1;">
-     <div style="display: inline-block; background: rgba(212, 166, 63, 0.3); padding: 0.4rem 1.2rem; border-radius: 50px; margin-bottom: 1.5rem; border: 2px solid #D4A63F;"><span style="color: #D4A63F; font-weight: 800; font-size: 0.75rem; letter-spacing: 1px;">✦ START YOUR PROJECT</span>
-     </div>
-     <h2 id="cta-headline" class="text-glow" style="font-size: 2.5rem; font-weight: 900; color: #D4A63F; margin-bottom: 1rem; line-height: 1.2;">Build your dream home faster and better.</h2>
-     <div class="gold-divider" style="width: 150px; margin: 1.5rem auto;"></div>
-     <p style="font-size: 1rem; color: rgba(255, 255, 255, 0.95); margin-bottom: 2.5rem; line-height: 1.6; max-width: 700px; margin-left: auto; margin-right: auto;">Experience the future of residential construction with Roof &amp; Realms modular solutions. Superior quality, faster delivery, guaranteed satisfaction.</p>
-     <div style="display: flex; gap: 2.5rem; justify-content: center; flex-wrap: wrap;">
-      <div style="text-align: center;">
-       <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #D4A63F, #FFD700); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 0.8rem; box-shadow: 0 5px 15px rgba(212, 166, 63, 0.5);">
-        📞
-       </div>
-       <h4 style="color: white; font-weight: 800; font-size: 1rem; margin-bottom: 0.3rem;">Call Us</h4>
-       <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.85rem;">+91 XXX XXX XXXX</p>
-      </div>
-      <div style="text-align: center;">
-       <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #D4A63F, #FFD700); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 0.8rem; box-shadow: 0 5px 15px rgba(212, 166, 63, 0.5);">
-        📧
-       </div>
-       <h4 style="color: white; font-weight: 800; font-size: 1rem; margin-bottom: 0.3rem;">Email Us</h4>
-       <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.85rem;">info@roofrealms.com</p>
-      </div>
-      <div style="text-align: center;">
-       <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #D4A63F, #FFD700); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 0.8rem; box-shadow: 0 5px 15px rgba(212, 166, 63, 0.5);">
-        📍
-       </div>
-       <h4 style="color: white; font-weight: 800; font-size: 1rem; margin-bottom: 0.3rem;">Visit Us</h4>
-       <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.85rem;">Location, City</p>
-      </div>
-     </div>
-    </div>
-   </section><!-- FOOTER -->
-   <footer style="background: #0A1A2F; border-top: 3px solid #D4A63F; padding: 4rem 2rem 2rem;">
-    <div style="max-width: 1400px; margin: 0 auto;">
-     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 4rem; margin-bottom: 4rem;">
-      <div>
-       <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 2rem;">
-        <svg width="50" height="50" viewbox="0 0 50 50" fill="none"><rect width="50" height="50" rx="12" fill="#D4A63F" /> <path d="M25 12L38 20V35L25 43L12 35V20L25 12Z" fill="#0A1A2F" /> <path d="M25 18L32 22V33L25 37L18 33V22L25 18Z" fill="#D4A63F" />
-        </svg>
-        <div>
-         <div id="footer-company-name" style="font-size: 1.5rem; font-weight: 900; color: #D4A63F;">
-          Roof &amp; Realms
-         </div>
-         <div style="font-size: 0.65rem; color: #D4A63F; letter-spacing: 2.5px; opacity: 0.9;">
-          MODULAR SOLUTIONS
-         </div>
-        </div>
-       </div>
-       <p style="color: rgba(255, 255, 255, 0.8); line-height: 1.9; font-size: 1.05rem;">Engineering the future of residential and commercial construction with precision modular solutions.</p>
-      </div>
-      <div>
-       <h4 style="color: #D4A63F; margin-bottom: 2rem; font-size: 1.3rem; font-weight: 900;">Quick Links</h4>
-       <ul style="list-style: none; color: rgba(255, 255, 255, 0.8); line-height: 2.5; font-size: 1.05rem;">
-        <li>Home</li>
-        <li>Products</li>
-        <li>Material</li>
-        <li>About Us</li>
-        <li>Contact</li>
-       </ul>
-      </div>
-      <div>
-       <h4 style="color: #D4A63F; margin-bottom: 2rem; font-size: 1.3rem; font-weight: 900;">Residential</h4>
-       <ul style="list-style: none; color: rgba(255, 255, 255, 0.8); line-height: 2.5; font-size: 1.05rem;">
-        <li>Villas</li>
-        <li>Farmhouses</li>
-        <li>Apartments</li>
-        <li>Studios</li>
-        <li>Penthouses</li>
-       </ul>
-      </div>
-      <div>
-       <h4 style="color: #D4A63F; margin-bottom: 2rem; font-size: 1.3rem; font-weight: 900;">Contact</h4>
-       <div style="color: rgba(255, 255, 255, 0.8); line-height: 2.5; font-size: 1.05rem;">
-        <p>📧 info@roofrealms.com</p>
-        <p>📞 +91 XXX XXX XXXX</p>
-        <p>📍 Location, City</p>
-       </div>
-      </div>
-     </div>
-     <div class="gold-divider" style="margin: 3rem auto;"></div>
-     <div style="text-align: center; color: rgba(255, 255, 255, 0.6); font-size: 1rem;">
-      <p>© 2024 Roof &amp; Realms. All rights reserved. | Engineered for Excellence</p>
-     </div>
-    </div>
-   </footer>
-  </div>
-  <script>
-    const defaultConfig = {
-      hero_headline: "Residential Modular Solutions",
-      hero_subheadline: "Homes engineered for speed, comfort, design and certainty.",
-      hero_description: "For today's home buyer, time, comfort and design matter as much as structure. Roof & Realms modular residential solutions are engineered to feel like premium RCC homes while eliminating years of construction uncertainty.",
-      cta_headline: "Build your dream home faster and better.",
-      company_name: "Roof & Realms",
-      background_color: "#0A1A2F",
-      surface_color: "#1F3A93",
-      text_color: "#FFFFFF",
-      primary_action: "#D4A63F",
-      secondary_action: "#D4A63F",
-      font_family: "system-ui, -apple-system, sans-serif",
-      font_size: 16
-    };
+</head>
 
-    async function onConfigChange(config) {
-      const customFont = config.font_family || defaultConfig.font_family;
-      const baseFontStack = 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
-      const fontFamily = `${customFont}, ${baseFontStack}`;
-      const baseSize = config.font_size || defaultConfig.font_size;
-      
-      document.body.style.fontFamily = fontFamily;
-      document.body.style.background = config.background_color || defaultConfig.background_color;
-      
-      const heroHeadline = document.getElementById('hero-headline');
-      if (heroHeadline) {
-        heroHeadline.textContent = config.hero_headline || defaultConfig.hero_headline;
-        heroHeadline.style.fontSize = `${baseSize * 3.4375}px`;
-        heroHeadline.style.color = config.primary_action || defaultConfig.primary_action;
+<body>
+  <!-- Header -->
+  <header id="header">
+    <div class="logo-container" onclick="window.location.href='./index.html'">
+      <img src="image/logo.png" alt="Logo" style="width: 100px; height: 70px;">
+    </div>
+    <nav id="mainNav">
+      <a href="./index.html">HOME</a>
+      <div class="dropdown" id="productsDropdown">
+        <span class="nav-item">PRODUCTS ▾</span>
+        <div class="dropdown-content">
+          <a href="./commercial.html" class="dropdown-item"> <span class="dropdown-item-title">🏢
+              COMMERCIAL</span>
+          </a>
+          <a href="./hospitality.html" class="dropdown-item"> <span class="dropdown-item-title">🏨
+              HOSPITALITY</span> </a>
+          <a href="./residential.html" class="dropdown-item"> <span class="dropdown-item-title">🏠
+              RESIDENTIAL</span> </a>
+          <a href="./institutional.html" class="dropdown-item"> <span class="dropdown-item-title">🎓
+              INSTITUTIONAL</span> </a>
+          <a href="./public-facilities.html" class="dropdown-item">
+            <span class="dropdown-item-title">🏛 PUBLIC FACILITIES</span> </a>
+        </div>
+      </div>
+      </div>
+      <a href="./materials.html">MATERIALS</a>
+      <a href="./about-us.html">ABOUT US</a>
+      <a href="./contact.html">CONTACT</a>
+    </nav>
+    <button class="header-cta" onclick="window.location.href='./contact.html'">Schedule Call</button>
+    <div class="mobile-menu-btn" id="mobileMenuBtn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-background">
+      <div class="hero-bg-slide active">
+        <video src="image/Commercial.mp4" autoplay muted loop playsinline class="hero-video"
+          onerror="this.style.display='none';"></video>
+      </div>
+    </div>
+    <div class="hero-content">
+      <h1>Premium Residential Solutions</h1>
+      <p class="hero-subtitle">Engineered for speed, comfort, and timeless design</p>
+      <div class="gold-divider"></div>
+      <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.1rem; max-width: 700px; margin: 0 auto;">Experience the
+        future of home construction with modular precision that delivers superior quality, faster timelines, and
+        energy-efficient living spaces.</p>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="benefits-section">
+    <h2 class="section-title">Why Choose Modular Homes</h2>
+    <p class="section-subtitle">Superior advantages over traditional construction</p>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon">⚡</div>
+        <h3>60% Faster Completion</h3>
+        <p>Factory-controlled assembly eliminates weather delays and on-site complications. Move into your dream home
+          months earlier.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🏠</div>
+        <h3>Energy Efficient Living</h3>
+        <p>Superior insulation keeps homes cooler in summer and warmer in winter, reducing energy costs by up to 40%.
+        </p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">✓</div>
+        <h3>Guaranteed Quality</h3>
+        <p>Every component is precision-engineered in controlled factory conditions with complete documentation and
+          testing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Residential Types -->
+  <section class="residential-section">
+    <h2 class="section-title">Our Residential Solutions</h2>
+    <p class="section-subtitle">Premium modular homes for every lifestyle</p>
+
+    <div class="residential-types">
+      <!-- Villas -->
+      <div class="residential-card">
+        <img src="image/residential-villa.jpg" alt="Luxury Villa" class="residential-image"
+          onerror="this.src='https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&q=80'">
+        <div class="residential-content">
+          <span class="residential-badge">LUXURY LIVING</span>
+          <h3>Villas</h3>
+          <p>Premium aesthetics with double-height spaces, cleaner detailing, and strong insulation. Modular villas
+            deliver architectural excellence without compromising on luxury or comfort.</p>
+          <ul class="residential-features">
+            <li>Premium precision-built aesthetics</li>
+            <li>Energy efficient - lower utility bills</li>
+            <li>Superior sound insulation</li>
+            <li>Customizable layouts</li>
+          </ul>
+          <a href="#villas" class="residential-link">Explore Villas</a>
+        </div>
+      </div>
+
+      <!-- Apartments -->
+      <div class="residential-card">
+        <img src="image/residential-apartment.jpg" alt="Apartments" class="residential-image"
+          onerror="this.src='https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&q=80'">
+        <div class="residential-content">
+          <span class="residential-badge">MULTI-STORY</span>
+          <h3>Apartments (G+3)</h3>
+          <p>Multi-story residential buildings engineered for speed and consistency. Perfect for developers seeking
+            faster project delivery and superior quality control across all units.</p>
+          <ul class="residential-features">
+            <li>40-50% faster Phase 1 handover</li>
+            <li>Earlier sales velocity and ROI</li>
+            <li>Consistent quality across floors</li>
+            <li>Scalable across multiple cities</li>
+          </ul>
+          <a href="#apartments" class="residential-link">Explore Apartments</a>
+        </div>
+      </div>
+
+      <!-- Farmhouses -->
+      <div class="residential-card">
+        <img src="image/residential-farmhouse.jpg" alt="Farmhouse" class="residential-image"
+          onerror="this.src='https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1200&q=80'">
+        <div class="residential-content">
+          <span class="residential-badge">COUNTRY LIVING</span>
+          <h3>Farmhouses</h3>
+          <p>Build on remote terrain with minimal environmental impact. Engineered to be comfortable across extreme
+            climates while maintaining fast execution with premium finishes.</p>
+          <ul class="residential-features">
+            <li>Remote ready - any terrain</li>
+            <li>Eco-friendly - low impact</li>
+            <li>All-climate comfort</li>
+            <li>Rapid construction timeline</li>
+          </ul>
+          <a href="#farmhouses" class="residential-link">Explore Farmhouses</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section class="process-section">
+    <h2 class="section-title">Our 5-Step Process</h2>
+    <p class="section-subtitle">From concept to keys in hand</p>
+
+    <div class="process-steps">
+      <div class="process-card">
+        <div class="process-number">1</div>
+        <h3>Design & Planning</h3>
+        <p>Collaborative design process where we bring your vision to life with 3D modeling and detailed planning.</p>
+      </div>
+      <div class="process-card">
+        <div class="process-number">2</div>
+        <h3>Factory Fabrication</h3>
+        <p>Precision manufacturing of all components in our controlled factory environment for guaranteed quality.</p>
+      </div>
+      <div class="process-card">
+        <div class="process-number">3</div>
+        <h3>Site Preparation</h3>
+        <p>Simultaneous site work including foundation preparation while factory fabrication is underway.</p>
+      </div>
+      <div class="process-card">
+        <div class="process-number">4</div>
+        <h3>Module Assembly</h3>
+        <p>Rapid on-site assembly of precision modules, reducing construction time by up to 60%.</p>
+      </div>
+      <div class="process-card">
+        <div class="process-number">5</div>
+        <h3>Handover & Support</h3>
+        <p>Complete handover with warranty and ongoing support for your peace of mind.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="gallery-section">
+    <h2 class="section-title">Residential Portfolio</h2>
+    <p class="section-subtitle">Explore our delivered modular homes</p>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=80" alt="Modern Villa"
+          class="gallery-img">
+        <div class="gallery-caption">
+          <h4>Modern Villa</h4>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80" alt="Contemporary Interior"
+          class="gallery-img">
+        <div class="gallery-caption">
+          <h4>Contemporary Interior</h4>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=600&q=80" alt="Luxury Bedroom"
+          class="gallery-img">
+        <div class="gallery-caption">
+          <h4>Luxury Bedroom</h4>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" alt="Modern Kitchen"
+          class="gallery-img">
+        <div class="gallery-caption">
+          <h4>Modern Kitchen</h4>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=900&q=80" alt="Apartment Complex"
+          class="gallery-img">
+        <div class="gallery-caption">
+          <h4>Apartment Complex</h4>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&q=80" alt="Outdoor Living"
+          class="gallery-img">
+        <div class="gallery-caption">
+          <h4>Outdoor Living</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <h2>Build Your Dream Home Faster</h2>
+    <p>Experience the future of residential construction with Roof & Realms modular solutions. Superior quality, faster
+      delivery, guaranteed satisfaction.</p>
+    <div class="cta-buttons">
+      <a href="./contact.html" class="btn btn-primary">Schedule Consultation</a>
+      <a href="./contact.html" class="btn btn-secondary">Download Brochure</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-grid">
+        <!-- Company Info -->
+        <div class="footer-section">
+          <div class="logo-container" style="justify-content: flex-start;">
+            <img src="image/logo.png" alt="Logo" style="width: 200px; height: 100px; margin-bottom: 10px;">
+          </div>
+          <p class="footer-tagline" style="text-align: left; font-size: 1.3rem; margin-bottom: 1rem;">Built with
+            Precision. Delivered with Pride.</p>
+          <p style="color: #888; line-height: 1.8; margin-bottom: 1.5rem;">Premium modular construction solutions for a
+            sustainable future. Transforming ideas into reality with LGSF technology.</p>
+          <div class="footer-social">
+            <a href="#" class="social-link" aria-label="Facebook">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+              </svg>
+            </a>
+            <a href="#" class="social-link" aria-label="Twitter">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+              </svg>
+            </a>
+            <a href="#" class="social-link" aria-label="LinkedIn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-section">
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-list">
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./about-us.html">About Us</a></li>
+            <li><a href="./materials.html">Materials</a></li>
+            <li><a href="./contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Our Solutions -->
+        <div class="footer-section">
+          <h4 class="footer-heading">Our Solutions</h4>
+          <ul class="footer-list">
+            <li><a href="./commercial.html">Commercial</a></li>
+            <li><a href="./residential.html">Residential</a></li>
+            <li><a href="./institutional.html">Institutional</a></li>
+            <li><a href="./hospitality.html">Hospitality</a></li>
+            <li><a href="./public-facilities.html">Public Facilities</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="footer-section">
+          <h4 class="footer-heading">Get In Touch</h4>
+          <ul class="footer-contact">
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              <span>Mumbai, Maharashtra, India</span>
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+              </svg>
+              <span>+91 99700 60008</span>
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              <span>info@roofandrealms.com</span>
+            </li>
+          </ul>
+          <button class="footer-cta" onclick="window.location.href='./contact.html'">Schedule a Meeting</button>
+        </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <p>© 2024 Roof & Realms. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <span>•</span>
+          <a href="#">Terms of Service</a>
+          <span>•</span>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mainNav = document.getElementById('mainNav');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenuBtn.classList.toggle('active');
+      mainNav.classList.toggle('active');
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
       }
-      
-      const heroSubheadline = document.getElementById('hero-subheadline');
-      if (heroSubheadline) {
-        heroSubheadline.textContent = config.hero_subheadline || defaultConfig.hero_subheadline;
-        heroSubheadline.style.fontSize = `${baseSize * 1.375}px`;
-        heroSubheadline.style.color = config.text_color || defaultConfig.text_color;
-      }
-      
-      const heroDescription = document.getElementById('hero-description');
-      if (heroDescription) {
-        heroDescription.textContent = config.hero_description || defaultConfig.hero_description;
-        heroDescription.style.fontSize = `${baseSize * 0.8125}px`;
-        heroDescription.style.color = config.text_color || defaultConfig.text_color;
-      }
-      
-      const ctaHeadline = document.getElementById('cta-headline');
-      if (ctaHeadline) {
-        ctaHeadline.textContent = config.cta_headline || defaultConfig.cta_headline;
-        ctaHeadline.style.fontSize = `${baseSize * 3.125}px`;
-        ctaHeadline.style.color = config.primary_action || defaultConfig.primary_action;
-      }
-      
-      const logoName = document.getElementById('logo-name');
-      if (logoName) {
-        logoName.textContent = config.company_name || defaultConfig.company_name;
-      }
-      
-      const footerCompanyName = document.getElementById('footer-company-name');
-      if (footerCompanyName) {
-        footerCompanyName.textContent = config.company_name || defaultConfig.company_name;
-      }
+    });
+
+    // Mobile dropdown toggle
+    if (window.innerWidth <= 968) {
+      const navItem = document.querySelector('.dropdown .nav-item');
+      const dropdown = document.getElementById('productsDropdown');
+
+      navItem.addEventListener('click', (e) => {
+        e.preventDefault();
+        dropdown.classList.toggle('active');
+      });
     }
 
-    function mapToCapabilities(config) {
-      return {
-        recolorables: [
-          {
-            get: () => config.background_color || defaultConfig.background_color,
-            set: (value) => {
-              config.background_color = value;
-              if (window.elementSdk) {
-                window.elementSdk.setConfig({ background_color: value });
-              }
-            }
-          },
-          {
-            get: () => config.surface_color || defaultConfig.surface_color,
-            set: (value) => {
-              config.surface_color = value;
-              if (window.elementSdk) {
-                window.elementSdk.setConfig({ surface_color: value });
-              }
-            }
-          },
-          {
-            get: () => config.text_color || defaultConfig.text_color,
-            set: (value) => {
-              config.text_color = value;
-              if (window.elementSdk) {
-                window.elementSdk.setConfig({ text_color: value });
-              }
-            }
-          },
-          {
-            get: () => config.primary_action || defaultConfig.primary_action,
-            set: (value) => {
-              config.primary_action = value;
-              if (window.elementSdk) {
-                window.elementSdk.setConfig({ primary_action: value });
-              }
-            }
-          },
-          {
-            get: () => config.secondary_action || defaultConfig.secondary_action,
-            set: (value) => {
-              config.secondary_action = value;
-              if (window.elementSdk) {
-                window.elementSdk.setConfig({ secondary_action: value });
-              }
-            }
-          }
-        ],
-        borderables: [],
-        fontEditable: {
-          get: () => config.font_family || defaultConfig.font_family,
-          set: (value) => {
-            config.font_family = value;
-            if (window.elementSdk) {
-              window.elementSdk.setConfig({ font_family: value });
-            }
-          }
-        },
-        fontSizeable: {
-          get: () => config.font_size || defaultConfig.font_size,
-          set: (value) => {
-            config.font_size = value;
-            if (window.elementSdk) {
-              window.elementSdk.setConfig({ font_size: value });
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href.startsWith('#') && href !== '#') {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+            // Close mobile menu if open
+            if (mainNav.classList.contains('active')) {
+              mainNav.classList.remove('active');
+              mobileMenuBtn.classList.remove('active');
             }
           }
         }
-      };
-    }
-
-    function mapToEditPanelValues(config) {
-      return new Map([
-        ["hero_headline", config.hero_headline || defaultConfig.hero_headline],
-        ["hero_subheadline", config.hero_subheadline || defaultConfig.hero_subheadline],
-        ["hero_description", config.hero_description || defaultConfig.hero_description],
-        ["cta_headline", config.cta_headline || defaultConfig.cta_headline],
-        ["company_name", config.company_name || defaultConfig.company_name]
-      ]);
-    }
-
-    if (window.elementSdk) {
-      window.elementSdk.init({
-        defaultConfig,
-        onConfigChange,
-        mapToCapabilities,
-        mapToEditPanelValues
       });
-    }
+    });
+
+    // Add animation on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Observe elements for animation
+    document.querySelectorAll('.benefit-card, .residential-card, .process-card, .gallery-item').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(50px)';
+      el.style.transition = 'opacity 1s ease, transform 1s ease';
+      observer.observe(el);
+    });
+
+    // Image fallback handler
+    document.querySelectorAll('img').forEach(img => {
+      img.addEventListener('error', function () {
+        if (this.classList.contains('residential-image')) {
+          if (this.src.includes('villa')) {
+            this.src = 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&q=80';
+          } else if (this.src.includes('apartment')) {
+            this.src = 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&q=80';
+          } else if (this.src.includes('farmhouse')) {
+            this.src = 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1200&q=80';
+          }
+        }
+      });
+    });
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9acb126cc70b84d1',t:'MTc2NTUxOTk2Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
+
 </html>
