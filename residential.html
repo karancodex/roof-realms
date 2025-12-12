@@ -1,0 +1,773 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Residential Solutions - Roof &amp; Realms</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      overflow-x: hidden;
+    }
+
+    .main-wrapper {
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-60px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideRight {
+      from {
+        opacity: 0;
+        transform: translateX(60px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes zoomIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @keyframes shimmer {
+      0% {
+        left: -100%;
+      }
+      100% {
+        left: 100%;
+      }
+    }
+
+    .animate-fade-up {
+      animation: fadeUp 1s ease-out;
+    }
+
+    .animate-slide-left {
+      animation: slideLeft 1s ease-out;
+    }
+
+    .animate-slide-right {
+      animation: slideRight 1s ease-out;
+    }
+
+    .animate-zoom {
+      animation: zoomIn 1s ease-out;
+    }
+
+    .float-icon {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .hero-video-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .hero-video-wrapper video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(10, 26, 47, 0.9) 0%, rgba(31, 58, 147, 0.8) 50%, rgba(10, 26, 47, 0.9) 100%);
+    }
+
+    .section-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .section-image:hover {
+      transform: scale(1.05);
+    }
+
+    .card-3d {
+      transition: all 0.5s ease;
+    }
+
+    .card-3d:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(212, 166, 63, 0.4);
+    }
+
+    .gold-divider {
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #D4A63F, transparent);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gold-divider::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+      animation: shimmer 3s infinite;
+    }
+
+    .nav-link {
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: #D4A63F;
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(10, 26, 47, 0.98);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .benefit-box {
+      background: linear-gradient(135deg, rgba(31, 58, 147, 0.6), rgba(10, 26, 47, 0.6));
+      border: 2px solid #D4A63F;
+      border-radius: 15px;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+      transition: all 0.4s ease;
+    }
+
+    .benefit-box:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(212, 166, 63, 0.5);
+      border-color: #FFD700;
+    }
+
+    .text-glow {
+      text-shadow: 0 0 20px rgba(212, 166, 63, 0.5);
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #D4A63F 0%, #FFD700 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .image-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      border: 3px solid #D4A63F;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      border: 2px solid #D4A63F;
+      transition: all 0.5s ease;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.15) rotate(2deg);
+    }
+
+    .gallery-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(212, 166, 63, 0.7), rgba(31, 58, 147, 0.7));
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: 1;
+    }
+
+    .gallery-item:hover::before {
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .grid-section {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div class="main-wrapper" style="background: #0A1A2F;"><!-- HEADER -->
+   <header class="sticky-nav">
+    <nav style="max-width: 1400px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; align-items: center; justify-content: space-between;"><!-- Logo -->
+     <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <svg width="50" height="50" viewbox="0 0 50 50" fill="none"><rect width="50" height="50" rx="12" fill="#D4A63F" /> <path d="M25 12L38 20V35L25 43L12 35V20L25 12Z" fill="#0A1A2F" /> <path d="M25 18L32 22V33L25 37L18 33V22L25 18Z" fill="#D4A63F" />
+      </svg>
+      <div>
+       <div id="logo-name" style="font-size: 1.7rem; font-weight: 900; color: #D4A63F; line-height: 1.2;">
+        Roof &amp; Realms
+       </div>
+       <div style="font-size: 0.65rem; color: #D4A63F; letter-spacing: 3px; opacity: 0.9;">
+        MODULAR SOLUTIONS
+       </div>
+      </div>
+     </div><!-- Navigation -->
+     <div style="display: flex; gap: 2.5rem; align-items: center;"><a href="#" class="nav-link" style="color: white; text-decoration: none; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.5px;">HOME</a> <a href="#" class="nav-link" style="color: white; text-decoration: none; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.5px;">PRODUCTS</a> <a href="#" class="nav-link" style="color: white; text-decoration: none; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.5px;">MATERIAL</a> <a href="#" class="nav-link" style="color: white; text-decoration: none; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.5px;">ABOUT</a> <a href="#" class="nav-link" style="color: white; text-decoration: none; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.5px;">CONTACT</a>
+     </div>
+    </nav>
+   </header><!-- HERO SECTION WITH VIDEO -->
+   <section style="position: relative; height: 500px; display: flex; align-items: center; overflow: hidden;"><!-- Background Video -->
+    <div class="hero-video-wrapper">
+     <video autoplay muted loop playsinline><source src="https://cdn.coverr.co/videos/coverr-aerial-view-of-beautiful-resort-1061/1080p.mp4" type="video/mp4">
+     </video>
+    </div><!-- Overlay -->
+    <div class="hero-overlay"></div><!-- Content -->
+    <div style="position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 2rem; width: 100%;">
+     <div style="max-width: 700px;">
+      <div class="animate-fade-up" style="display: inline-block; background: rgba(212, 166, 63, 0.3); padding: 0.4rem 1.2rem; border-radius: 50px; margin-bottom: 1rem; border: 2px solid #D4A63F;"><span style="color: #D4A63F; font-weight: 700; font-size: 0.75rem; letter-spacing: 1px;">✦ PREMIUM CONSTRUCTION</span>
+      </div>
+      <h1 id="hero-headline" class="animate-fade-up text-glow" style="font-size: 3rem; font-weight: 900; color: #D4A63F; margin-bottom: 1rem; line-height: 1.1; animation-delay: 0.2s;">Residential Modular Solutions</h1>
+      <h2 id="hero-subheadline" class="animate-fade-up" style="font-size: 1.3rem; font-weight: 600; color: white; margin-bottom: 1rem; line-height: 1.4; animation-delay: 0.4s;">Homes engineered for speed, comfort, design and certainty.</h2>
+      <div class="gold-divider animate-fade-up" style="width: 100px; margin: 1rem 0; animation-delay: 0.6s;"></div>
+      <p id="hero-description" class="animate-fade-up" style="font-size: 0.95rem; color: rgba(255, 255, 255, 0.95); line-height: 1.6; max-width: 650px; animation-delay: 0.8s;">For today's home buyer, time, comfort and design matter as much as structure. Roof &amp; Realms modular residential solutions are engineered to feel like premium RCC homes while eliminating years of construction uncertainty.</p>
+     </div>
+    </div>
+   </section><!-- BENEFITS SECTION - GRID STYLE -->
+   <section style="background: linear-gradient(180deg, #0A1A2F 0%, #1F3A93 50%, #0A1A2F 100%); padding: 3rem 2rem;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+     <div style="text-align: center; margin-bottom: 2.5rem;">
+      <h2 class="gradient-text" style="font-size: 2rem; font-weight: 900; margin-bottom: 0.5rem;">Core Advantages</h2>
+      <div class="gold-divider" style="width: 120px; margin: 0.8rem auto;"></div>
+      <p style="color: rgba(255, 255, 255, 0.85); font-size: 0.95rem;">Experience modular excellence</p>
+     </div>
+     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;"><!-- Benefit 1 -->
+      <div class="benefit-box">
+       <div style="text-align: center;">
+        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #D4A63F, #FFD700); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 1rem; box-shadow: 0 5px 15px rgba(212, 166, 63, 0.5);">
+         ⚡
+        </div>
+        <h3 style="font-size: 1.3rem; font-weight: 900; color: #D4A63F; margin-bottom: 0.8rem;">60% Faster</h3>
+        <p style="color: rgba(255, 255, 255, 0.9); line-height: 1.5; font-size: 0.9rem;">Factory-controlled assembly eliminates site delays. Move in months earlier.</p>
+       </div>
+      </div><!-- Benefit 2 -->
+      <div class="benefit-box">
+       <div style="text-align: center;">
+        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #D4A63F, #FFD700); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 1rem; box-shadow: 0 5px 15px rgba(212, 166, 63, 0.5);">
+         🏠
+        </div>
+        <h3 style="font-size: 1.3rem; font-weight: 900; color: #D4A63F; margin-bottom: 0.8rem;">Superior Comfort</h3>
+        <p style="color: rgba(255, 255, 255, 0.9); line-height: 1.5; font-size: 0.9rem;">Enhanced insulation keeps homes cooler, warmer, and quieter year-round.</p>
+       </div>
+      </div><!-- Benefit 3 -->
+      <div class="benefit-box">
+       <div style="text-align: center;">
+        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #D4A63F, #FFD700); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 1rem; box-shadow: 0 5px 15px rgba(212, 166, 63, 0.5);">
+         ✓
+        </div>
+        <h3 style="font-size: 1.3rem; font-weight: 900; color: #D4A63F; margin-bottom: 0.8rem;">Quality Assured</h3>
+        <p style="color: rgba(255, 255, 255, 0.9); line-height: 1.5; font-size: 0.9rem;">Every component documented and tested with complete traceability.</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- VILLAS SECTION - IMAGE RIGHT, CONTENT LEFT -->
+   <section style="background: #0A1A2F; padding: 3rem 2rem;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+     <div class="grid-section" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center;"><!-- Content LEFT -->
+      <div class="animate-slide-left">
+       <div style="display: inline-block; background: rgba(212, 166, 63, 0.2); padding: 0.4rem 1rem; border-radius: 50px; margin-bottom: 1rem; border: 2px solid #D4A63F;"><span style="color: #D4A63F; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.5px;">LUXURY LIVING</span>
+       </div>
+       <h2 class="gradient-text" style="font-size: 2.5rem; font-weight: 900; margin-bottom: 1rem; line-height: 1.1;">Villas</h2>
+       <div class="gold-divider" style="width: 80px; margin: 1rem 0;"></div>
+       <p style="color: rgba(255, 255, 255, 0.95); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">Premium aesthetics with double-height spaces, cleaner detailing, and strong insulation. Modular villas deliver architectural excellence without compromising on luxury or comfort.</p>
+       <div style="display: grid; gap: 0.8rem;">
+        <div style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: linear-gradient(135deg, rgba(212, 166, 63, 0.15), rgba(31, 58, 147, 0.15)); border-radius: 8px; border-left: 3px solid #D4A63F;"><span style="color: #D4A63F; font-size: 1.2rem; font-weight: 900;">✓</span> <span style="color: white; font-size: 0.9rem; font-weight: 600;">Premium Precision-Built Aesthetics</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: linear-gradient(135deg, rgba(212, 166, 63, 0.15), rgba(31, 58, 147, 0.15)); border-radius: 8px; border-left: 3px solid #D4A63F;"><span style="color: #D4A63F; font-size: 1.2rem; font-weight: 900;">✓</span> <span style="color: white; font-size: 0.9rem; font-weight: 600;">Energy Efficient - Lower Bills</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: linear-gradient(135deg, rgba(212, 166, 63, 0.15), rgba(31, 58, 147, 0.15)); border-radius: 8px; border-left: 3px solid #D4A63F;"><span style="color: #D4A63F; font-size: 1.2rem; font-weight: 900;">✓</span> <span style="color: white; font-size: 0.9rem; font-weight: 600;">Superior Sound Insulation</span>
+        </div>
+       </div>
+      </div><!-- Image RIGHT -->
+      <div class="animate-slide-right image-container"><img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&amp;q=80" alt="Luxury Villa" class="section-image" style="height: 350px;">
+      </div>
+     </div>
+    </div>
+   </section><!-- FARMHOUSES SECTION - IMAGE LEFT, CONTENT RIGHT -->
+   <section style="background: linear-gradient(135deg, #1F3A93 0%, #0A1A2F 100%); padding: 3rem 2rem;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+     <div class="grid-section" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center;"><!-- Image LEFT -->
+      <div class="animate-slide-left image-container"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1200&amp;q=80" alt="Farmhouse" class="section-image" style="height: 350px;">
+      </div><!-- Content RIGHT -->
+      <div class="animate-slide-right">
+       <div style="display: inline-block; background: rgba(212, 166, 63, 0.2); padding: 0.4rem 1rem; border-radius: 50px; margin-bottom: 1rem; border: 2px solid #D4A63F;"><span style="color: #D4A63F; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.5px;">COUNTRY LIVING</span>
+       </div>
+       <h2 class="gradient-text" style="font-size: 2.5rem; font-weight: 900; margin-bottom: 1rem; line-height: 1.1;">Farmhouses</h2>
+       <div class="gold-divider" style="width: 80px; margin: 1rem 0;"></div>
+       <p style="color: rgba(255, 255, 255, 0.95); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">Build on remote terrain with minimal environmental impact. Engineered to be comfortable across extreme climates while maintaining fast execution with premium finishes.</p>
+       <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+        <div style="text-align: center; padding: 1rem; background: rgba(212, 166, 63, 0.15); border-radius: 10px; border: 2px solid #D4A63F;">
+         <div style="font-size: 2rem; margin-bottom: 0.5rem;">
+          🏔️
+         </div>
+         <h4 style="color: #D4A63F; font-weight: 800; margin-bottom: 0.3rem; font-size: 0.95rem;">Remote Ready</h4>
+         <p style="color: rgba(255, 255, 255, 0.85); font-size: 0.8rem; line-height: 1.4;">Any terrain</p>
+        </div>
+        <div style="text-align: center; padding: 1rem; background: rgba(212, 166, 63, 0.15); border-radius: 10px; border: 2px solid #D4A63F;">
+         <div style="font-size: 2rem; margin-bottom: 0.5rem;">
+          🌿
+         </div>
+         <h4 style="color: #D4A63F; font-weight: 800; margin-bottom: 0.3rem; font-size: 0.95rem;">Eco-Friendly</h4>
+         <p style="color: rgba(255, 255, 255, 0.85); font-size: 0.8rem; line-height: 1.4;">Low impact</p>
+        </div>
+        <div style="text-align: center; padding: 1rem; background: rgba(212, 166, 63, 0.15); border-radius: 10px; border: 2px solid #D4A63F;">
+         <div style="font-size: 2rem; margin-bottom: 0.5rem;">
+          ❄️
+         </div>
+         <h4 style="color: #D4A63F; font-weight: 800; margin-bottom: 0.3rem; font-size: 0.95rem;">All-Climate</h4>
+         <p style="color: rgba(255, 255, 255, 0.85); font-size: 0.8rem; line-height: 1.4;">Weather proof</p>
+        </div>
+        <div style="text-align: center; padding: 1rem; background: rgba(212, 166, 63, 0.15); border-radius: 10px; border: 2px solid #D4A63F;">
+         <div style="font-size: 2rem; margin-bottom: 0.5rem;">
+          🔥
+         </div>
+         <h4 style="color: #D4A63F; font-weight: 800; margin-bottom: 0.3rem; font-size: 0.95rem;">Fast Build</h4>
+         <p style="color: rgba(255, 255, 255, 0.85); font-size: 0.8rem; line-height: 1.4;">Rapid timeline</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- APARTMENTS SECTION - IMAGE RIGHT, CONTENT LEFT -->
+   <section style="background: #0A1A2F; padding: 3rem 2rem;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+     <div class="grid-section" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center;"><!-- Content LEFT -->
+      <div class="animate-slide-left">
+       <div style="display: inline-block; background: rgba(212, 166, 63, 0.2); padding: 0.4rem 1rem; border-radius: 50px; margin-bottom: 1rem; border: 2px solid #D4A63F;"><span style="color: #D4A63F; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.5px;">MULTI-STORY</span>
+       </div>
+       <h2 class="gradient-text" style="font-size: 2.5rem; font-weight: 900; margin-bottom: 1rem; line-height: 1.1;">Apartments (G+3)</h2>
+       <div class="gold-divider" style="width: 80px; margin: 1rem 0;"></div>
+       <p style="color: rgba(255, 255, 255, 0.95); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">Multi-story residential buildings engineered for speed and consistency. Perfect for developers seeking faster project delivery and superior quality control across all units.</p>
+       <div style="background: linear-gradient(135deg, rgba(212, 166, 63, 0.2), rgba(31, 58, 147, 0.2)); padding: 1.5rem; border-radius: 15px; border: 2px solid rgba(212, 166, 63, 0.5);">
+        <h3 style="color: #D4A63F; font-size: 1.2rem; font-weight: 900; margin-bottom: 1rem; text-align: center;">Developer Benefits</h3>
+        <div style="display: grid; gap: 0.8rem;">
+         <div style="display: flex; align-items: center; gap: 0.8rem;">
+          <div style="background: #D4A63F; color: #0A1A2F; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1rem; flex-shrink: 0;">
+           1
+          </div><span style="color: white; font-size: 0.9rem; font-weight: 600;">40-50% faster Phase 1 handover</span>
+         </div>
+         <div style="display: flex; align-items: center; gap: 0.8rem;">
+          <div style="background: #D4A63F; color: #0A1A2F; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1rem; flex-shrink: 0;">
+           2
+          </div><span style="color: white; font-size: 0.9rem; font-weight: 600;">Earlier sales velocity and ROI</span>
+         </div>
+         <div style="display: flex; align-items: center; gap: 0.8rem;">
+          <div style="background: #D4A63F; color: #0A1A2F; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1rem; flex-shrink: 0;">
+           3
+          </div><span style="color: white; font-size: 0.9rem; font-weight: 600;">Consistent quality across floors</span>
+         </div>
+         <div style="display: flex; align-items: center; gap: 0.8rem;">
+          <div style="background: #D4A63F; color: #0A1A2F; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1rem; flex-shrink: 0;">
+           4
+          </div><span style="color: white; font-size: 0.9rem; font-weight: 600;">Scalable across multiple cities</span>
+         </div>
+        </div>
+       </div>
+      </div><!-- Image RIGHT -->
+      <div class="animate-slide-right image-container"><img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&amp;q=80" alt="Apartment Complex" class="section-image" style="height: 350px;">
+      </div>
+     </div>
+    </div>
+   </section><!-- STUDIOS & PENTHOUSES - CARD STYLE WITH IMAGES -->
+   <section style="background: linear-gradient(180deg, #1F3A93 0%, #0A1A2F 100%); padding: 3rem 2rem;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+     <div style="text-align: center; margin-bottom: 2.5rem;">
+      <h2 class="gradient-text" style="font-size: 2rem; font-weight: 900; margin-bottom: 0.5rem;">Compact &amp; Luxury Options</h2>
+      <div class="gold-divider" style="width: 120px; margin: 0.8rem auto;"></div>
+      <p style="color: rgba(255, 255, 255, 0.85); font-size: 0.95rem;">From efficient studios to luxurious penthouses</p>
+     </div>
+     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;"><!-- Studios Card -->
+      <div class="card-3d" style="position: relative; border-radius: 15px; overflow: hidden; border: 2px solid #D4A63F; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);">
+       <div style="height: 200px; overflow: hidden;"><img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&amp;q=80" alt="Studio" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease;">
+       </div>
+       <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(10, 26, 47, 0.98), rgba(31, 58, 147, 0.98));">
+        <div style="display: inline-block; background: rgba(212, 166, 63, 0.2); padding: 0.3rem 0.8rem; border-radius: 50px; margin-bottom: 0.8rem; border: 1px solid #D4A63F;"><span style="color: #D4A63F; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.5px;">COMPACT LIVING</span>
+        </div>
+        <h2 class="gradient-text" style="font-size: 1.8rem; font-weight: 900; margin-bottom: 0.8rem;">Studios</h2>
+        <p style="color: rgba(255, 255, 255, 0.95); font-size: 0.9rem; line-height: 1.5; margin-bottom: 1rem;">Efficient living spaces optimized for modern lifestyles. Perfect for rental properties, co-living projects, and first-time homeowners.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.6rem;"><span style="background: rgba(212, 166, 63, 0.25); color: #D4A63F; padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; border: 2px solid #D4A63F; font-weight: 700;">Cost Effective</span> <span style="background: rgba(212, 166, 63, 0.25); color: #D4A63F; padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; border: 2px solid #D4A63F; font-weight: 700;">Fast Income</span> <span style="background: rgba(212, 166, 63, 0.25); color: #D4A63F; padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; border: 2px solid #D4A63F; font-weight: 700;">Smart Layout</span>
+        </div>
+       </div>
+      </div><!-- Penthouses Card -->
+      <div class="card-3d" style="position: relative; border-radius: 15px; overflow: hidden; border: 2px solid #D4A63F; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);">
+       <div style="height: 200px; overflow: hidden;"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&amp;q=80" alt="Penthouse" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease;">
+       </div>
+       <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(10, 26, 47, 0.98), rgba(31, 58, 147, 0.98));">
+        <div style="display: inline-block; background: rgba(212, 166, 63, 0.2); padding: 0.3rem 0.8rem; border-radius: 50px; margin-bottom: 0.8rem; border: 1px solid #D4A63F;"><span style="color: #D4A63F; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.5px;">LUXURY LIVING</span>
+        </div>
+        <h2 class="gradient-text" style="font-size: 1.8rem; font-weight: 900; margin-bottom: 0.8rem;">Penthouses</h2>
+        <p style="color: rgba(255, 255, 255, 0.95); font-size: 0.9rem; line-height: 1.5; margin-bottom: 1rem;">Luxury at new heights with premium terraces and glass features. Signature architecture delivered faster with lightweight LGSF construction.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.6rem;"><span style="background: rgba(212, 166, 63, 0.25); color: #D4A63F; padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; border: 2px solid #D4A63F; font-weight: 700;">Lightweight LGSF</span> <span style="background: rgba(212, 166, 63, 0.25); color: #D4A63F; padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; border: 2px solid #D4A63F; font-weight: 700;">Premium Terraces</span> <span style="background: rgba(212, 166, 63, 0.25); color: #D4A63F; padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; border: 2px solid #D4A63F; font-weight: 700;">Fast Delivery</span>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- GALLERY SECTION - MASONRY STYLE -->
+   <section style="background: #0A1A2F; padding: 3rem 2rem;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+     <div style="text-align: center; margin-bottom: 2.5rem;">
+      <h2 class="gradient-text" style="font-size: 2rem; font-weight: 900; margin-bottom: 0.5rem;">Our Portfolio</h2>
+      <div class="gold-divider" style="width: 120px; margin: 0.8rem auto;"></div>
+      <p style="color: rgba(255, 255, 255, 0.85); font-size: 0.95rem;">Explore premium modular homes we've delivered</p>
+     </div>
+     <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;">
+      <div class="gallery-item" style="height: 220px; grid-column: span 2; grid-row: span 2;"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&amp;q=80" alt="Villa Exterior">
+      </div>
+      <div class="gallery-item" style="height: 220px;"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&amp;q=80" alt="Modern Interior">
+      </div>
+      <div class="gallery-item" style="height: 220px;"><img src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=600&amp;q=80" alt="Living Space">
+      </div>
+      <div class="gallery-item" style="height: 220px;"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=600&amp;q=80" alt="Bedroom">
+      </div>
+      <div class="gallery-item" style="height: 220px;"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&amp;q=80" alt="Kitchen">
+      </div>
+      <div class="gallery-item" style="height: 220px; grid-column: span 2;"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=900&amp;q=80" alt="Apartment Complex">
+      </div>
+      <div class="gallery-item" style="height: 220px;"><img src="https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?w=600&amp;q=80" alt="Dining">
+      </div>
+      <div class="gallery-item" style="height: 220px;"><img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&amp;q=80" alt="Outdoor">
+      </div>
+     </div>
+    </div>
+   </section><!-- CTA SECTION - CENTERED STYLE -->
+   <section style="background: linear-gradient(135deg, #1F3A93 0%, #0A1A2F 50%, #1F3A93 100%); padding: 3rem 2rem; position: relative; overflow: hidden;"><!-- Decorative Elements -->
+    <div style="position: absolute; top: -100px; left: -100px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(212, 166, 63, 0.2) 0%, transparent 70%); border-radius: 50%; filter: blur(80px);"></div>
+    <div style="position: absolute; bottom: -100px; right: -100px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(212, 166, 63, 0.2) 0%, transparent 70%); border-radius: 50%; filter: blur(80px);"></div>
+    <div style="max-width: 900px; margin: 0 auto; text-align: center; position: relative; z-index: 1;">
+     <div style="display: inline-block; background: rgba(212, 166, 63, 0.3); padding: 0.4rem 1.2rem; border-radius: 50px; margin-bottom: 1.5rem; border: 2px solid #D4A63F;"><span style="color: #D4A63F; font-weight: 800; font-size: 0.75rem; letter-spacing: 1px;">✦ START YOUR PROJECT</span>
+     </div>
+     <h2 id="cta-headline" class="text-glow" style="font-size: 2.5rem; font-weight: 900; color: #D4A63F; margin-bottom: 1rem; line-height: 1.2;">Build your dream home faster and better.</h2>
+     <div class="gold-divider" style="width: 150px; margin: 1.5rem auto;"></div>
+     <p style="font-size: 1rem; color: rgba(255, 255, 255, 0.95); margin-bottom: 2.5rem; line-height: 1.6; max-width: 700px; margin-left: auto; margin-right: auto;">Experience the future of residential construction with Roof &amp; Realms modular solutions. Superior quality, faster delivery, guaranteed satisfaction.</p>
+     <div style="display: flex; gap: 2.5rem; justify-content: center; flex-wrap: wrap;">
+      <div style="text-align: center;">
+       <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #D4A63F, #FFD700); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 0.8rem; box-shadow: 0 5px 15px rgba(212, 166, 63, 0.5);">
+        📞
+       </div>
+       <h4 style="color: white; font-weight: 800; font-size: 1rem; margin-bottom: 0.3rem;">Call Us</h4>
+       <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.85rem;">+91 XXX XXX XXXX</p>
+      </div>
+      <div style="text-align: center;">
+       <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #D4A63F, #FFD700); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 0.8rem; box-shadow: 0 5px 15px rgba(212, 166, 63, 0.5);">
+        📧
+       </div>
+       <h4 style="color: white; font-weight: 800; font-size: 1rem; margin-bottom: 0.3rem;">Email Us</h4>
+       <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.85rem;">info@roofrealms.com</p>
+      </div>
+      <div style="text-align: center;">
+       <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #D4A63F, #FFD700); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 0.8rem; box-shadow: 0 5px 15px rgba(212, 166, 63, 0.5);">
+        📍
+       </div>
+       <h4 style="color: white; font-weight: 800; font-size: 1rem; margin-bottom: 0.3rem;">Visit Us</h4>
+       <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.85rem;">Location, City</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- FOOTER -->
+   <footer style="background: #0A1A2F; border-top: 3px solid #D4A63F; padding: 4rem 2rem 2rem;">
+    <div style="max-width: 1400px; margin: 0 auto;">
+     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 4rem; margin-bottom: 4rem;">
+      <div>
+       <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 2rem;">
+        <svg width="50" height="50" viewbox="0 0 50 50" fill="none"><rect width="50" height="50" rx="12" fill="#D4A63F" /> <path d="M25 12L38 20V35L25 43L12 35V20L25 12Z" fill="#0A1A2F" /> <path d="M25 18L32 22V33L25 37L18 33V22L25 18Z" fill="#D4A63F" />
+        </svg>
+        <div>
+         <div id="footer-company-name" style="font-size: 1.5rem; font-weight: 900; color: #D4A63F;">
+          Roof &amp; Realms
+         </div>
+         <div style="font-size: 0.65rem; color: #D4A63F; letter-spacing: 2.5px; opacity: 0.9;">
+          MODULAR SOLUTIONS
+         </div>
+        </div>
+       </div>
+       <p style="color: rgba(255, 255, 255, 0.8); line-height: 1.9; font-size: 1.05rem;">Engineering the future of residential and commercial construction with precision modular solutions.</p>
+      </div>
+      <div>
+       <h4 style="color: #D4A63F; margin-bottom: 2rem; font-size: 1.3rem; font-weight: 900;">Quick Links</h4>
+       <ul style="list-style: none; color: rgba(255, 255, 255, 0.8); line-height: 2.5; font-size: 1.05rem;">
+        <li>Home</li>
+        <li>Products</li>
+        <li>Material</li>
+        <li>About Us</li>
+        <li>Contact</li>
+       </ul>
+      </div>
+      <div>
+       <h4 style="color: #D4A63F; margin-bottom: 2rem; font-size: 1.3rem; font-weight: 900;">Residential</h4>
+       <ul style="list-style: none; color: rgba(255, 255, 255, 0.8); line-height: 2.5; font-size: 1.05rem;">
+        <li>Villas</li>
+        <li>Farmhouses</li>
+        <li>Apartments</li>
+        <li>Studios</li>
+        <li>Penthouses</li>
+       </ul>
+      </div>
+      <div>
+       <h4 style="color: #D4A63F; margin-bottom: 2rem; font-size: 1.3rem; font-weight: 900;">Contact</h4>
+       <div style="color: rgba(255, 255, 255, 0.8); line-height: 2.5; font-size: 1.05rem;">
+        <p>📧 info@roofrealms.com</p>
+        <p>📞 +91 XXX XXX XXXX</p>
+        <p>📍 Location, City</p>
+       </div>
+      </div>
+     </div>
+     <div class="gold-divider" style="margin: 3rem auto;"></div>
+     <div style="text-align: center; color: rgba(255, 255, 255, 0.6); font-size: 1rem;">
+      <p>© 2024 Roof &amp; Realms. All rights reserved. | Engineered for Excellence</p>
+     </div>
+    </div>
+   </footer>
+  </div>
+  <script>
+    const defaultConfig = {
+      hero_headline: "Residential Modular Solutions",
+      hero_subheadline: "Homes engineered for speed, comfort, design and certainty.",
+      hero_description: "For today's home buyer, time, comfort and design matter as much as structure. Roof & Realms modular residential solutions are engineered to feel like premium RCC homes while eliminating years of construction uncertainty.",
+      cta_headline: "Build your dream home faster and better.",
+      company_name: "Roof & Realms",
+      background_color: "#0A1A2F",
+      surface_color: "#1F3A93",
+      text_color: "#FFFFFF",
+      primary_action: "#D4A63F",
+      secondary_action: "#D4A63F",
+      font_family: "system-ui, -apple-system, sans-serif",
+      font_size: 16
+    };
+
+    async function onConfigChange(config) {
+      const customFont = config.font_family || defaultConfig.font_family;
+      const baseFontStack = 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+      const fontFamily = `${customFont}, ${baseFontStack}`;
+      const baseSize = config.font_size || defaultConfig.font_size;
+      
+      document.body.style.fontFamily = fontFamily;
+      document.body.style.background = config.background_color || defaultConfig.background_color;
+      
+      const heroHeadline = document.getElementById('hero-headline');
+      if (heroHeadline) {
+        heroHeadline.textContent = config.hero_headline || defaultConfig.hero_headline;
+        heroHeadline.style.fontSize = `${baseSize * 3.4375}px`;
+        heroHeadline.style.color = config.primary_action || defaultConfig.primary_action;
+      }
+      
+      const heroSubheadline = document.getElementById('hero-subheadline');
+      if (heroSubheadline) {
+        heroSubheadline.textContent = config.hero_subheadline || defaultConfig.hero_subheadline;
+        heroSubheadline.style.fontSize = `${baseSize * 1.375}px`;
+        heroSubheadline.style.color = config.text_color || defaultConfig.text_color;
+      }
+      
+      const heroDescription = document.getElementById('hero-description');
+      if (heroDescription) {
+        heroDescription.textContent = config.hero_description || defaultConfig.hero_description;
+        heroDescription.style.fontSize = `${baseSize * 0.8125}px`;
+        heroDescription.style.color = config.text_color || defaultConfig.text_color;
+      }
+      
+      const ctaHeadline = document.getElementById('cta-headline');
+      if (ctaHeadline) {
+        ctaHeadline.textContent = config.cta_headline || defaultConfig.cta_headline;
+        ctaHeadline.style.fontSize = `${baseSize * 3.125}px`;
+        ctaHeadline.style.color = config.primary_action || defaultConfig.primary_action;
+      }
+      
+      const logoName = document.getElementById('logo-name');
+      if (logoName) {
+        logoName.textContent = config.company_name || defaultConfig.company_name;
+      }
+      
+      const footerCompanyName = document.getElementById('footer-company-name');
+      if (footerCompanyName) {
+        footerCompanyName.textContent = config.company_name || defaultConfig.company_name;
+      }
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              config.background_color = value;
+              if (window.elementSdk) {
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            }
+          },
+          {
+            get: () => config.surface_color || defaultConfig.surface_color,
+            set: (value) => {
+              config.surface_color = value;
+              if (window.elementSdk) {
+                window.elementSdk.setConfig({ surface_color: value });
+              }
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              config.text_color = value;
+              if (window.elementSdk) {
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            }
+          },
+          {
+            get: () => config.primary_action || defaultConfig.primary_action,
+            set: (value) => {
+              config.primary_action = value;
+              if (window.elementSdk) {
+                window.elementSdk.setConfig({ primary_action: value });
+              }
+            }
+          },
+          {
+            get: () => config.secondary_action || defaultConfig.secondary_action,
+            set: (value) => {
+              config.secondary_action = value;
+              if (window.elementSdk) {
+                window.elementSdk.setConfig({ secondary_action: value });
+              }
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || defaultConfig.font_family,
+          set: (value) => {
+            config.font_family = value;
+            if (window.elementSdk) {
+              window.elementSdk.setConfig({ font_family: value });
+            }
+          }
+        },
+        fontSizeable: {
+          get: () => config.font_size || defaultConfig.font_size,
+          set: (value) => {
+            config.font_size = value;
+            if (window.elementSdk) {
+              window.elementSdk.setConfig({ font_size: value });
+            }
+          }
+        }
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ["hero_headline", config.hero_headline || defaultConfig.hero_headline],
+        ["hero_subheadline", config.hero_subheadline || defaultConfig.hero_subheadline],
+        ["hero_description", config.hero_description || defaultConfig.hero_description],
+        ["cta_headline", config.cta_headline || defaultConfig.cta_headline],
+        ["company_name", config.company_name || defaultConfig.company_name]
+      ]);
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9acb126cc70b84d1',t:'MTc2NTUxOTk2Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
