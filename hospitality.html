@@ -469,6 +469,9 @@
             border: 1px solid rgba(212, 166, 63, 0.3);
             transition: all 0.5s ease;
             position: relative;
+            justify-content: space-between;
+            display: flex;
+            flex-direction: column;
         }
 
         .hospitality-card:hover {
@@ -478,7 +481,7 @@
         }
 
         .hospitality-image {
-            height: 250px;
+            height: 270px;
             width: 100%;
             object-fit: cover;
             transition: transform 0.8s ease;
@@ -682,7 +685,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
-            max-width: 1400px;
+            max-width: 100%;
             margin: 0 auto;
         }
 
@@ -1206,20 +1209,21 @@
                         <li>Energy-efficient climate control</li>
                         <li>Customizable luxury finishes</li>
                     </ul>
-                    <a href="#hotels" class="hospitality-link">Explore Hotels & Resorts</a>
+                <a href="#hotels" class="hospitality-link">Explore Hotels</a>
+
                 </div>
             </div>
 
             <!-- Restaurants -->
             <div class="hospitality-card">
-                <img src="image/restorent.png" alt="Restaurants" class="hospitality-image">
+                <img src="image/resto2.png" alt="Restaurants" class="hospitality-image">
                 <div class="hospitality-content">
                     <span class="hospitality-badge">DINING EXPERIENCE</span>
                     <h3>Restaurants</h3>
                     <p>Modular restaurant shells designed for optimal guest comfort, kitchen efficiency, and acoustic
                         performance.</p>
                     <ul class="hospitality-features">
-                        <li>Ready-to-open faster → capture peak seasons</li>
+                        <li>Ready-to-open faster capture</li>
                         <li>Consistent ambiance across outlets</li>
                         <li>Efficient kitchen and dining flow</li>
                         <li>Outdoor decks and café zones</li>
@@ -1230,8 +1234,7 @@
 
             <!-- Clubs & Lounges -->
             <div class="hospitality-card">
-                <img src="image/club-lounge.jpg" alt="Clubs & Lounges" class="hospitality-image"
-                    onerror="this.src='https://images.unsplash.com/photo-1566737236500-c8ac43014a67?w=1200&q=80'">
+                <img src="image/club.png" alt="Clubs & Lounges" class="hospitality-image">
                 <div class="hospitality-content">
                     <span class="hospitality-badge">SOCIAL EXPERIENCE</span>
                     <h3>Clubs & Lounges</h3>
@@ -1345,42 +1348,42 @@
 
         <div class="gallery-grid">
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1455587734955-081b22074882?w=900&q=80" alt="Hotel Room"
+                <img src="image/hotels.png" alt="Hotel Room"
                     class="gallery-img">
                 <div class="gallery-caption">
                     <h4>Hotel Rooms</h4>
                 </div>
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=900&q=80" alt="Hotel Lounge"
+                <img src="image/Luxury Lounges.jpg" alt="Hotel Lounge"
                     class="gallery-img">
                 <div class="gallery-caption">
                     <h4>Luxury Lounges</h4>
                 </div>
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=900&q=80" alt="Hotel Lobby"
+                <img src="image/hospital.jpg" alt="Hotel Lobby"
                     class="gallery-img">
                 <div class="gallery-caption">
                     <h4>Reception Areas</h4>
                 </div>
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=900&q=80" alt="Hotel Bar"
+                <img src="image/club.png" alt="Hotel Bar"
                     class="gallery-img">
                 <div class="gallery-caption">
                     <h4>Bars & Nightlife</h4>
                 </div>
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=900&q=80" alt="Hotel Exterior"
+                <img src="image/restorent.png" alt="Hotel Exterior"
                     class="gallery-img">
                 <div class="gallery-caption">
                     <h4>Resort Exteriors</h4>
                 </div>
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=900&q=80" alt="Hotel Suite"
+                <img src="image/Residential-home.jpg" alt="Hotel Suite"
                     class="gallery-img">
                 <div class="gallery-caption">
                     <h4>Luxury Suites</h4>
