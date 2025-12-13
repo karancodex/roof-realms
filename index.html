@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roof &amp; Realms - Premium Modular Construction</title>
+    <title>Roof &amp; Realms Premium Modular Construction</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sora:wght@100..800&display=swap"
         rel="stylesheet">
@@ -159,7 +159,8 @@
             flex-direction: column;
             gap: 0;
             opacity: 0;
-            animation: fadeInDown 0.4s ease forwards;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
             z-index: 1001;
         }
 
@@ -167,6 +168,8 @@
         .dropdown:hover .dropdown-content,
         .dropdown-content:hover {
             display: flex;
+            opacity: 1;
+            visibility: visible;
         }
 
         @keyframes fadeInDown {
@@ -2184,6 +2187,9 @@
                 display: none;
                 box-shadow: none;
                 animation: none;
+                opacity: 1;
+                visibility: visible;
+                transition: none;
             }
 
             .dropdown.active .dropdown-content {
@@ -2539,7 +2545,7 @@
 
 <body>
     <header id="header">
-        <div class="logo-container" onclick="window.location.href='https://roofandrealms.rightbraininfotech.in/'">
+        <div class="logo-container" onclick="window.location.href='./index.html'">
             <img src="image/logo.png" alt="Logo" style="width: 120px; height: 70px;">
         </div>
         <nav id="mainNav">
@@ -2562,6 +2568,12 @@
             <a href="./about-us.html">ABOUT US</a>
             <a href="./contact.html">CONTACT</a>
         </nav><button class="btn btn-primary" id="scheduleMeetingBtn">Schedule Call</button>
+        <!-- Mobile Menu Button -->
+        <div class="mobile-menu-btn" id="mobileMenuBtn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </header>
     <main style="width: 100%; overflow-x: hidden;"><!-- Enhanced Hero Section -->
         <section class="hero" id="home">
@@ -2587,7 +2599,7 @@
         <section class="who-we-serve" id="who-we-serve">
             <h2 class="section-title">Who We Serve</h2>
             <div class="gold-divider"></div>
-            <p class="section-subtitle">Precision-engineered solutions across every sector</p><!-- Commercial -->
+            <p class="section-subtitle">Precision engineered solutions across every sector</p><!-- Commercial -->
             <div class="serve-row">
                 <div class="serve-image-container"><img src="image/Commercial-home.png"
                         alt="Modern commercial office building" class="serve-image"
@@ -2595,12 +2607,12 @@
                 </div>
                 <div class="serve-content">
                     <h3>Commercial</h3>
-                    <p class="serve-subtitle">Launch, expand or reposition commercial assets with factory-controlled
+                    <p class="serve-subtitle">Launch, expand or reposition commercial assets with factory controlled
                         quality and dramatically shorter build cycles without compromising design or comfort.</p>
                     <ul class="serve-benefits">
                         <li>30–60% faster completion</li>
-                        <li>Predictable budgets, fixed-price modular packages</li>
-                        <li>Brand-ready aesthetics and Grade-A comfort</li>
+                        <li>Predictable budgets, fixed price modular packages</li>
+                        <li>Brand ready aesthetics and Grade-A comfort</li>
                         <li>Scalable solutions for growth</li>
                     </ul><a href="./commercial.html" class="serve-link">View
                         Solutions</a>
@@ -2616,7 +2628,7 @@
                     <ul class="serve-benefits">
                         <li>Elegant and functional spaces</li>
                         <li>Luxurious finishes and amenities</li>
-                        <li>Faster time-to-market for revenue generation</li>
+                        <li>Faster time to market for revenue generation</li>
                         <li>Scalable design for expansion</li>
                     </ul><a href="./hospitality.html" class="serve-link">View
                         Solutions</a>
@@ -2636,8 +2648,8 @@
                         that combine precision engineering with personalized comfort and style.</p>
                     <ul class="serve-benefits">
                         <li>Customizable luxury designs</li>
-                        <li>Eco-friendly and energy-efficient</li>
-                        <li>Premium finishes with faster move-in dates</li>
+                        <li>Eco friendly and energy efficient</li>
+                        <li>Premium finishes with faster move in dates</li>
                         <li>Smart home integration ready</li>
                     </ul><a href="./residential.html" class="serve-link">View
                         Solutions</a>
@@ -2648,12 +2660,11 @@
 
                 <div class="serve-content">
                     <h3>Institutional</h3>
-                    <p class="serve-subtitle">Schools, universities, and research centers with world-class
-                        infrastructure designed for safety, functionality, and inspiring learning environments.</p>
+                    <p class="serve-subtitle">Schools, universities, and research centers with world class infrastructure designed for safety, functionality, and inspiring learning environments.</p>
                     <ul class="serve-benefits">
                         <li>Safe and spacious learning environments</li>
                         <li>Minimal disruption during construction</li>
-                        <li>Modern facilities with future-proof design</li>
+                        <li>Modern facilities with future proof design</li>
                         <li>Compliance with education standards</li>
                     </ul><a href="./institutional.html" class="serve-link">View
                         Solutions</a>
@@ -2670,12 +2681,11 @@
                 </div>
                 <div class="serve-content">
                     <h3>Public Facilities</h3>
-                    <p class="serve-subtitle">Government buildings, community centers, and civic infrastructure built
-                        with durability, accessibility, and public service excellence in mind.</p>
+                    <p class="serve-subtitle">Government buildings, community centers, and civic infrastructure built with durability, accessibility, and public service excellence in mind.</p>
                     <ul class="serve-benefits">
-                        <li>Durable and long-lasting construction</li>
+                        <li>Durable and long lasting construction</li>
                         <li>Accessible design for all communities</li>
-                        <li>Cost-efficient public investment</li>
+                        <li>Cost efficient public investment</li>
                         <li>Rapid deployment for urgent needs</li>
                     </ul><a href="./public-facilities.html" class="serve-link">View
                         Solutions</a>
@@ -2685,8 +2695,7 @@
             <div class="serve-row">
                 <div class="serve-content">
                     <h3>Interiors</h3>
-                    <p class="serve-subtitle">Transform spaces with precision-engineered interior solutions that blend
-                        aesthetic excellence with functional design for residential and commercial applications.</p>
+                    <p class="serve-subtitle">Transform spaces with precision engineered interior solutions that blend aesthetic excellence with functional design for residential and commercial applications.</p>
                     <ul class="serve-benefits">
                         <li>Custom interior design and execution</li>
                         <li>Premium materials and finishes</li>
@@ -2704,7 +2713,7 @@
         <section class="why-section" id="why">
             <h2 class="section-title" id="why-title">Why Roof &amp; Realms</h2>
             <div class="gold-divider"></div>
-            <p class="section-subtitle">We Don’t Just Construct We Engineer Certainty, Built on 5 Pillars of Excellence.
+            <p class="section-subtitle">We Don't Just Construct We Engineer Certainty, Built on 5 Pillars of Excellence.
             </p>
 
             <div class="pillars-row">
@@ -2736,7 +2745,7 @@
         <section class="journey-section" id="journey">
             <h2 class="section-title" id="journey-title">The Roof &amp; Realms 12-Step Modular Journey</h2>
             <div class="gold-divider"></div>
-            <p class="section-subtitle">From concept to handover – precision engineered, meticulously executed</p>
+            <p class="section-subtitle">From concept to handover precision engineered, meticulously executed</p>
             <div class="journey-timeline-container"><!-- Vertical Timeline Line -->
                 <div class="journey-vertical-line"></div><!-- Home Icon at the End -->
                 <!-- Journey Steps -->
@@ -2747,8 +2756,7 @@
                         </div>
                         <div class="step-content-box">
                             <h4>Project Definition &amp; Goals</h4>
-                            <p>Understand your vision, site requirements, budget constraints, and project objectives
-                                through detailed consultation.</p>
+                            <p>Understand your vision, site requirements, budget constraints, and project objectives through detailed consultation.</p>
                         </div>
                     </div><!-- Step 2 - Right -->
                     <div class="journey-step">
@@ -2757,8 +2765,7 @@
                         </div>
                         <div class="step-content-box">
                             <h4>Design Development &amp; Feasibility</h4>
-                            <p>Create preliminary designs, conduct site analysis, and establish project feasibility with
-                                technical assessments.</p>
+                            <p>Create preliminary designs, conduct site analysis, and establish project feasibility with technical assessments.</p>
                         </div>
                     </div><!-- Step 3 - Left -->
                     <div class="journey-step">
@@ -2952,7 +2959,7 @@
                                 </div>
                             </div>
                             <p class="testimonial-text">"The luxury villa they built is a masterpiece. Factory quality
-                                with on-site speed—we moved in 3 months earlier than planned."</p>
+                                with on-site speed we moved in 3 months earlier than planned."</p>
                             <div class="testimonial-stars">
                                 ★★★★★
                             </div>
@@ -3231,7 +3238,7 @@
                 </div>
             </div><!-- Footer Bottom -->
             <div class="footer-bottom">
-                <p>© 2024 Roof &amp; Realms. All rights reserved.</p>
+                <p>© 2025 Roof &amp; Realms. All rights reserved.</p>
                 <div class="footer-bottom-links"><a href="#">Privacy Policy</a> <span>•</span> <a href="#">Terms of
                         Service</a> <span>•</span> <a href="#">Cookie Policy</a>
                 </div>
@@ -3342,12 +3349,7 @@
         } */
 
         // Mobile Menu Toggle
-        const mobileMenuBtn = document.createElement('div');
-        mobileMenuBtn.id = 'mobileMenuBtn';
-        mobileMenuBtn.className = 'mobile-menu-btn';
-        mobileMenuBtn.innerHTML = '<span></span><span></span><span></span>';
-        document.getElementById('header').appendChild(mobileMenuBtn);
-
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mainNav = document.getElementById('mainNav');
         const productsDropdown = document.getElementById('productsDropdown');
 
@@ -3366,22 +3368,44 @@
             dropdown.addEventListener('mouseenter', () => {
                 clearTimeout(dropdownTimeout);
                 dropdownContent.style.display = 'flex';
+                dropdownContent.style.opacity = '1';
+                dropdownContent.style.visibility = 'visible';
             });
 
-            dropdown.addEventListener('mouseleave', () => {
-                dropdownTimeout = setTimeout(() => {
-                    dropdownContent.style.display = 'none';
-                }, 300);
+            dropdown.addEventListener('mouseleave', (e) => {
+                // Check if we're moving to the dropdown content
+                const relatedTarget = e.relatedTarget;
+                if (relatedTarget && !dropdownContent.contains(relatedTarget)) {
+                    dropdownTimeout = setTimeout(() => {
+                        dropdownContent.style.opacity = '0';
+                        dropdownContent.style.visibility = 'hidden';
+                        setTimeout(() => {
+                            dropdownContent.style.display = 'none';
+                        }, 400); // Match the CSS animation duration
+                    }, 300);
+                }
             });
 
+            // Keep dropdown open when hovering over it
             dropdownContent.addEventListener('mouseenter', () => {
                 clearTimeout(dropdownTimeout);
+                dropdownContent.style.display = 'flex';
+                dropdownContent.style.opacity = '1';
+                dropdownContent.style.visibility = 'visible';
             });
 
-            dropdownContent.addEventListener('mouseleave', () => {
-                dropdownTimeout = setTimeout(() => {
-                    dropdownContent.style.display = 'none';
-                }, 300);
+            // Hide dropdown when leaving dropdown content
+            dropdownContent.addEventListener('mouseleave', (e) => {
+                const relatedTarget = e.relatedTarget;
+                if (relatedTarget && !dropdown.contains(relatedTarget)) {
+                    dropdownTimeout = setTimeout(() => {
+                        dropdownContent.style.opacity = '0';
+                        dropdownContent.style.visibility = 'hidden';
+                        setTimeout(() => {
+                            dropdownContent.style.display = 'none';
+                        }, 400);
+                    }, 300);
+                }
             });
         }
 

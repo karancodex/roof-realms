@@ -116,15 +116,26 @@
             width: 100%;
         }
 
-        /* Mega Menu Dropdown */
+        /* Mega Menu Dropdown - FIXED */
         .dropdown {
             position: relative;
+        }
+
+        /* Create invisible hover bridge to prevent immediate close */
+        .dropdown::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 15px;
+            background: transparent;
         }
 
         .dropdown-content {
             display: none;
             position: absolute;
-            top: calc(100% + 1rem);
+            top: calc(100% + 15px);
             left: 50%;
             transform: translateX(-50%);
             background: linear-gradient(180deg, rgba(15, 15, 30, 0.98) 0%, rgba(10, 10, 20, 0.98) 100%);
@@ -138,12 +149,14 @@
             gap: 0;
             opacity: 0;
             animation: fadeInDown 0.4s ease forwards;
+            z-index: 1001;
+            pointer-events: auto;
         }
 
         @keyframes fadeInDown {
             from {
                 opacity: 0;
-                transform: translateX(-50%) translateY(-20px);
+                transform: translateX(-50%) translateY(-10px);
             }
 
             to {
@@ -152,7 +165,9 @@
             }
         }
 
-        .dropdown:hover .dropdown-content {
+        /* FIX: Prevent dropdown from closing immediately */
+        .dropdown:hover .dropdown-content,
+        .dropdown-content:hover {
             display: flex;
         }
 
@@ -245,74 +260,74 @@
 
         /* Hero Section */
         .hero {
-      height: 80vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      margin-top: 80px;
-    }
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
 
-    .hero-background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-    }
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
 
-    .hero-bg-slide {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
+        .hero-bg-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
 
-    .hero-bg-slide video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+        .hero-bg-slide video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-    .hero-bg-slide::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0.5;
-      background: black;
-    }
+        .hero-bg-slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.5;
+            background: black;
+        }
 
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 900px;
-      text-align: center;
-      padding: 0.2rem;
-    }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            text-align: center;
+            padding: 0.2rem;
+        }
 
-    .hero h1 {
-      font-size: 3.2rem;
-      font-weight: 800;
-      margin-bottom: 0.5rem;
-      background: linear-gradient(135deg, #ffffff 0%, #D4A63F 50%, #ffffff 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1.1;
-    }
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #D4A63F 50%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
 
-    .hero-subtitle {
-      font-size: 1rem;
-      color: #e8e8e8;
-      line-height: 1.8;
-      margin-bottom: 2rem;
-    }
+        .hero-subtitle {
+            font-size: 1rem;
+            color: #e8e8e8;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
 
         @keyframes fadeInUp {
             from {
@@ -676,61 +691,99 @@
         }
 
         /* Process Section */
-        .process-section {
-            padding: 5rem 5%;
-            background: linear-gradient(135deg, #1F3A93 0%, #0a0a14 100%);
-        }
+        /* Process Section - Updated for 3x2 grid */
+.process-section {
+    padding: 5rem 5%;
+    background: linear-gradient(135deg, #1F3A93 0%, #0a0a14 100%);
+}
 
-        .process-steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            max-width: 100%;
-            margin: 0 auto;
-        }
+.process-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
-        .process-card {
-            background: linear-gradient(135deg, rgba(212, 166, 63, 0.1) 0%, rgba(31, 58, 147, 0.2) 100%);
-            padding: 2rem;
-            border-radius: 20px;
-            text-align: center;
-            border: 1px solid rgba(212, 166, 63, 0.3);
-            transition: all 0.5s ease;
-            position: relative;
-        }
+.process-card {
+    background: linear-gradient(135deg, rgba(212, 166, 63, 0.1) 0%, rgba(31, 58, 147, 0.2) 100%);
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid rgba(212, 166, 63, 0.3);
+    transition: all 0.5s ease;
+    position: relative;
+}
 
-        .process-card:hover {
-            transform: translateY(-8px);
-            border-color: #D4A63F;
-            box-shadow: 0 15px 40px rgba(212, 166, 63, 0.3);
-        }
+.process-card:hover {
+    transform: translateY(-8px);
+    border-color: #D4A63F;
+    box-shadow: 0 15px 40px rgba(212, 166, 63, 0.3);
+}
 
-        .process-number {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #D4A63F 0%, #f4d483 100%);
-            color: #0a0a1a;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.2rem;
-            margin: 0 auto 1rem;
-        }
+.process-number {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #D4A63F 0%, #f4d483 100%);
+    color: #0a0a1a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin: 0 auto 1rem;
+}
 
-        .process-card h3 {
-            color: #D4A63F;
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
+.process-card h3 {
+    color: #D4A63F;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
 
-        .process-card p {
-            color: #c8c8c8;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
+.process-card p {
+    color: #c8c8c8;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Responsive adjustments for the process section */
+@media (max-width: 968px) {
+    .process-steps {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .process-steps {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .process-card {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .process-section {
+        padding: 3rem 4%;
+    }
+    
+    .process-card {
+        padding: 1.2rem;
+    }
+    
+    .process-card h3 {
+        font-size: 1.2rem;
+    }
+    
+    .process-card p {
+        font-size: 0.9rem;
+    }
+}
 
         /* CTA Section */
         .cta-section {
@@ -995,6 +1048,10 @@
                 margin-top: 0.8rem;
                 display: none;
                 box-shadow: none;
+                animation: none;
+                opacity: 1;
+                width: 100%;
+                border-radius: 10px;
             }
 
             .dropdown.active .dropdown-content {
@@ -1042,6 +1099,11 @@
             .btn {
                 width: 100%;
                 max-width: 300px;
+            }
+            
+            /* Remove hover bridge on mobile */
+            .dropdown::after {
+                display: none;
             }
         }
 
@@ -1302,44 +1364,47 @@
     </section>
 
     <!-- Process Section -->
-    <section class="process-section">
-        <h2 class="section-title">Our Modular Process</h2>
-        <p class="section-subtitle">From concept to grand opening with precision engineering</p>
+   <!-- Process Section -->
+<section class="process-section">
+    <h2 class="section-title">Our Modular Process</h2>
+    <p class="section-subtitle">From concept to grand opening with precision engineering</p>
 
-        <div class="process-steps">
-            <div class="process-card">
-                <div class="process-number">1</div>
-                <h3>Consultation & Design</h3>
-                <p>Understand your vision, brand identity, and hospitality requirements with detailed planning.</p>
-            </div>
-            <div class="process-card">
-                <div class="process-number">2</div>
-                <h3>Factory Fabrication</h3>
-                <p>Precision manufacturing of all components in controlled factory conditions for guaranteed quality.
-                </p>
-            </div>
-            <div class="process-card">
-                <div class="process-number">3</div>
-                <h3>Site Preparation</h3>
-                <p>Simultaneous site work while factory fabrication is underway for maximum efficiency.</p>
-            </div>
-            <div class="process-card">
-                <div class="process-number">4</div>
-                <h3>Rapid Assembly</h3>
-                <p>Fast on-site assembly of precision modules, reducing construction time by 40-60%.</p>
-            </div>
-            <div class="process-card">
-                <div class="process-number">5</div>
-                <h3>Luxury Finishes</h3>
-                <p>Premium finishes, lighting, and decor to create exceptional guest experiences.</p>
-            </div>
-            <div class="process-card">
-                <div class="process-number">6</div>
-                <h3>Grand Opening</h3>
-                <p>Complete handover with training and support for seamless operations.</p>
-            </div>
+    <div class="process-steps">
+        <!-- First Row - 3 Cards -->
+        <div class="process-card">
+            <div class="process-number">1</div>
+            <h3>Consultation & Design</h3>
+            <p>Understand your vision, brand identity, and hospitality requirements with detailed planning.</p>
         </div>
-    </section>
+        <div class="process-card">
+            <div class="process-number">2</div>
+            <h3>Factory Fabrication</h3>
+            <p>Precision manufacturing of all components in controlled factory conditions for guaranteed quality.</p>
+        </div>
+        <div class="process-card">
+            <div class="process-number">3</div>
+            <h3>Site Preparation</h3>
+            <p>Simultaneous site work while factory fabrication is underway for maximum efficiency.</p>
+        </div>
+        
+        <!-- Second Row - 3 Cards -->
+        <div class="process-card">
+            <div class="process-number">4</div>
+            <h3>Rapid Assembly</h3>
+            <p>Fast on-site assembly of precision modules, reducing construction time by 40-60%.</p>
+        </div>
+        <div class="process-card">
+            <div class="process-number">5</div>
+            <h3>Luxury Finishes</h3>
+            <p>Premium finishes, lighting, and decor to create exceptional guest experiences.</p>
+        </div>
+        <div class="process-card">
+            <div class="process-number">6</div>
+            <h3>Grand Opening</h3>
+            <p>Complete handover with training and support for seamless operations.</p>
+        </div>
+    </div>
+</section>
 
     <!-- Gallery Section -->
     <section class="gallery-section">
@@ -1497,7 +1562,7 @@
 
             <!-- Footer Bottom -->
             <div class="footer-bottom">
-                <p>© 2024 Roof & Realms. All rights reserved.</p>
+                <p>© 2025 Roof & Realms. All rights reserved.</p>
                 <div class="footer-bottom-links">
                     <a href="#">Privacy Policy</a>
                     <span>•</span>
@@ -1517,6 +1582,11 @@
         mobileMenuBtn.addEventListener('click', () => {
             mobileMenuBtn.classList.toggle('active');
             mainNav.classList.toggle('active');
+            
+            // Close dropdown when mobile menu closes
+            if (!mainNav.classList.contains('active')) {
+                document.getElementById('productsDropdown').classList.remove('active');
+            }
         });
 
         // Header scroll effect
@@ -1530,15 +1600,25 @@
         });
 
         // Mobile dropdown toggle
-        if (window.innerWidth <= 968) {
-            const navItem = document.querySelector('.dropdown .nav-item');
-            const dropdown = document.getElementById('productsDropdown');
+        const dropdown = document.getElementById('productsDropdown');
+        const navItem = dropdown.querySelector('.nav-item');
 
-            navItem.addEventListener('click', (e) => {
+        navItem.addEventListener('click', (e) => {
+            if (window.innerWidth <= 968) {
                 e.preventDefault();
+                e.stopPropagation();
                 dropdown.classList.toggle('active');
-            });
-        }
+            }
+        });
+
+        // Close dropdown when clicking outside (for mobile)
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 968) {
+                if (!dropdown.contains(e.target)) {
+                    dropdown.classList.remove('active');
+                }
+            }
+        });
 
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {

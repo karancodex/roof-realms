@@ -116,7 +116,7 @@
       width: 100%;
     }
 
-    /* Mega Menu Dropdown */
+    /* Mega Menu Dropdown - Fixed */
     .dropdown {
       position: relative;
     }
@@ -137,7 +137,17 @@
       flex-direction: column;
       gap: 0;
       opacity: 0;
-      animation: fadeInDown 0.4s ease forwards;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+      z-index: 1001;
+    }
+
+    /* Fixed: Keep dropdown open when hovering over it */
+    .dropdown:hover .dropdown-content,
+    .dropdown-content:hover {
+      display: flex;
+      opacity: 1;
+      visibility: visible;
     }
 
     @keyframes fadeInDown {
@@ -150,10 +160,6 @@
         opacity: 1;
         transform: translateX(-50%) translateY(0);
       }
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: flex;
     }
 
     .dropdown-item {
@@ -308,7 +314,7 @@
     }
 
     .hero-subtitle {
-      font-size: 1rem;
+      font-size: 1.5rem;
       color: #e8e8e8;
       line-height: 1.8;
       margin-bottom: 2rem;
@@ -933,6 +939,10 @@
         margin-top: 0.8rem;
         display: none;
         box-shadow: none;
+        animation: none;
+        opacity: 1;
+        visibility: visible;
+        transition: none;
       }
 
       .dropdown.active .dropdown-content {
@@ -1090,7 +1100,6 @@
     <div class="hero-content">
       <h1>Premium Residential Solutions</h1>
       <p class="hero-subtitle">Engineered for speed, comfort, and timeless design</p>
-      <div class="gold-divider"></div>
       <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.1rem; max-width: 700px; margin: 0 auto;">Experience the
         future of home construction with modular precision that delivers superior quality, faster timelines, and
         energy-efficient living spaces.</p>
@@ -1131,8 +1140,7 @@
     <div class="residential-types">
       <!-- Villas -->
       <div class="residential-card">
-        <img src="image/residential-villa.jpg" alt="Luxury Villa" class="residential-image"
-          onerror="this.src='https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&q=80'">
+        <img src="image/Residential-home.jpg" alt="Luxury Villa" class="residential-image">
         <div class="residential-content">
           <span class="residential-badge">LUXURY LIVING</span>
           <h3>Villas</h3>
@@ -1150,8 +1158,7 @@
 
       <!-- Apartments -->
       <div class="residential-card">
-        <img src="image/residential-apartment.jpg" alt="Apartments" class="residential-image"
-          onerror="this.src='https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&q=80'">
+        <img src="image/Residential.png" alt="Apartments" class="residential-image">
         <div class="residential-content">
           <span class="residential-badge">MULTI-STORY</span>
           <h3>Apartments (G+3)</h3>
@@ -1169,8 +1176,7 @@
 
       <!-- Farmhouses -->
       <div class="residential-card">
-        <img src="image/residential-farmhouse.jpg" alt="Farmhouse" class="residential-image"
-          onerror="this.src='https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1200&q=80'">
+        <img src="image/Residential2.png" alt="Farmhouse" class="residential-image">
         <div class="residential-content">
           <span class="residential-badge">COUNTRY LIVING</span>
           <h3>Farmhouses</h3>
@@ -1229,42 +1235,42 @@
 
     <div class="gallery-grid">
       <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=80" alt="Modern Villa"
+        <img src="image/Residential3.png" alt="Modern Villa"
           class="gallery-img">
         <div class="gallery-caption">
           <h4>Modern Villa</h4>
         </div>
       </div>
       <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80" alt="Contemporary Interior"
+        <img src="image/Residential4.png" alt="Contemporary Interior"
           class="gallery-img">
         <div class="gallery-caption">
           <h4>Contemporary Interior</h4>
         </div>
       </div>
       <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=600&q=80" alt="Luxury Bedroom"
+        <img src="image/Residential5.png" alt="Luxury Bedroom"
           class="gallery-img">
         <div class="gallery-caption">
           <h4>Luxury Bedroom</h4>
         </div>
       </div>
       <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" alt="Modern Kitchen"
+        <img src="image/Residential2.png" alt="Modern Kitchen"
           class="gallery-img">
         <div class="gallery-caption">
           <h4>Modern Kitchen</h4>
         </div>
       </div>
       <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=900&q=80" alt="Apartment Complex"
+        <img src="image/Residential-home.jpg" alt="Apartment Complex"
           class="gallery-img">
         <div class="gallery-caption">
           <h4>Apartment Complex</h4>
         </div>
       </div>
       <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&q=80" alt="Outdoor Living"
+        <img src="image/Residential.png" alt="Outdoor Living"
           class="gallery-img">
         <div class="gallery-caption">
           <h4>Outdoor Living</h4>
@@ -1374,7 +1380,7 @@
 
       <!-- Footer Bottom -->
       <div class="footer-bottom">
-        <p>© 2024 Roof & Realms. All rights reserved.</p>
+        <p>© 2025 Roof & Realms. All rights reserved.</p>
         <div class="footer-bottom-links">
           <a href="#">Privacy Policy</a>
           <span>•</span>
@@ -1406,14 +1412,75 @@
       }
     });
 
-    // Mobile dropdown toggle
+    // Fixed: Enhanced dropdown functionality
+    let dropdownTimeout;
+    const dropdown = document.querySelector('.dropdown');
+    const dropdownContent = document.querySelector('.dropdown-content');
+
+    // Desktop: Show on hover, hide with delay
+    if (window.innerWidth > 968) {
+      dropdown.addEventListener('mouseenter', () => {
+        clearTimeout(dropdownTimeout);
+        dropdownContent.style.display = 'flex';
+        dropdownContent.style.opacity = '1';
+        dropdownContent.style.visibility = 'visible';
+      });
+
+      dropdown.addEventListener('mouseleave', (e) => {
+        // Check if we're moving to the dropdown content
+        const relatedTarget = e.relatedTarget;
+        if (relatedTarget && !dropdownContent.contains(relatedTarget)) {
+          dropdownTimeout = setTimeout(() => {
+            dropdownContent.style.opacity = '0';
+            dropdownContent.style.visibility = 'hidden';
+            setTimeout(() => {
+              dropdownContent.style.display = 'none';
+            }, 400); // Match the CSS animation duration
+          }, 300);
+        }
+      });
+
+      // Keep dropdown open when hovering over it
+      dropdownContent.addEventListener('mouseenter', () => {
+        clearTimeout(dropdownTimeout);
+        dropdownContent.style.display = 'flex';
+        dropdownContent.style.opacity = '1';
+        dropdownContent.style.visibility = 'visible';
+      });
+
+      // Hide dropdown when leaving dropdown content
+      dropdownContent.addEventListener('mouseleave', (e) => {
+        const relatedTarget = e.relatedTarget;
+        if (relatedTarget && !dropdown.contains(relatedTarget)) {
+          dropdownTimeout = setTimeout(() => {
+            dropdownContent.style.opacity = '0';
+            dropdownContent.style.visibility = 'hidden';
+            setTimeout(() => {
+              dropdownContent.style.display = 'none';
+            }, 400);
+          }, 300);
+        }
+      });
+    }
+
+    // Mobile: Toggle on click
     if (window.innerWidth <= 968) {
       const navItem = document.querySelector('.dropdown .nav-item');
-      const dropdown = document.getElementById('productsDropdown');
+      const dropdown = document.querySelector('.dropdown');
+      
+      if (navItem) {
+        navItem.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dropdown.classList.toggle('active');
+        });
+      }
 
-      navItem.addEventListener('click', (e) => {
-        e.preventDefault();
-        dropdown.classList.toggle('active');
+      // Close dropdown when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!dropdown.contains(e.target)) {
+          dropdown.classList.remove('active');
+        }
       });
     }
 
